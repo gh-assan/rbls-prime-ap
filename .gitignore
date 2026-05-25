@@ -1,0 +1,13 @@
+# Virtual environment
+.venv/
+
+# VS Code settings
+.vscode/
+
+# Pip install location (from --no-warn-script-location)
+--no-warn-script-location/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
