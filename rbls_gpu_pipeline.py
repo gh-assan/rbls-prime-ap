@@ -12,11 +12,19 @@ import time
 # =====================================================================
 cuda_source = """
 typedef unsigned long long uint64;
-typedef unsigned __int128 uint128;
 
-// Device function for fast, overflow-safe modular multiplication
+// Device function for overflow-safe modular multiplication (64-bit, no 128-bit needed)
 __device__ inline uint64 mul_mod(uint64 a, uint64 b, uint64 m) {
-    return (uint64)(((uint128)a * b) % m);
+    uint64 r = 0;
+    a %= m;
+    while (b > 0) {
+        if (b & 1) {
+            r = (r + a) % m;
+        }
+        a = (a << 1) % m;
+        b >>= 1;
+    }
+    return r;
 }
 
 // Device function for modular exponentiation: (base^exp) % mod
@@ -114,7 +122,7 @@ def get_resonance_parameters():
     ])
     
     # Run Lenstra-Lenstra-Lovasz
-    L = M.LLL()
+    L = M.lll()
     
     # Extract the shortest vector's multiplier (q)
     # To force the magnitude near 10^15, we scale the base vector
