@@ -202,27 +202,48 @@ if __name__ == "__main__":
     # Step 2: Configure the search space
     k_length = 7  # Looking for a 7-term progression
     batch_size = 10_000_000  # Streaming 10 Million numbers per GPU burst
+    max_batches = 200  # Search up to 200 batches (2 billion candidates)
     
     print("\n--- [PHASE 2: DISCRETE GPU SIEVE] ---")
-    print(f"Generating block of {batch_size:,} candidates starting at {target_a:,}...")
-    candidates = np.arange(target_a, target_a + batch_size, dtype=np.uint64)
     
-    # Step 3: Dispatch to GPU
-    print(f"Dispatching {batch_size:,} candidate chains to Tesla T4...")
-    start_time = time.time()
+    overall_start = time.time()
+    total_found = 0
+    batch_num = 1
+    estimated_time_per_batch = None
     
-    matches = run_gpu_sieve(mod, candidates, d_step, k_length)
+    while batch_num <= max_batches:
+        current_start = target_a + ((batch_num - 1) * batch_size)
+        print(f"\nBatch {batch_num}: Candidates {current_start:,} to {current_start + batch_size:,}...")
+        
+        candidates = np.arange(current_start, current_start + batch_size, dtype=np.uint64)
+        
+        start_time = time.time()
+        matches = run_gpu_sieve(mod, candidates, d_step, k_length)
+        end_time = time.time()
+        
+        elapsed = end_time - start_time
+        
+        if estimated_time_per_batch is None:
+            estimated_time_per_batch = elapsed
+        
+        print(f"  GPU execution: {elapsed:.4f}s. Found {len(matches)} AP-{k_length} progressions.")
+        
+        if len(matches) > 0:
+            print("\n" + "=" * 60)
+            print("*** FOUND VALID AP-7 PROGRESSION(S)! ***")
+            print("=" * 60)
+            for idx, m in enumerate(matches):
+                print(f"\nProgression #{idx + 1} starting at {m}:")
+                for i in range(k_length):
+                    term = m + (i * d_step)
+                    print(f"  Index {i}: {term}")
+            total_found += len(matches)
+            break  # Stop once we find at least one
+        
+        batch_num += 1
     
-    end_time = time.time()
-    print(f"GPU execution completed in {end_time - start_time:.4f} seconds.\n")
-    
-    # Step 4: Output Results
-    print("--- [RESULTS] ---")
-    print(f"Found {len(matches)} valid AP-{k_length} progressions.")
-    
-    if len(matches) > 0:
-        print("\nDisplaying first discovered mathematical progression:")
-        first_match = matches[0]
-        for i in range(k_length):
-            term = first_match + (i * d_step)
-            print(f"Index {i}: {term}")
+    overall_end = time.time()
+    total_time = overall_end - overall_start
+    print(f"\n--- [FINAL RESULTS] ---")
+    print(f"Searched {batch_num - 1} batch(es) ({(batch_num - 1) * batch_size:,} candidates) in {total_time:.2f} seconds.")
+    print(f"Total AP-{k_length} progressions found: {total_found}")
