@@ -61,7 +61,7 @@ __device__ uint64 pow_mod(uint64 base, uint64 exp, uint64 mod) {
 __device__ bool is_prime_fast(uint64 n) {
     if (n < 2) return false;
     if (n == 2) return true;
-    if ((n & 1) == 0) return false;  // even > 2 → composite
+    if ((n & 1) == 0) return false;  // even > 2 -> composite
     if (n % 3 == 0) return n == 3;
 
     // Precompute d, s once
