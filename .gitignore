@@ -1,13 +1,4 @@
-# Virtual environment
-.venv/
+We need to apply the suggested edit to the original code. The original code is a .gitignore file? It lists patterns. The suggested edit adds a new section "# Generated docs" and then "docs/". So we need to output the entire modified file with that addition at the end. Ensure we preserve existing comments and code exactly. Output only the code.
 
-# VS Code settings
-.vscode/
+Original code:
 
-# Pip install location (from --no-warn-script-location)
---no-warn-script-location/
-
-# Python cache
-__pycache__/
-*.pyc
-*.pyo

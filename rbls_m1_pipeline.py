@@ -1,9 +1,21 @@
 import numpy as np
 import sympy
-from sympy import Matrix
+from sympy import Matrix, primerange
 import math
 import time
 from numba import njit, prange
+
+# =====================================================================
+# 0. PRIMORIAL CALCULATION
+# =====================================================================
+
+def get_required_primorial(k):
+    """Calculates the product of all primes strictly less than k."""
+    primes = list(sympy.primerange(2, k))
+    primorial = 1
+    for p in primes:
+        primorial *= p
+    return primorial
 
 # =====================================================================
 # 1. THE CPU MULTIPROCESSING ENGINE (Compiled via Numba for Apple Silicon)
@@ -85,7 +97,7 @@ def evaluate_progressions(candidates, d_step, k_len):
         base_a = candidates[idx]
         valid_progression = True
 
-        # Check all terms in the AP-k sequence
+    # Check all terms in the AP-k sequence
         for j in range(k_len):
             current_term = base_a + (j * d_step)
             if not is_prime(current_term):
@@ -101,7 +113,7 @@ def evaluate_progressions(candidates, d_step, k_len):
 # 2. THE ANALYTIC BRAIN (SymPy LLL Lattice Reduction)
 # =====================================================================
 
-def get_resonance_parameters():
+def get_resonance_parameters(k_length):
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION] ---")
     
     # Imaginary parts of first 3 Riemann Zeros
@@ -137,14 +149,14 @@ def get_resonance_parameters():
     y = final_q / C
     a_target = int(math.exp(y))
     
-    # Align discrete step size d with primorial P7 = 2*3*5*7 = 210
-    P7 = 210
+    # Compute primorial step size based on progression length
+    d_step = get_required_primorial(k_length)
     
     print(f"LLL complete. Resonant base ln(a) found at: {y:.6f}")
     print(f"Target discrete starting magnitude (a): {a_target:,}")
-    print(f"Enforcing Primorial P7 step size (d): {P7}")
+    print(f"Computed primorial step size (d): {d_step}")
     
-    return a_target, P7
+    return a_target, d_step
 
 # =====================================================================
 # 3. MAIN PIPELINE EXECUTION
@@ -154,10 +166,10 @@ if __name__ == "__main__":
     print("Initializing LLVM JIT Compilation for Apple M1...")
     
     # Step 1: Run analytic phase alignment
-    target_a, d_step = get_resonance_parameters()
+    k_length = 7  # Looking for a 7-term progression
+    target_a, d_step = get_resonance_parameters(k_length)
     
     # Step 2: Configure the search space
-    k_length = 7  # Looking for a 7-term progression
     batch_size = 5_000_000  # 5 Million numbers per batch is comfortable for the M1
     
     print("\n--- [PHASE 2: DISCRETE M1 CPU SIEVE] ---")

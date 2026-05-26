@@ -3,9 +3,21 @@ import pycuda.autoinit
 import pycuda.driver as cuda
 from pycuda.compiler import SourceModule
 import sympy
-from sympy import Matrix
+from sympy import Matrix, primerange
 import math
 import time
+
+# =====================================================================
+# 0. PRIMORIAL CALCULATION
+# =====================================================================
+
+def get_required_primorial(k):
+    """Calculates the product of all primes <= k."""
+    primes = list(sympy.primerange(2, k + 1))
+    primorial = 1
+    for p in primes:
+        primorial *= p
+    return primorial
 
 # =====================================================================
 # 1. THE CUDA KERNEL (Compiles dynamically for Tesla T4)
@@ -13,14 +25,12 @@ import time
 cuda_source = """
 typedef unsigned long long uint64;
 
-// Device function for overflow-safe modular multiplication (64-bit, no 128-bit needed)
+// Device function for overflow-safe modular multiplication (Russian peasant)
 __device__ inline uint64 mul_mod(uint64 a, uint64 b, uint64 m) {
     uint64 r = 0;
     a %= m;
     while (b > 0) {
-        if (b & 1) {
-            r = (r + a) % m;
-        }
+        if (b & 1) r = (r + a) % m;
         a = (a << 1) % m;
         b >>= 1;
     }
@@ -98,7 +108,7 @@ __global__ void evaluate_progressions(uint64* candidates, uint64 d_step, int k_l
 # =====================================================================
 # 2. THE ANALYTIC BRAIN (SymPy LLL Lattice Reduction)
 # =====================================================================
-def get_resonance_parameters():
+def get_resonance_parameters(k_length):
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION] ---")
     
     # Imaginary parts of first 3 Riemann Zeros
@@ -136,14 +146,14 @@ def get_resonance_parameters():
     y = final_q / C
     a_target = int(math.exp(y))
     
-    # Align discrete step size d with primorial P7 = 2*3*5*7 = 210
-    P7 = 210
+    # Compute primorial step size based on progression length
+    d_step = get_required_primorial(k_length)
     
     print(f"LLL complete. Resonant base ln(a) found at: {y:.6f}")
     print(f"Target discrete starting magnitude (a): {a_target:,}")
-    print(f"Enforcing Primorial P7 step size (d): {P7}")
+    print(f"Computed primorial step size (d): {d_step}")
     
-    return a_target, P7
+    return a_target, d_step
 
 # =====================================================================
 # 3. THE GPU DISPATCHER
@@ -197,10 +207,10 @@ if __name__ == "__main__":
     print("CUDA compilation successful.\n")
 
     # Step 1: Run analytic phase alignment
-    target_a, d_step = get_resonance_parameters()
+    k_length = 7  # Looking for a 7-term progression
+    target_a, d_step = get_resonance_parameters(k_length)
     
     # Step 2: Configure the search space
-    k_length = 7  # Looking for a 7-term progression
     batch_size = 10_000_000  # Streaming 10 Million numbers per GPU burst
     max_batches = 200  # Search up to 200 batches (2 billion candidates)
     

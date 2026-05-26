@@ -12,7 +12,7 @@ import pycuda.autoinit
 import pycuda.driver as cuda
 from pycuda.compiler import SourceModule
 import sympy
-from sympy import Matrix
+from sympy import Matrix, primerange
 import math
 import time
 from datetime import datetime
@@ -76,9 +76,21 @@ __global__ void find_primes(uint64* start_nums, int* is_prime_out, int num_count
 """
 
 # =====================================================================
+# 1b. PRIMORIAL CALCULATION
+# =====================================================================
+
+def get_required_primorial(k):
+    """Calculates the product of all primes strictly less than k."""
+    primes = list(sympy.primerange(2, k))
+    primorial = 1
+    for p in primes:
+        primorial *= p
+    return primorial
+
+# =====================================================================
 # 2. LLL RESONANCE TARGETING
 # =====================================================================
-def get_resonance_parameters():
+def get_resonance_parameters(k_length):
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION] ---")
     t = [14.134725142, 21.022039638, 25.010857580]
     alphas = [ti / (2 * math.pi) for ti in t]
@@ -102,12 +114,12 @@ def get_resonance_parameters():
     final_q = base_q * multiplier
     y = final_q / C
     a_target = int(math.exp(y))
-    P7 = 210
+    d_step = get_required_primorial(k_length)
     
     print(f"LLL complete. Resonant base ln(a) found at: {y:.6f}")
     print(f"Target discrete starting magnitude (a): {a_target:,}")
-    print(f"Enforcing Primorial P7 step size (d): {P7}")
-    return a_target, P7
+    print(f"Computed primorial step size (d): {d_step}")
+    return a_target, d_step
 
 # =====================================================================
 # 3. GPU PRIME FINDER
@@ -135,7 +147,7 @@ def run_gpu_prime_finder(mod, numbers):
 def scan_ap_from_primes(primes_sorted, k_target, min_d, max_d, result_writer):
     prime_set = set(primes_sorted)
     found = []
-    d_step = 210
+    d_step = get_required_primorial(k_target)
     report_interval = max(1, len(primes_sorted) // 10)
     
     for idx, p in enumerate(primes_sorted):
@@ -180,10 +192,9 @@ if __name__ == "__main__":
     mod = SourceModule(cuda_source)
     print("CUDA compilation successful.")
     
-    target_a, d_step = get_resonance_parameters()
-    write_result(f"LLL target: {target_a:,}")
-    
     k_target = 28
+    target_a, d_step = get_resonance_parameters(k_target)
+    write_result(f"LLL target: {target_a:,}")
     chunk_size = 100_000_000
     num_chunks = 10
     all_primes = []
@@ -217,10 +228,10 @@ if __name__ == "__main__":
     max_d = range_size // (k_target - 1)
     
     print(f"\n--- [PHASE 3: AP-{k_target} SCAN] ---")
-    print(f"Scanning {len(all_primes):,} primes, d from 210 to {max_d:,}")
+    print(f"Scanning {len(all_primes):,} primes, d from {d_step} to {max_d:,}")
     
     t2 = time.time()
-    results = scan_ap_from_primes(all_primes, k_target, 210, max_d, write_result)
+    results = scan_ap_from_primes(all_primes, k_target, d_step, max_d, write_result)
     t3 = time.time()
     
     overall_end = time.time()
