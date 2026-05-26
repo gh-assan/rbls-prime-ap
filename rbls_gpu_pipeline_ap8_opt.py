@@ -4,11 +4,11 @@ RBLS GPU Pipeline - AP-8 Search (OPTIMIZED)
 Searches for 8-term arithmetic progressions of primes near the LLL-resonant target.
 
 Optimizations over base pipeline:
-  1. __int128 mul_mod (~20x faster than shift-loop)
+  1. shift-loop mul_mod (compatible with all GPUs)
   2. Skip even a0 (210d ensures all terms cycle odd/even → must start odd)
   3. High-throughput kernel: 512 threads, multiple candidates per thread (unroll 2x)
   4. Multiple LLL resonance targets (top 3 lattice vectors)
-  5. Wavefront stagger to reduce memory contention
+  5. Multi-target LLL (top 3 lattice vectors)
 
 For k=8: primorial of primes <= 8 = 2*3*5*7 = 210
 """
@@ -38,11 +38,12 @@ def get_required_primorial(k):
 cuda_source = """
 typedef unsigned long long uint64;
 
-// OPTIMIZATION 1: __int128 multiplication - ~20x faster than shift-loop
-// Available on NVIDIA GPUs with Compute Capability >= 2.0 (Tesla T4 is 7.5)
-// This eliminates the inner loop entirely for modular multiplication
+// OPTIMIZATION 1: Russian peasant multiplication (shift-loop)
+// Works on all GPUs; __int128 not available on this machine
 __device__ inline uint64 mul_mod(uint64 a, uint64 b, uint64 m) {
-    return (uint64)(((unsigned __int128)a * b) % m);
+    uint64 r = 0; a %= m;
+    while (b > 0) { if (b & 1) r = (r + a) % m; a = (a << 1) % m; b >>= 1; }
+    return r;
 }
 
 __device__ uint64 pow_mod(uint64 base, uint64 exp, uint64 mod) {
@@ -280,9 +281,9 @@ if __name__ == "__main__":
 
     expected_candidates = estimate_probability(k_length, d_step)
 
-    print("\nCompiling OPTIMIZED CUDA kernel (__int128 + base-2 prefilter + 2x unroll)...")
+    print("\nCompiling OPTIMIZED CUDA kernel (shift-loop mul_mod + base-2 prefilter + 2x unroll)...")
     t0 = time.time()
-    mod = SourceModule(cuda_source, options=['--std=c++11'])
+    mod = SourceModule(cuda_source)
     print(f"CUDA compilation successful ({time.time()-t0:.1f}s).\n")
 
     # Get multiple resonance targets
