@@ -1,0 +1,88 @@
+=====================================================================
+AP-9 ARITHMETIC PROGRESSION OF PRIMES - SEARCH RESULTS
+=====================================================================
+
+Date: 2026-05-29 (M1-native search using Numba JIT + parallel CPU)
+Method: LLL lattice reduction (Riemann zeros) + Numba CPU sieve (Miller-Rabin)
+Hardware: Apple Silicon (M1 MacBook Pro)
+
+---------------------------------------------------------------------
+Parameters
+---------------------------------------------------------------------
+Target magnitude:         ~10^15
+Common difference (d):    210  (primorial P7 = 2*3*5*7)
+Length (k):               9
+Batch size:               10,000,000 raw candidates (5,000,000 odd)
+Batches searched:         200  (2,000,000,000 total raw candidates)
+                          735,000,000 odd candidates
+Search time:              5,007 seconds (~83 minutes)
+Throughput:               ~147,000 odd/s average
+
+---------------------------------------------------------------------
+Result (Run 1)
+---------------------------------------------------------------------
+AP-9 progression:         NOT FOUND in searched range
+
+Probability estimate:     Using a truncated Hardy-Littlewood singular series
+                          for d=210 near 10^15:
+                          P(AP-9) ≈ 2.31e-10 per raw start
+                          Expected ~434 batches of 10M raw
+                          P(miss after 200 batches | estimate) ≈ 63%
+
+---------------------------------------------------------------------
+Candidates Searched (Run 1)
+---------------------------------------------------------------------
+Starting a0:              999,721,403,904,415 (LLL resonant target, odd-adjusted)
+Ending a0:                999,723,403,904,415 (199 batches later)
+
+Total range covered:      ~2.00 × 10^9 numbers
+Range width:              ~2 billion consecutive integers
+
+=====================================================================
+AP-9 SEARCH RUN 2 — Shifted Window
+=====================================================================
+Date: 2026-05-30 (M1-native, same method)
+Shift: 5 trillion past original LLL target
+
+---------------------------------------------------------------------
+Parameters
+---------------------------------------------------------------------
+Batch size:               10,000,000 raw (5,000,000 odd)
+Batches searched:         200  (2,000,000,000 total raw candidates)
+                          1,000,000,000 odd candidates
+Search time:              3,580 seconds (~60 minutes)
+Throughput:               ~279,000 odd/s average
+
+---------------------------------------------------------------------
+Result (Run 2)
+---------------------------------------------------------------------
+AP-9 progression:         NOT FOUND
+
+---------------------------------------------------------------------
+Candidates Searched (Run 2)
+---------------------------------------------------------------------
+Starting a0:              1,004,721,403,904,415 (LLL target + 5T)
+Ending a0:                1,004,723,403,904,415 (199 batches later)
+
+Total range covered:      ~2.00 × 10^9 numbers
+Range width:              ~2 billion consecutive integers
+
+---------------------------------------------------------------------
+Combined (Runs 1 + 2)
+---------------------------------------------------------------------
+Total raw candidates:     ~4,000,000,000 (4B)
+Total odd candidates:     ~1,735,000,000
+Total search time:        ~8,587s (~143 min / ~2.4 hours)
+Total range width:        ~4 billion across 5T separation
+
+---------------------------------------------------------------------
+Notes
+---------------------------------------------------------------------
+- Two independent searches covering different windows both found nothing.
+- Under the corrected Hardy-Littlewood-style baseline, missing AP-9 across
+  the combined runs is plausible rather than surprising.
+- This run should be treated as a negative data point for the current target
+  generator, not as evidence that AP-9 does not exist near 10^15 with d=210.
+- Run 3 prepared (multi-target LLL, top 3 lattice vectors sorted by quality):
+  rbls_m1_pipeline_ap9_v3.py
+=====================================================================

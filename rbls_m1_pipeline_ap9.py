@@ -9,14 +9,16 @@ Key optimizations ported from GPU AP-8 pipeline:
   - Multi-batch processing with per-batch progress reporting
   - Probability estimation at startup
 
-For k=9: primorial of primes < 9 = 2*3*5*7 => d=210 (same d as AP-8 but ~35x harder)
-  P(AP-9) = P(AP-8) * p_cond(~1/35) ≈ P(AP-8)/35
+For k=9: primorial of primes <= 9 = 2*3*5*7 => d=210.
+The startup estimate uses a truncated Hardy-Littlewood singular series.
 """
 import numpy as np
 import sympy
 from sympy import Matrix
 import math
 import time
+import sys
+sys.stdout.reconfigure(line_buffering=True)
 from numba import njit, prange
 
 # =====================================================================
@@ -24,8 +26,8 @@ from numba import njit, prange
 # =====================================================================
 
 def get_required_primorial(k):
-    """Product of all primes strictly less than k."""
-    primes = list(sympy.primerange(2, k))
+    """Product of all primes <= k."""
+    primes = list(sympy.primerange(2, k + 1))
     primorial = 1
     for p in primes:
         primorial *= p
@@ -157,7 +159,7 @@ def get_resonance_parameters(k_length):
     print(f"LLL complete. Resonant ln(a) = {y:.6f}")
     print(f"Target starting magnitude  = {a_target:,}")
     print(f"Primorial step size (d)    = {d_step}")
-    print(f"  d = product of primes < {k_length} = {d_step}")
+    print(f"  d = product of primes <= {k_length} = {d_step}")
     print(f"  d parity: {'even' if d_step % 2 == 0 else 'odd'} "
           f"(even => odd-only filter applicable, cuts search space in half)")
 
@@ -170,21 +172,21 @@ def get_resonance_parameters(k_length):
 def estimate_probability(k, d):
     """
     Heuristic estimate of expected candidates needed for an AP-k with step d
-    near 10^15, based on the prime number theorem and admissible tuples.
+    near 10^15, using a truncated Hardy-Littlewood singular series.
     """
     ln_n = math.log(10**15)
-    p_prime = 1.0 / ln_n
-    # Euler's totient / d = proportion of residues coprime to d
-    phi_d = d
-    for p in sympy.primerange(2, k + 1):
-        phi_d = phi_d * (p - 1) // p
-    filt = phi_d / d
-    p_cond = p_prime / filt
-    p_ap = p_cond ** k
+    singular = 1.0
+    for p in sympy.primerange(2, 100_000):
+        residues = len({(j * d) % p for j in range(k)})
+        if residues == p:
+            singular = 0.0
+            break
+        singular *= (1.0 - residues / p) / ((1.0 - 1.0 / p) ** k)
+    p_ap = singular / (ln_n ** k) if singular else 0.0
     print(f"\n--- AP-{k} Estimate ---")
-    print(f"d={d}, phi={phi_d}, admissible fraction={filt:.4f}")
-    print(f"P(AP-{k}) = {p_ap:.2e}, expected candidates = {1/p_ap:.2e}")
-    print(f"  Naive expected batches of 10M raw: {1/p_ap/10_000_000:.1f}")
+    print(f"d={d}, singular series≈{singular:.3e}")
+    print(f"P(AP-{k})≈{p_ap:.2e}, expected raw candidates≈{1/p_ap:.2e}")
+    print(f"  Expected batches of 10M raw: {1/p_ap/10_000_000:.1f}")
     return 1.0 / p_ap
 
 # =====================================================================

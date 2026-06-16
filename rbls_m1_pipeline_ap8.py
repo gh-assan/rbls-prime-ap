@@ -8,7 +8,7 @@ Key optimizations ported from GPU AP-8 pipeline:
   - Odd-only filtering (d=210 even => even a0 makes all terms even => skip 50%)
   - Multi-batch processing with per-batch progress reporting
 
-For k=8: primorial of primes < 8 = 2*3*5*7 => d=210
+For k=8: primorial of primes <= 8 = 2*3*5*7 => d=210
 """
 import numpy as np
 import sympy
@@ -22,8 +22,8 @@ from numba import njit, prange
 # =====================================================================
 
 def get_required_primorial(k):
-    """Product of all primes strictly less than k."""
-    primes = list(sympy.primerange(2, k))
+    """Product of all primes <= k."""
+    primes = list(sympy.primerange(2, k + 1))
     primorial = 1
     for p in primes:
         primorial *= p
@@ -155,7 +155,7 @@ def get_resonance_parameters(k_length):
     print(f"LLL complete. Resonant ln(a) = {y:.6f}")
     print(f"Target starting magnitude  = {a_target:,}")
     print(f"Primorial step size (d)    = {d_step}")
-    print(f"  d = product of primes < {k_length} = {d_step}")
+    print(f"  d = product of primes <= {k_length} = {d_step}")
     print(f"  d parity: {'even' if d_step % 2 == 0 else 'odd'} "
           f"(even => odd-only filter applicable, cuts search space in half)")
 

@@ -12,8 +12,9 @@ Parameters
 Target magnitude:         ~10^15
 Common difference (d):    210  (primorial P7 = 2*3*5*7)
 Length (k):               8
-Batch size:               10,000,000 raw candidates (5,000,000 odd)
-Batches searched:         46  (250,000,000 total raw candidates)
+Batch size:               5,000,000 raw candidates (2,500,000 odd)
+Batches searched:         46  (~230,000,000 raw candidates to discovery;
+                          250,000,000 raw candidates allocated)
 Search time:              ~6 minutes 51 seconds
 Throughput:               ~280,000 odd candidates/s (~560,000 raw/s)
 

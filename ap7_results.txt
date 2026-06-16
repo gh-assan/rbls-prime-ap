@@ -2,7 +2,7 @@
 AP-7 ARITHMETIC PROGRESSION OF PRIMES - DISCOVERY RESULT
 =====================================================================
 
-Date: 2025 (GPU-based search using RBLS pipeline on Tesla T4)
+Date: 2026 (GPU-based search using RBLS pipeline on Tesla T4)
 Method: LLL lattice reduction (Riemann zeros) + GPU sieve (Miller-Rabin)
 
 ---------------------------------------------------------------------

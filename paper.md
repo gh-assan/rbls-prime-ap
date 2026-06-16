@@ -1,4 +1,4 @@
-# Resonance-Biased Lattice Sieving: A Hybrid Analytic-Discrete Heuristic for Locating Prime Arithmetic Progressions
+# Resonance-Biased Lattice Sieving: An Exploratory Heuristic for Locating Prime Arithmetic Progressions
 
 **Author:** Ghassan Al Hamoud
 **Location:** Berlin, Germany
@@ -6,73 +6,79 @@
 
 ### Abstract
 
-The search for long arithmetic progressions of primes (AP-$k$) is a computationally intensive challenge historically dominated by brute-force discrete sieving. In this paper, we introduce Resonance-Biased Lattice Sieving (RBLS), a novel hybrid heuristic that uses continuous analytic approximations to bias the search space of discrete prime sieves. By applying the Lenstra–Lenstra–Lovász (LLL) algorithm to the phases of the lowest-frequency Riemann zeta zeros, we identify macroscopic number-line intervals ("resonance zones") hypothesized to contain higher local prime densities. We outline the theoretical framework, detail a GPU-accelerated Miller-Rabin implementation on a Tesla T4, and present empirical benchmark data: the successful identification of a 7-term arithmetic progression of primes near $10^{15}$. We further address statistical concerns regarding single-trial validity by proposing a controlled baseline comparison protocol and presenting a parameter sensitivity analysis for the key design choices (number of zeros, scaling constant, lattice dimension). The RBLS framework is general and may be applied to other prime constellation searches.
+The search for long arithmetic progressions of primes (AP-$k$) is a computationally intensive problem usually approached through discrete sieving, wheel constraints, and large-scale parallel search. This note describes Resonance-Biased Lattice Sieving (RBLS), an exploratory heuristic that uses a low-dimensional lattice construction from the phases of the first Riemann zeta zeros to choose reproducible starting regions for prime-progression searches. The method is not presented as a theorem or as a proven statistical accelerator. Its current value is experimental: it combines an analytic target generator with deterministic Miller-Rabin sieving, and it produced verified AP-7 and AP-8 examples near $10^{15}$ with common difference $210$. A subsequent AP-9 search over roughly $7 \times 10^9$ raw candidates did not find a progression. Reinterpreted against a Hardy-Littlewood-style baseline, these results are compatible with ordinary AP densities and should be viewed as a starting point for controlled baseline experiments rather than evidence of a large speedup.
 
 ---
 
 ### 1. Introduction
 
-The Green-Tao theorem (2004) establishes that the sequence of prime numbers contains arbitrarily long arithmetic progressions. However, the theorem is non-constructive. The practical discovery of long prime progressions—such as the record-breaking AP-27 found by PrimeGrid in 2019—relies on massively parallel, distributed computational sieving.
+The Green-Tao theorem establishes that the primes contain arbitrarily long arithmetic progressions. The theorem is non-constructive, and practical searches for long prime progressions rely on careful arithmetic constraints and high-throughput computation. Record searches, including PrimeGrid AP searches, use primorial structure and massive parallelism to reduce a very sparse search problem to a tractable distributed computation.
 
-Traditional searches apply primorial wheel factorization to eliminate small prime factors, but otherwise sample the number line uniformly or sequentially. This paper proposes a heuristic method, Resonance-Biased Lattice Sieving (RBLS), which bridges analytic number theory and discrete computation. Rather than using the explicit formula of the Riemann zeta function $\zeta(s)$ as a primality test, we utilize the phase alignments of its lowest-frequency zeros to probabilistically bias our search space, guiding a high-speed CUDA-based discrete sieve to regions with theoretically favorable prime distributions.
+This note proposes and tests a heuristic targeting layer, Resonance-Biased Lattice Sieving (RBLS). The idea is to use a small number of low-frequency Riemann-zero phases to select a logarithmic region, then run an ordinary discrete AP sieve in that region. RBLS does not replace primality testing, does not prove elevated prime density, and does not currently establish a statistically significant advantage over standard structured search. The contribution is a reproducible experimental pipeline and a set of observations that can be tested against random and residue-class baselines.
 
-We emphasize that RBLS is a heuristic, not a theorem. It does not guarantee finding primes or prime progressions; rather, it attempts to identify intervals where the probability of success is elevated relative to uniform sampling. The contribution is methodological: a novel synthesis of LLL lattice reduction and analytic number theory applied to a practical computational search problem.
+### 2. Theoretical Framework
 
-### 2. Theoretical Framework: Resonance-Biased Lattice Sieving
+#### 2.1 Analytic Phase Motivation
 
-#### 2.1 Analytic Phase Alignment
+The explicit formula for prime-counting functions expresses fluctuations in prime distribution through the non-trivial zeros of $\zeta(s)$. A short truncation of the zero sum is far too coarse to predict individual primes near $10^{15}$, but it can be used as a source of low-frequency phase information.
 
-The explicit formula for the Chebyshev function $\psi(x)$ demonstrates that the distribution of primes is governed by the non-trivial zeros of $\zeta(s)$. A truncated sum of these zeros does not provide enough resolution to determine individual primes without massive error terms, but the lowest-frequency zeros act as dominant macroscopic waves [4, 6].
+For a progression starting at $a$ with common difference $d$, the phase contributed by a zero with imaginary part $t_i$ depends on
 
-We define a probability weight function based on the constructive interference of the first $N$ zeros. For a progression starting at $a$ with a common difference $d$, the phase of the $k$-th Riemann zero at the $j$-th term is proportional to $\log(a + jd)$. For $d \ll a$, a first-order Taylor expansion yields:
+$$t_i \log(a + jd).$$
 
-$$\log(a + jd) \approx \log a + j\frac{d}{a}$$
+When $d \ll a$,
 
-For maximum constructive interference across the progression, the base phase $\log a$ must align closely with the frequencies of the dominant zeros.
+$$\log(a + jd) = \log a + j\frac{d}{a} + O\left(\frac{j^2d^2}{a^2}\right).$$
 
-#### 2.2 LLL Lattice Reduction
+Thus, over the short spans considered here, the terms in the progression share almost the same logarithmic phase. RBLS uses this observation only as a heuristic for choosing a search region.
 
-To find a region $a$ where these phases align, we treat the alignment as a Simultaneous Diophantine Approximation problem. Let $t_k$ be the imaginary part of the $k$-th zero, and define $\alpha_k = t_k / 2\pi$. We seek a logarithmic magnitude $y = \log a$ such that $y \alpha_k$ is close to an integer for the first three zeros.
+#### 2.2 LLL Target Generation
 
-We scale the irrational values by a constant $C = 10^8$ to map the problem into an integer lattice, constructing the following basis matrix $M$:
+Let $\alpha_i = t_i / 2\pi$ for the first three non-trivial zeros. The implementation constructs an integer lattice from the scaled values $\lfloor C\alpha_i \rceil$, with $C = 10^8$:
 
-$$M = \begin{bmatrix} C & 0 & 0 & 0 \\ 0 & C & 0 & 0 \\ 0 & 0 & C & 0 \\ \lfloor C\alpha_1 \rceil & \lfloor C\alpha_2 \rceil & \lfloor C\alpha_3 \rceil & 1 \end{bmatrix}$$
+$$M = \begin{bmatrix}
+C & 0 & 0 & 0 \\
+0 & C & 0 & 0 \\
+0 & 0 & C & 0 \\
+\lfloor C\alpha_1 \rceil & \lfloor C\alpha_2 \rceil & \lfloor C\alpha_3 \rceil & 1
+\end{bmatrix}.$$
 
-Applying the Lenstra–Lenstra–Lovász (LLL) lattice basis reduction algorithm [2] yields a short vector, from which we extract an optimal scalar $q$. Dividing by our scale factor gives our highly resonant base magnitude $y$, and the continuous starting target $a = e^y$.
+LLL reduction returns short vectors whose final coordinate is treated as a candidate denominator $q$. The code then scales $q$ to a logarithmic magnitude close to $\log(10^{15})$ and converts the resulting $y$ to a target $a_{\text{target}} = \lfloor e^y \rfloor$.
 
-#### 2.3 Parameter Justification
+This construction should be interpreted cautiously. Scaling an LLL-derived denominator to a prescribed magnitude does not by itself prove strong phase alignment at that magnitude. In the current implementation, it is best described as a deterministic target generator inspired by simultaneous Diophantine approximation.
 
-Several design choices warrant explicit justification, as they directly affect the method's validity and reproducibility.
+#### 2.3 Parameter Choices
 
-**Number of Riemann zeros ($N = 3$):** The lowest-frequency zeros dominate the macroscopic behavior of the Chebyshev sum. Zeros beyond the third have frequencies above $\gamma_3/(2\pi) \approx 3.98$, meaning they oscillate more than 4 times per unit interval in $\ln x$-space. For hunting prime-dense zones of width $\sim 10^7$ near $10^{15}$ (corresponding to $\Delta \ln x \approx 1.6 \times 10^{-8}$), high-frequency zeros complete many cycles within the search window, contributing noise rather than signal. A sensitivity analysis varying $N \in \{2, 3, 4, 5\}$ and measuring the resulting prime density in targeted windows is planned to calibrate this trade-off empirically.
+**Number of zeros ($N=3$):** Three zeros give the smallest non-trivial lattice used in this implementation. This is a computational choice, not an optimized theoretical parameter. In particular, the current experiments do not prove that three zeros are better than two, four, or five. A publishable statistical claim would require a sensitivity study over $N$.
 
-**Scaling constant ($C = 10^8$):** This integer scaling maps the irrational $\alpha_k$ to integers for the LLL lattice. The value $10^8$ balances two considerations: too small, and the lattice vector is too coarse to resolve meaningful phase alignments; too large, and the integer entries approach $10^{16}$, approaching the precision limits of standard 64-bit arithmetic. Empirically, varying $C$ across the range $10^7$ through $10^9$ produces resonant magnitudes within $\pm 0.01\%$ of each other, suggesting the method is robust to this parameter.
+**Scaling constant ($C=10^8$):** The scale $C$ maps floating-point approximations of $\alpha_i$ into integer lattice entries. It is large enough to preserve several decimal places while keeping the lattice small and fast to reduce. Robustness to $C$ should be measured directly rather than assumed.
 
-**Lattice dimension (4D):** The 4D lattice — three $\alpha_k$ constraints plus one free parameter $y = \ln a$ — is the smallest non-trivial construction. Lower dimensions (2D or 3D) would under-constrain the phase alignment, allowing too many candidate solutions. Higher dimensions (5D+) over-determine the system; by the pigeonhole principle, simultaneous Diophantine approximation becomes exponentially harder in higher dimension, and LLL may fail to find a short vector with aligned phases. The 4D choice balances specificity with solvability.
+**Lattice dimension:** The current 4D lattice contains three zero-phase coordinates and one denominator coordinate. Higher-dimensional versions may encode more zeros, but simultaneous approximation becomes more restrictive and may produce targets that are not meaningfully better for this application.
 
-**Primorial constraint ($d = P_k$):** Using $d = \prod_{p \leq k} p$ ensures that all terms of the progression are coprime to every prime $\leq k$. Without this condition, for any $d$ not divisible by a prime $p < k$, the $k$ terms would cycle through all $p$ residue classes modulo $p$, guaranteeing that one term is divisible by $p$ and therefore composite (for $a \gg p$). The primorial is the minimal $d$ satisfying this necessary condition. Note: for AP-7, the correct primorial is $d = 2 \times 3 \times 5 \times 7 = 210$. Early implementations incorrectly used the product of primes strictly less than $k$ (30 for $k=7$), which makes AP-7 mathematically impossible at large magnitudes since 7 terms with step 30 cycle through all residues modulo 7, forcing one term to be divisible by 7.
+**Primorial step:** For an AP-$k$ at large magnitude, the common difference must be divisible by every prime $p \leq k$ unless the progression starts at the prime $p$ itself. Otherwise the $k$ consecutive residues $a, a+d, \ldots, a+(k-1)d \pmod p$ include $0$, forcing one term to be composite. For AP-7, this requires $d$ to be divisible by $2,3,5,7$, so the smallest admissible primorial step is $210$. AP-8 and AP-9 also use $d=210$.
 
 ### 3. Computational Methodology
 
-To test the RBLS heuristic, we built a two-stage computational pipeline executing on a 24-core CPU and an NVIDIA Tesla T4 GPU.
+The pipeline has two stages.
 
-1. **Analytic Stage (CPU):** A Python-based SymPy engine constructs the 4D lattice matrix and performs the LLL reduction to generate a target starting magnitude $a_{target}$.
-2. **Discrete Stage (GPU):** The target magnitude is passed to a custom PyCUDA kernel. Because standard 64-bit integers overflow during modular multiplication near $10^{15}$, the kernel utilizes native 128-bit unsigned integers (`__int128`) to perform highly parallel, deterministic 12-witness Miller-Rabin primality testing.
+1. **Target generation:** Python and SymPy construct the lattice above, run LLL, and produce one or more starting regions near $10^{15}$.
+2. **Discrete search:** CUDA/PyCUDA or Numba evaluates candidate starts. For each candidate $a$, it tests
 
-To bypass destructive interference from small primes, the common difference $d$ is constrained to the primorial of all primes $\leq k$. For an AP-7 search, $d = P_7 = 2 \times 3 \times 5 \times 7 = 210$. Number-theoretic justification: any $d$ not divisible by a prime $p < k = 7$ (i.e., $p \in \{2,3,5\}$) would cause the $k$ terms to sample all $p$ residue classes, guaranteeing at least one term divisible by $p$, which for $a \gg p$ would be composite. The factor 7 is included because, although $7 = k$ does not trigger the "all residues" guarantee, the primorial constraint is standard practice and ensures maximal small-prime filtering.
+$$a,\; a+d,\; a+2d,\; \ldots,\; a+(k-1)d$$
 
-### 4. Empirical Results: AP-7 Benchmark
+using deterministic Miller-Rabin witnesses valid for 64-bit integers. The GPU and CPU implementations use overflow-safe modular multiplication; variants use either shift/add multiplication or equivalent 64-bit-safe modular arithmetic.
 
-On [Insert Exact Date], the RBLS pipeline was initialized targeting a magnitude of approximately $10^{15}$.
+Because $d=210$ is even, even starting values are skipped in the optimized CPU/M1 searches.
 
-* **Target Generation:** The LLL algorithm generated a resonant starting region near $999,721,467,600,000$.
-* **Execution:** The GPU evaluated batches of 10,000,000 candidate progressions.
-* **Discovery:** A valid 7-term arithmetic progression of primes was discovered in the 6th batch (after scanning 60,000,000 candidates). Total GPU execution time was 139.44 seconds.
+### 4. Empirical Results
 
-**The AP-7 Progression Details:**
+#### 4.1 AP-7 Benchmark
 
-* **Base Term ($a_0$):** 999,721,467,601,817
-* **Common Difference ($d$):** 210
+In May 2026, the RBLS pipeline generated a target region near
+
+$$a_{\text{target}} \approx 999,721,403,904,414.$$
+
+The GPU search evaluated batches of $10,000,000$ raw candidate starts and found a valid AP-7 in the sixth batch, after roughly $60,000,000$ raw candidates. The recorded GPU execution time was 139.44 seconds.
 
 | Index ($n$) | Term ($a_n$) | Status |
 | --- | --- | --- |
@@ -84,99 +90,138 @@ On [Insert Exact Date], the RBLS pipeline was initialized targeting a magnitude 
 | 5 | 999,721,467,602,867 | Prime |
 | 6 | 999,721,467,603,077 | Prime |
 
-The primality of all seven terms was independently verified post-execution via CPU-side Miller-Rabin testing and trial division, using a separate implementation to exclude GPU kernel errors.
+The progression is
 
-### 5. Statistical Analysis: Separating Signal from Fluke
+$$a_n = 999,721,467,601,817 + 210n,\qquad 0 \leq n \leq 6.$$
 
-A single AP-7 discovery, however striking, does not constitute proof that RBLS works. A skeptical referee could dismiss it as a statistical outlier. This section addresses that concern directly, providing a three-pronged approach to move from anecdote to evidence.
+All seven terms were verified independently with CPU-side Miller-Rabin and trial division checks.
 
-#### 5.1 Expected vs. Observed Candidate Count
+#### 4.2 AP-8 Follow-Up
 
-For a progression of length $k$ with common difference $d$ near magnitude $10^{15}$, the naive expected probability of any given starting $a$ yielding an AP-$k$ (assuming primality events are independent except for the primorial constraint) is:
+The AP-8 search used the same primorial step $d=210$ and the same target-generation mechanism. The M1/Numba implementation searched odd starting values in batches of $5,000,000$ raw candidates. A valid AP-8 was found in the 46th of 50 allocated batches, after approximately $2.28 \times 10^8$ raw candidate positions from the starting target.
 
-$$P(\text{AP-}k) \approx \left(\frac{\phi(d)/d}{\ln(10^{15})}\right)^k$$
+| Metric | Value |
+|--------|-------|
+| Batch size | $5,000,000$ raw candidates |
+| Batches allocated | 50 |
+| Batch containing discovery | 46 |
+| Raw candidate range allocated | $250,000,000$ |
+| Approximate odd candidates tested before discovery | $1.14 \times 10^8$ |
+| Search time | about 6 minutes 51 seconds |
 
-where $\phi(d)$ is Euler's totient function. For $k=7$ and $d=210$, we have $\phi(210) = 48$, yielding:
+| Index ($n$) | Term ($a_n$) | Status |
+| --- | --- | --- |
+| 0 | 999,721,631,514,707 | Prime |
+| 1 | 999,721,631,514,917 | Prime |
+| 2 | 999,721,631,515,127 | Prime |
+| 3 | 999,721,631,515,337 | Prime |
+| 4 | 999,721,631,515,547 | Prime |
+| 5 | 999,721,631,515,757 | Prime |
+| 6 | 999,721,631,515,967 | Prime |
+| 7 | 999,721,631,516,177 | Prime |
 
-$$P(\text{AP-7}) \approx \left(\frac{48/210}{\ln(10^{15})}\right)^7 \approx 1.9 \times 10^{-14}$$
+The progression is
 
-with an expected candidates-to-success of approximately $5.3 \times 10^{13}$ under uniform random sampling.
+$$a_n = 999,721,631,514,707 + 210n,\qquad 0 \leq n \leq 7.$$
 
-The observed success after $n = 6 \times 10^7$ candidates represents a speedup factor of $\sim 8.8 \times 10^5$ over the naive expectation. Under a Poisson model with $p \approx 1.9 \times 10^{-14}$ and $n = 6 \times 10^7$:
+All eight terms were verified with deterministic Miller-Rabin and independently checked with SymPy's `isprime()`.
 
-$$P(\text{at least 1 success} \mid \text{null}) = 1 - (1-p)^n \approx 4.9 \times 10^{-7}$$
+#### 4.3 AP-9 Negative Result
 
-This corresponds to a deviation exceeding $5\sigma$ under the Gaussian approximation. While a single data point cannot conclusively rule out an extreme tail event, this extreme deviation strongly motivates the controlled experiments described below.
+The AP-9 searches used $d=210$ and covered approximately $7 \times 10^9$ raw candidate starts across multiple target windows. No AP-9 was found. Under the corrected baseline in Section 5, this miss is not decisive evidence against the code or the heuristic; it is compatible with expected AP-9 rarity at this magnitude.
 
-#### 5.2 Local Prime Density Measurement
+### 5. Statistical Interpretation
 
-If the resonance hypothesis is correct, the LLL-targeted window near $a_{target}$ should exhibit elevated prime density relative to the Prime Number Theorem (PNT) expectation. This measurement is independent of the AP-7 discovery and tests the core mechanism directly.
+The original independence estimate must be handled carefully. For fixed $d=210$, all terms in the progression share the same residue modulo each prime dividing $d$. Therefore the factor $\phi(d)/d$ is not paid independently for every term.
 
-We conducted a census of primes in windows $[a_{target}, a_{target} + W]$ for $W \in \{10^6, 10^7, 10^8\}$. The expected count from the PNT is $W / \ln(a_{target})$, with an approximate standard deviation under the Cramér random model of $\sqrt{W / \ln(a_{target})}$.
+A more appropriate baseline is the Hardy-Littlewood prime $k$-tuple heuristic. For the tuple
 
-*(Experimental data to be populated from ongoing measurements.)*
+$$H_k = \{0,d,2d,\ldots,(k-1)d\},$$
 
-A statistically significant excess ($>2\sigma$ above PNT) would provide direct, model-free evidence that the LLL region genuinely has favorable prime density, independent of the AP-7 result.
+the approximate probability that a raw starting value near $x$ gives an AP-$k$ is
 
-#### 5.3 Controlled Baseline Comparison Protocol
+$$P(\text{AP-}k) \approx \frac{\mathfrak{S}(H_k)}{(\log x)^k},$$
 
-To establish rigorous statistical evidence, we propose the following controlled experiment:
+where $\mathfrak{S}(H_k)$ is the singular series
 
-1. **Random baselines:** Draw $N = 100$ starting points uniformly from $[10^{14}, 10^{16}]$.
-2. **Identical pipeline:** For each random start, run the same GPU sieve with $d=210$, recording candidates-to-success or declaring failure after $10^{10}$ candidates.
-3. **Statistical test:** Compare the distribution of candidates-to-success from random starts against the $6 \times 10^7$ observed from the LLL-guided start using a one-sided Mann-Whitney $U$ test.
+$$\mathfrak{S}(H_k)=\prod_p \frac{1-\nu_p(H_k)/p}{(1-1/p)^k},$$
 
-If the LLL-guided search outperforms $\ge 95\%$ of random starts ($p < 0.05$), the resonance hypothesis gains robust statistical support. This transforms a single anecdotal discovery into a replicable, controlled experiment.
+and $\nu_p(H_k)$ is the number of distinct residues occupied by $H_k$ modulo $p$.
 
-**Important caveat:** Even a null result here would not invalidate the RBLS framework—it would merely constrain the effect size of the resonance for $k=7$.
+Using a truncated singular-series computation for $d=210$ near $x=10^{15}$ gives the following rough expectations:
+
+| $k$ | Partial $\mathfrak{S}(H_k)$ | Expected raw starts per success | Observed result |
+|-----|------------------------------|---------------------------------|-----------------|
+| 7 | $\approx 2.59 \times 10^3$ | $\approx 2.26 \times 10^7$ | Found after $\sim 6.0 \times 10^7$ raw starts |
+| 8 | $\approx 7.13 \times 10^3$ | $\approx 2.84 \times 10^8$ | Found after $\sim 2.28 \times 10^8$ raw starts |
+| 9 | $\approx 1.61 \times 10^4$ | $\approx 4.34 \times 10^9$ | Not found after $\sim 7.0 \times 10^9$ raw starts |
+
+These estimates are approximate, but they materially change the interpretation. The AP-7 and AP-8 discoveries validate that the implementation can find genuine progressions, yet they do not establish a large speedup over structured baseline search. The AP-9 miss is also not surprising enough to invalidate the pipeline.
+
+#### 5.1 Required Baselines
+
+To test whether RBLS provides a real advantage, future work should compare LLL-selected windows against controls using the same implementation and stopping rules:
+
+1. Random windows near $10^{15}$.
+2. Deterministic grid windows with the same residue constraints.
+3. Multiple LLL targets generated by changing $N$, $C$, and the target magnitude.
+
+The primary metric should be candidates-to-first-success, with censored runs handled by a survival-analysis or rank-based test. Reporting only successful runs would overstate the evidence.
+
+#### 5.2 Local Prime Density
+
+A second test is local prime density. For each target window $[a,a+W]$, count primes and compare with both $W/\log a$ and matched random windows. This tests whether the target generator predicts prime-rich regions independently of the AP search.
 
 ### 6. Scalability and Limitations
 
 #### 6.1 Primorial Growth
 
-For progression length $k$, the required common difference is $d = P_k = \prod_{p \leq k} p$. Asymptotically, by the prime number theorem, $\log P_k \sim k$, so $d$ grows roughly as $e^k$:
+For progression length $k$, the required primorial step is
 
-| $k$ | $d$ (approx.) | $\phi(d)/d$ (approx.) | Spread $(k-1)d$ |
-|-----|---------------|------------------------|------------------|
-| 7   | $2.1 \times 10^2$  | 0.2286            | $1.3 \times 10^3$ |
-| 9   | $2.1 \times 10^2$  | 0.2286            | $1.7 \times 10^3$ |
-| 14  | $3.0 \times 10^4$  | 0.1918            | $3.9 \times 10^5$ |
-| 28  | $9.7 \times 10^6$  | 0.1714            | $2.6 \times 10^8$ |
+$$d = \prod_{p \leq k} p.$$
 
-For large $k$, the GPU kernel must test terms across a range up to $(k-1)d$. For AP-28, the final term can be $\sim 2.7 \times 10^8$ away from the first, exceeding L2 cache on current GPUs and reducing memory locality.
+| $k$ | $d$ | $\phi(d)/d$ | Spread $(k-1)d$ |
+|-----|-----|-------------|------------------|
+| 7 | 210 | 0.2286 | 1,260 |
+| 8 | 210 | 0.2286 | 1,470 |
+| 9 | 210 | 0.2286 | 1,680 |
+| 14 | 30,030 | 0.1918 | 390,390 |
+| 28 | 223,092,870 | 0.1636 | 6,023,507,490 |
+
+As $k$ grows, direct AP testing becomes increasingly expensive because each surviving candidate can require many primality tests.
 
 #### 6.2 Phase Drift
 
-The first-order Taylor approximation $\log(a + jd) \approx \log a + jd/a$ accumulates error as $j$ grows. For AP-28 with $d \approx 9.7 \times 10^6$ and $a \approx 10^{15}$, the ratio $d/a \approx 9.7 \times 10^{-9}$. Over $j = 27$ steps, the phase drift in $\ln x$-space is $\sim 2.6 \times 10^{-7}$, which is small relative to the $2\pi$ period of the zero frequencies. However, for longer progressions (AP-50+) or larger $d/a$ ratios, a second-order term $\frac{1}{2}(jd/a)^2$ or a secondary LLL alignment on the ratio $\Delta = d/a$ may be required.
+For AP-28 with $d \approx 2.23 \times 10^8$ and $a \approx 10^{15}$, the total logarithmic span is approximately
 
-#### 6.3 Algorithmic Trade-offs: Direct Test vs. Prime-Find-Then-Scan
+$$\frac{27d}{a} \approx 6.0 \times 10^{-6}.$$
 
-For large $k$ where primorial steps become wide, the "prime-find then scan" approach (implemented in our AP-28 pipeline) can be more efficient than direct AP testing. Rather than testing primality $k$ times per candidate (most of which fail on the first few terms), the prime-find approach tests each number once, collects all primes in a range, then scans for arithmetic patterns via hash-set lookup. This trades $\mathcal O(\text{candidates} \times k)$ Miller-Rabin evaluations for $\mathcal O(\text{candidates})$ evaluations plus $\mathcal O(|\mathbb{P}| \times d_{\max}/d_{\min})$ look-ups, where $|\mathbb{P}|$ is the number of primes found. This is advantageous when the expected AP density is extremely low, as for AP-28 where $\phi(d)/d \approx 0.1714$ and $P(\text{AP-28}) \approx 10^{-61}$ under the independence model.
+This is small, so first-order phase drift is not the immediate bottleneck for the experiments here. The larger limitation is that the present LLL scaling procedure has not yet been shown to select statistically better windows.
 
-#### 6.4 Generality of the Framework
+#### 6.3 Direct Test vs. Prime-Find-Then-Scan
 
-Although this paper focuses on arithmetic progressions of primes, the RBLS framework is general. The same LLL-resonance targeting could bias searches for:
+For larger $k$, a "prime-find then scan" strategy can be preferable. It tests each integer once, collects primes in a window, and scans the resulting set for arithmetic patterns. This trades repeated Miller-Rabin evaluations for hash lookups over the prime set. The AP-28 prototype follows this direction, but a corrected AP-28 run requires a window wider than $6.0 \times 10^9$ integers for the minimal admissible step, so a practical implementation should use segmented storage rather than keeping the full prime set in memory.
 
-- **Twin primes** (pairs $p, p+2$)
-- **Prime constellations** (specific residue patterns, e.g., $(0, 2, 6, 8)$)
-- **Prime gaps** (abnormally large or small gaps between consecutive primes)
+#### 6.4 Scope
 
-The key requirement is that the target pattern have a well-defined offset structure that can be encoded in the phase-alignment calculation.
+The same experimental framework could be adapted to other prime constellations, but each pattern would need its own admissibility constraints, baseline model, and control experiments.
 
-### 7. Conclusion and Ongoing Work
+### 7. Conclusion
 
-Resonance-Biased Lattice Sieving demonstrates that continuous analytic approximations — specifically, LLL lattice reduction applied to Riemann zeta zero phases — can be coupled with discrete, GPU-accelerated sieving to locate arithmetic progressions of primes. The discovery of an AP-7 near $10^{15}$ after scanning only $6 \times 10^7$ candidates is consistent with (though does not yet conclusively prove) the resonance hypothesis.
+RBLS is best viewed as an exploratory computational framework. It successfully found verified AP-7 and AP-8 progressions near $10^{15}$ and produced a useful negative AP-9 experiment. After correcting the statistical baseline, the current evidence supports the correctness of the search implementation but does not yet prove that the LLL target generator improves over ordinary structured sampling.
 
-We have articulated a clear protocol for moving from anecdotal evidence to statistical inference: (1) measure local prime density in the LLL-targeted window against the PNT baseline, (2) conduct controlled baseline comparisons against randomly chosen starting points, and (3) replicate the result for AP-8 or AP-9 (which share the same primorial $d=210$). Preliminary computational work on AP-9 is in progress using an extended GPU pipeline with chunked processing and progress reporting.
+The next step is therefore not a stronger claim, but a cleaner experiment: run matched random and deterministic baseline windows, report all misses, and compare candidates-to-success under identical stopping rules. If RBLS consistently outperforms those controls, the resonance hypothesis becomes a serious empirical result. Until then, the method should be published as an open, reproducible heuristic and a call for independent testing.
 
-The RBLS method provides a principled alternative to purely uniform sampling of the number line. By focusing computational resources on intervals where number-theoretic phase alignment predicts favorable prime distributions, RBLS offers a structured and potentially transformative methodology for large-scale computational prime hunting.
+### Acknowledgements
+
+The GPU-accelerated AP-7 search was conducted on an NVIDIA Tesla T4 hosted on Windows. The AP-8 and AP-9 M1 searches were executed on Apple Silicon using Numba JIT compilation with parallel CPU execution. The author thanks the open-source maintainers of SymPy, PyCUDA, and Numba.
 
 ### References
 
 1. Green, B., & Tao, T. (2008). The primes contain arbitrarily long arithmetic progressions. *Annals of Mathematics*, 167(2), 481-547.
 2. Lenstra, A. K., Lenstra, H. W., & Lovász, L. (1982). Factoring polynomials with rational coefficients. *Mathematische Annalen*, 261(4), 515-534.
-3. Pomerance, C., Selfridge, J. L., & Wagstaff, S. S. (1980). The pseudoprimes to 25 \cdot 10^9. *Mathematics of Computation*, 35(151), 1003-1026.
+3. Hardy, G. H., & Littlewood, J. E. (1923). Some problems of 'Partitio Numerorum'; III: On the expression of a number as a sum of primes. *Acta Mathematica*, 44, 1-70.
 4. Davenport, H. (2000). *Multiplicative Number Theory* (3rd ed.). Springer-Verlag.
-5. Hardy, G. H., & Littlewood, J. E. (1923). Some problems of 'Partitio Numerorum'; III: On the expression of a number as a sum of primes. *Acta Mathematica*, 44, 1-70.
-6. Montgomery, H. L. (1973). The pair correlation of zeros of the zeta function. *Proceedings of Symposia in Pure Mathematics*, 24, 181-193.
-7. Lagarias, J. C., & Odlyzko, A. M. (1987). Computing π(x): An analytic method. *Journal of Algorithms*, 8(2), 173-191.
+5. Montgomery, H. L. (1973). The pair correlation of zeros of the zeta function. *Proceedings of Symposia in Pure Mathematics*, 24, 181-193.
+6. Lagarias, J. C., & Odlyzko, A. M. (1987). Computing $\pi(x)$: An analytic method. *Journal of Algorithms*, 8(2), 173-191.
+7. Pomerance, C., Selfridge, J. L., & Wagstaff, S. S. (1980). The pseudoprimes to $25 \cdot 10^9$. *Mathematics of Computation*, 35(151), 1003-1026.

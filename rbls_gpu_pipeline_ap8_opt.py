@@ -248,23 +248,23 @@ def run_gpu_sieve_optimized(mod, candidate_array, common_difference, k_length, b
 # =====================================================================
 def estimate_probability(k, d):
     ln_n = math.log(10**15)
-    p_prime = 1.0 / ln_n
-    phi_d = d
-    for p in sympy.primerange(2, k + 1):
-        phi_d = phi_d * (p - 1) // p
-    filt = phi_d / d
-    p_cond = p_prime / filt
-    p_ap = p_cond ** k
+    singular = 1.0
+    for p in sympy.primerange(2, 100_000):
+        residues = len({(j * d) % p for j in range(k)})
+        if residues == p:
+            singular = 0.0
+            break
+        singular *= (1.0 - residues / p) / ((1.0 - 1.0 / p) ** k)
+    p_ap = singular / (ln_n ** k) if singular else 0.0
     print(f"\n--- AP-{k} Estimate ---")
-    print(f"d={d}, phi(d)={phi_d}, admissible fraction={filt:.4f}")
-    print(f"P(prime|coprime to d)={p_cond:.6f}")
-    print(f"P(AP-{k} naive)={p_ap:.2e}")
+    print(f"d={d}, singular series≈{singular:.3e}")
+    print(f"P(AP-{k})≈{p_ap:.2e}")
     # Account for odd-only filtering (50% reduction)
     expected_raw = 1.0 / p_ap
     expected_odd = expected_raw / 2  # half the candidates are odd
     print(f"Expected raw candidates: {expected_raw:.2e}")
     print(f"Expected odd candidates (after even-skip): {expected_odd:.2e}")
-    print(f"  Naive expected batches of 10M raw: {expected_raw/10_000_000:.1f}")
+    print(f"  Expected batches of 10M raw: {expected_raw/10_000_000:.1f}")
     return expected_raw
 
 # =====================================================================

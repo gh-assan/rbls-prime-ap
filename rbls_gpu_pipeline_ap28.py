@@ -80,8 +80,8 @@ __global__ void find_primes(uint64* start_nums, int* is_prime_out, int num_count
 # =====================================================================
 
 def get_required_primorial(k):
-    """Calculates the product of all primes strictly less than k."""
-    primes = list(sympy.primerange(2, k))
+    """Calculates the product of all primes <= k."""
+    primes = list(sympy.primerange(2, k + 1))
     primorial = 1
     for p in primes:
         primorial *= p
@@ -197,10 +197,23 @@ if __name__ == "__main__":
     write_result(f"LLL target: {target_a:,}")
     chunk_size = 100_000_000
     num_chunks = 10
+    range_size = num_chunks * chunk_size
+    required_span = (k_target - 1) * d_step
+    if range_size <= required_span:
+        msg = (
+            f"Configured range ({range_size:,}) is too small for AP-{k_target} "
+            f"with d={d_step:,}; need more than {required_span:,} numbers. "
+            "Use a larger, memory-aware segmented scan before treating AP-28 "
+            "results as meaningful."
+        )
+        print(msg)
+        write_result(msg)
+        raise SystemExit(1)
+
     all_primes = []
     
     print(f"\n--- [PHASE 2: PRIME COLLECTION] ---")
-    print(f"Scanning {num_chunks}x{chunk_size:,} = {num_chunks*chunk_size:,} numbers")
+    print(f"Scanning {num_chunks}x{chunk_size:,} = {range_size:,} numbers")
     
     overall_start = time.time()
     
@@ -224,7 +237,6 @@ if __name__ == "__main__":
     write_result(f"Primes collected: {len(all_primes):,}")
     
     # Phase 3
-    range_size = num_chunks * chunk_size
     max_d = range_size // (k_target - 1)
     
     print(f"\n--- [PHASE 3: AP-{k_target} SCAN] ---")

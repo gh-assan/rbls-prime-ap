@@ -1,0 +1,357 @@
+NOTE: The probability estimate printed in this raw run log used an older
+conditional-independence model. The paper now uses a Hardy-Littlewood-style
+baseline for d=210 near 10^15, giving P(AP-9) ≈ 2.31e-10 per raw start and
+an expected ≈4.34e9 raw starts per success. Keep this log for execution
+provenance, not for the current statistical interpretation.
+
+======================================================================
+RBLS M1 Pipeline — AP-9 Search v3
+Multi-target LLL (top 3 vectors, quality-sorted)
+======================================================================
+--- [PHASE 1: MULTI-TARGET LLL REDUCTION] ---
+  Target #1: a=999,721,403,904,415, ln(a)=34.538498, quality=0.409409
+  Target #2: a=996,222,677,189,333, ln(a)=34.534992, quality=0.411296
+  Target #3: a=998,765,887,233,585, ln(a)=34.537542, quality=0.409923
+
+  Best quality:  a=999,721,403,904,415 (q=0.409409)
+  Worst quality: a=996,222,677,189,333 (q=0.411296)
+
+--- AP-9 Estimate ---
+d=210, phi=48, admissible fraction=0.2286
+P(AP-9) = 8.40e-09, expected candidates = 1.19e+08
+  Naive expected batches of 10M raw: 11.9
+
+Total search plan: 3 targets × 100 batches
+Total raw candidates: 3,000,000,000
+Total odd candidates: ~1,500,000,000
+
+--- [SEARCHING TARGET T1 (q=0.4094)] ---
+Starting at: 999,721,403,904,415
+Range: 999,721,403,904,415 to 999,722,403,904,415
+Batches: 100, batch size: 10,000,000 raw (5,000,000 odd)
+  T1 (q=0.4094) Batch   1/100: 5,000,000 odd in  20.80s | 0 matches |  239,792 odd/s | searching: 999,721,403,904,415
+  T1 (q=0.4094) Batch   2/100: 5,000,000 odd in  19.28s | 0 matches |  248,872 odd/s | searching: 999,721,413,904,415
+  T1 (q=0.4094) Batch   3/100: 5,000,000 odd in  17.73s | 0 matches |  258,829 odd/s | searching: 999,721,423,904,415
+  T1 (q=0.4094) Batch   4/100: 5,000,000 odd in  17.62s | 0 matches |  264,513 odd/s | searching: 999,721,433,904,415
+  T1 (q=0.4094) Batch   5/100: 5,000,000 odd in  19.38s | 0 matches |  263,066 odd/s | searching: 999,721,443,904,415
+  T1 (q=0.4094) Batch   6/100: 5,000,000 odd in  19.13s | 0 matches |  262,686 odd/s | searching: 999,721,453,904,415
+  T1 (q=0.4094) Batch   7/100: 5,000,000 odd in  19.22s | 0 matches |  262,239 odd/s | searching: 999,721,463,904,415
+  T1 (q=0.4094) Batch   8/100: 5,000,000 odd in  19.33s | 0 matches |  261,718 odd/s | searching: 999,721,473,904,415
+  T1 (q=0.4094) Batch   9/100: 5,000,000 odd in  19.33s | 0 matches |  261,319 odd/s | searching: 999,721,483,904,415
+  T1 (q=0.4094) Batch  10/100: 5,000,000 odd in  19.24s | 0 matches |  261,123 odd/s | searching: 999,721,493,904,415
+  T1 (q=0.4094) Batch  11/100: 5,000,000 odd in  18.33s | 0 matches |  262,087 odd/s | searching: 999,721,503,904,415
+  T1 (q=0.4094) Batch  12/100: 5,000,000 odd in  19.58s | 0 matches |  261,464 odd/s | searching: 999,721,513,904,415
+  T1 (q=0.4094) Batch  13/100: 5,000,000 odd in  18.54s | 0 matches |  262,036 odd/s | searching: 999,721,523,904,415
+  T1 (q=0.4094) Batch  14/100: 5,000,000 odd in  18.67s | 0 matches |  262,404 odd/s | searching: 999,721,533,904,415
+  T1 (q=0.4094) Batch  15/100: 5,000,000 odd in  19.52s | 0 matches |  261,939 odd/s | searching: 999,721,543,904,415
+  T1 (q=0.4094) Batch  16/100: 5,000,000 odd in  18.91s | 0 matches |  262,057 odd/s | searching: 999,721,553,904,415
+  T1 (q=0.4094) Batch  17/100: 5,000,000 odd in  18.90s | 0 matches |  262,166 odd/s | searching: 999,721,563,904,415
+  T1 (q=0.4094) Batch  18/100: 5,000,000 odd in  19.14s | 0 matches |  262,083 odd/s | searching: 999,721,573,904,415
+  T1 (q=0.4094) Batch  19/100: 5,000,000 odd in  18.44s | 0 matches |  262,516 odd/s | searching: 999,721,583,904,415
+  T1 (q=0.4094) Batch  20/100: 5,000,000 odd in  19.05s | 0 matches |  262,483 odd/s | searching: 999,721,593,904,415
+  T1 (q=0.4094) Batch  21/100: 5,000,000 odd in  18.92s | 0 matches |  262,540 odd/s | searching: 999,721,603,904,415
+  T1 (q=0.4094) Batch  22/100: 5,000,000 odd in  19.20s | 0 matches |  262,416 odd/s | searching: 999,721,613,904,415
+  T1 (q=0.4094) Batch  23/100: 5,000,000 odd in  19.22s | 0 matches |  262,292 odd/s | searching: 999,721,623,904,415
+  T1 (q=0.4094) Batch  24/100: 5,000,000 odd in  18.42s | 0 matches |  262,638 odd/s | searching: 999,721,633,904,415
+  T1 (q=0.4094) Batch  25/100: 5,000,000 odd in  18.97s | 0 matches |  262,652 odd/s | searching: 999,721,643,904,415
+  T1 (q=0.4094) Batch  26/100: 5,000,000 odd in  19.22s | 0 matches |  262,534 odd/s | searching: 999,721,653,904,415
+  T1 (q=0.4094) Batch  27/100: 5,000,000 odd in  19.33s | 0 matches |  262,367 odd/s | searching: 999,721,663,904,415
+  T1 (q=0.4094) Batch  28/100: 5,000,000 odd in  18.63s | 0 matches |  262,555 odd/s | searching: 999,721,673,904,415
+  T1 (q=0.4094) Batch  29/100: 5,000,000 odd in  19.20s | 0 matches |  262,463 odd/s | searching: 999,721,683,904,415
+  T1 (q=0.4094) Batch  30/100: 5,000,000 odd in  18.17s | 0 matches |  262,850 odd/s | searching: 999,721,693,904,415
+  T1 (q=0.4094) Batch  31/100: 5,000,000 odd in  17.92s | 0 matches |  263,322 odd/s | searching: 999,721,703,904,415
+  T1 (q=0.4094) Batch  32/100: 5,000,000 odd in  18.26s | 0 matches |  263,620 odd/s | searching: 999,721,713,904,415
+  T1 (q=0.4094) Batch  33/100: 5,000,000 odd in  19.11s | 0 matches |  263,541 odd/s | searching: 999,721,723,904,415
+  T1 (q=0.4094) Batch  34/100: 5,000,000 odd in  18.12s | 0 matches |  263,874 odd/s | searching: 999,721,733,904,415
+  T1 (q=0.4094) Batch  35/100: 5,000,000 odd in  18.13s | 0 matches |  264,182 odd/s | searching: 999,721,743,904,415
+  T1 (q=0.4094) Batch  36/100: 5,000,000 odd in  18.36s | 0 matches |  264,385 odd/s | searching: 999,721,753,904,415
+  T1 (q=0.4094) Batch  37/100: 5,000,000 odd in  18.77s | 0 matches |  264,423 odd/s | searching: 999,721,763,904,415
+  T1 (q=0.4094) Batch  38/100: 5,000,000 odd in  18.22s | 0 matches |  264,660 odd/s | searching: 999,721,773,904,415
+  T1 (q=0.4094) Batch  39/100: 5,000,000 odd in  19.42s | 0 matches |  264,457 odd/s | searching: 999,721,783,904,415
+  T1 (q=0.4094) Batch  40/100: 5,000,000 odd in  18.83s | 0 matches |  264,468 odd/s | searching: 999,721,793,904,415
+  T1 (q=0.4094) Batch  41/100: 5,000,000 odd in  18.48s | 0 matches |  264,600 odd/s | searching: 999,721,803,904,415
+  T1 (q=0.4094) Batch  42/100: 5,000,000 odd in  18.41s | 0 matches |  264,748 odd/s | searching: 999,721,813,904,415
+  T1 (q=0.4094) Batch  43/100: 5,000,000 odd in  17.44s | 0 matches |  265,205 odd/s | searching: 999,721,823,904,415
+  T1 (q=0.4094) Batch  44/100: 5,000,000 odd in  17.51s | 0 matches |  265,620 odd/s | searching: 999,721,833,904,415
+  T1 (q=0.4094) Batch  45/100: 5,000,000 odd in  18.10s | 0 matches |  265,835 odd/s | searching: 999,721,843,904,415
+  T1 (q=0.4094) Batch  46/100: 5,000,000 odd in  18.26s | 0 matches |  265,992 odd/s | searching: 999,721,853,904,415
+  T1 (q=0.4094) Batch  47/100: 5,000,000 odd in  17.83s | 0 matches |  266,271 odd/s | searching: 999,721,863,904,415
+  T1 (q=0.4094) Batch  48/100: 5,000,000 odd in  17.70s | 0 matches |  266,578 odd/s | searching: 999,721,873,904,415
+  T1 (q=0.4094) Batch  49/100: 5,000,000 odd in  18.07s | 0 matches |  266,764 odd/s | searching: 999,721,883,904,415
+  T1 (q=0.4094) Batch  50/100: 5,000,000 odd in  18.83s | 0 matches |  266,727 odd/s | searching: 999,721,893,904,415
+  T1 (q=0.4094) Batch  51/100: 5,000,000 odd in  18.59s | 0 matches |  266,759 odd/s | searching: 999,721,903,904,415
+  T1 (q=0.4094) Batch  52/100: 5,000,000 odd in  18.78s | 0 matches |  266,737 odd/s | searching: 999,721,913,904,415
+  T1 (q=0.4094) Batch  53/100: 5,000,000 odd in  18.26s | 0 matches |  266,855 odd/s | searching: 999,721,923,904,415
+  T1 (q=0.4094) Batch  54/100: 5,000,000 odd in  18.45s | 0 matches |  266,921 odd/s | searching: 999,721,933,904,415
+  T1 (q=0.4094) Batch  55/100: 5,000,000 odd in  19.46s | 0 matches |  266,721 odd/s | searching: 999,721,943,904,415
+  T1 (q=0.4094) Batch  56/100: 5,000,000 odd in  18.76s | 0 matches |  266,707 odd/s | searching: 999,721,953,904,415
+  T1 (q=0.4094) Batch  57/100: 5,000,000 odd in  18.14s | 0 matches |  266,847 odd/s | searching: 999,721,963,904,415
+  T1 (q=0.4094) Batch  58/100: 5,000,000 odd in  18.65s | 0 matches |  266,859 odd/s | searching: 999,721,973,904,415
+  T1 (q=0.4094) Batch  59/100: 5,000,000 odd in  18.81s | 0 matches |  266,832 odd/s | searching: 999,721,983,904,415
+  T1 (q=0.4094) Batch  60/100: 5,000,000 odd in  18.43s | 0 matches |  266,895 odd/s | searching: 999,721,993,904,415
+  T1 (q=0.4094) Batch  61/100: 5,000,000 odd in  18.26s | 0 matches |  266,995 odd/s | searching: 999,722,003,904,415
+  T1 (q=0.4094) Batch  62/100: 5,000,000 odd in  18.48s | 0 matches |  267,043 odd/s | searching: 999,722,013,904,415
+  T1 (q=0.4094) Batch  63/100: 5,000,000 odd in  18.08s | 0 matches |  267,178 odd/s | searching: 999,722,023,904,415
+  T1 (q=0.4094) Batch  64/100: 5,000,000 odd in  18.39s | 0 matches |  267,242 odd/s | searching: 999,722,033,904,415
+  T1 (q=0.4094) Batch  65/100: 5,000,000 odd in  18.93s | 0 matches |  267,185 odd/s | searching: 999,722,043,904,415
+  T1 (q=0.4094) Batch  66/100: 5,000,000 odd in  18.38s | 0 matches |  267,249 odd/s | searching: 999,722,053,904,415
+  T1 (q=0.4094) Batch  67/100: 5,000,000 odd in  18.54s | 0 matches |  267,277 odd/s | searching: 999,722,063,904,415
+  T1 (q=0.4094) Batch  68/100: 5,000,000 odd in  18.78s | 0 matches |  267,252 odd/s | searching: 999,722,073,904,415
+  T1 (q=0.4094) Batch  69/100: 5,000,000 odd in  18.76s | 0 matches |  267,233 odd/s | searching: 999,722,083,904,415
+  T1 (q=0.4094) Batch  70/100: 5,000,000 odd in  18.16s | 0 matches |  267,337 odd/s | searching: 999,722,093,904,415
+  T1 (q=0.4094) Batch  71/100: 5,000,000 odd in  18.20s | 0 matches |  267,429 odd/s | searching: 999,722,103,904,415
+  T1 (q=0.4094) Batch  72/100: 5,000,000 odd in  18.79s | 0 matches |  267,403 odd/s | searching: 999,722,113,904,415
+  T1 (q=0.4094) Batch  73/100: 5,000,000 odd in  18.46s | 0 matches |  267,441 odd/s | searching: 999,722,123,904,415
+  T1 (q=0.4094) Batch  74/100: 5,000,000 odd in  18.20s | 0 matches |  267,527 odd/s | searching: 999,722,133,904,415
+  T1 (q=0.4094) Batch  75/100: 5,000,000 odd in  18.38s | 0 matches |  267,578 odd/s | searching: 999,722,143,904,415
+  T1 (q=0.4094) Batch  76/100: 5,000,000 odd in  18.18s | 0 matches |  267,665 odd/s | searching: 999,722,153,904,415
+  T1 (q=0.4094) Batch  77/100: 5,000,000 odd in  18.08s | 0 matches |  267,768 odd/s | searching: 999,722,163,904,415
+  T1 (q=0.4094) Batch  78/100: 5,000,000 odd in  18.62s | 0 matches |  267,771 odd/s | searching: 999,722,173,904,415
+  T1 (q=0.4094) Batch  79/100: 5,000,000 odd in  18.04s | 0 matches |  267,877 odd/s | searching: 999,722,183,904,415
+  T1 (q=0.4094) Batch  80/100: 5,000,000 odd in  18.05s | 0 matches |  267,979 odd/s | searching: 999,722,193,904,415
+  T1 (q=0.4094) Batch  81/100: 5,000,000 odd in  18.06s | 0 matches |  268,078 odd/s | searching: 999,722,203,904,415
+  T1 (q=0.4094) Batch  82/100: 5,000,000 odd in  19.19s | 0 matches |  267,976 odd/s | searching: 999,722,213,904,415
+  T1 (q=0.4094) Batch  83/100: 5,000,000 odd in  18.26s | 0 matches |  268,037 odd/s | searching: 999,722,223,904,415
+  T1 (q=0.4094) Batch  84/100: 5,000,000 odd in  18.13s | 0 matches |  268,120 odd/s | searching: 999,722,233,904,415
+  T1 (q=0.4094) Batch  85/100: 5,000,000 odd in  18.36s | 0 matches |  268,161 odd/s | searching: 999,722,243,904,415
+  T1 (q=0.4094) Batch  86/100: 5,000,000 odd in  18.21s | 0 matches |  268,226 odd/s | searching: 999,722,253,904,415
+  T1 (q=0.4094) Batch  87/100: 5,000,000 odd in  18.01s | 0 matches |  268,323 odd/s | searching: 999,722,263,904,415
+  T1 (q=0.4094) Batch  88/100: 5,000,000 odd in  18.06s | 0 matches |  268,410 odd/s | searching: 999,722,273,904,415
+  T1 (q=0.4094) Batch  89/100: 5,000,000 odd in  18.21s | 0 matches |  268,471 odd/s | searching: 999,722,283,904,415
+  T1 (q=0.4094) Batch  90/100: 5,000,000 odd in  18.12s | 0 matches |  268,546 odd/s | searching: 999,722,293,904,415
+  T1 (q=0.4094) Batch  91/100: 5,000,000 odd in  18.80s | 0 matches |  268,511 odd/s | searching: 999,722,303,904,415
+  T1 (q=0.4094) Batch  92/100: 5,000,000 odd in  18.46s | 0 matches |  268,530 odd/s | searching: 999,722,313,904,415
+  T1 (q=0.4094) Batch  93/100: 5,000,000 odd in  18.09s | 0 matches |  268,606 odd/s | searching: 999,722,323,904,415
+  T1 (q=0.4094) Batch  94/100: 5,000,000 odd in  18.44s | 0 matches |  268,627 odd/s | searching: 999,722,333,904,415
+  T1 (q=0.4094) Batch  95/100: 5,000,000 odd in  18.45s | 0 matches |  268,646 odd/s | searching: 999,722,343,904,415
+  T1 (q=0.4094) Batch  96/100: 5,000,000 odd in  18.13s | 0 matches |  268,712 odd/s | searching: 999,722,353,904,415
+  T1 (q=0.4094) Batch  97/100: 5,000,000 odd in  16.99s | 0 matches |  268,946 odd/s | searching: 999,722,363,904,415
+  T1 (q=0.4094) Batch  98/100: 5,000,000 odd in  17.51s | 0 matches |  269,099 odd/s | searching: 999,722,373,904,415
+  T1 (q=0.4094) Batch  99/100: 5,000,000 odd in  17.14s | 0 matches |  269,304 odd/s | searching: 999,722,383,904,415
+  T1 (q=0.4094) Batch 100/100: 5,000,000 odd in  17.12s | 0 matches |  269,508 odd/s | searching: 999,722,393,904,415
+
+  Target 1 complete. Elapsed: 1855s (30.9 min). Remaining targets: 2
+
+--- [SEARCHING TARGET T2 (q=0.4099)] ---
+Starting at: 998,765,887,233,585
+Range: 998,765,887,233,585 to 998,766,887,233,585
+Batches: 100, batch size: 10,000,000 raw (5,000,000 odd)
+  T2 (q=0.4099) Batch   1/100: 5,000,000 odd in  17.55s | 0 matches |  284,161 odd/s | searching: 998,765,887,233,585
+  T2 (q=0.4099) Batch   2/100: 5,000,000 odd in  17.69s | 0 matches |  283,030 odd/s | searching: 998,765,897,233,585
+  T2 (q=0.4099) Batch   3/100: 5,000,000 odd in  17.66s | 0 matches |  282,821 odd/s | searching: 998,765,907,233,585
+  T2 (q=0.4099) Batch   4/100: 5,000,000 odd in  17.74s | 0 matches |  282,391 odd/s | searching: 998,765,917,233,585
+  T2 (q=0.4099) Batch   5/100: 5,000,000 odd in  17.68s | 0 matches |  282,329 odd/s | searching: 998,765,927,233,585
+  T2 (q=0.4099) Batch   6/100: 5,000,000 odd in  17.44s | 0 matches |  282,937 odd/s | searching: 998,765,937,233,585
+  T2 (q=0.4099) Batch   7/100: 5,000,000 odd in  17.36s | 0 matches |  283,559 odd/s | searching: 998,765,947,233,585
+  T2 (q=0.4099) Batch   8/100: 5,000,000 odd in  17.24s | 0 matches |  284,272 odd/s | searching: 998,765,957,233,585
+  T2 (q=0.4099) Batch   9/100: 5,000,000 odd in  17.49s | 0 matches |  284,376 odd/s | searching: 998,765,967,233,585
+  T2 (q=0.4099) Batch  10/100: 5,000,000 odd in  17.91s | 0 matches |  283,776 odd/s | searching: 998,765,977,233,585
+  T2 (q=0.4099) Batch  11/100: 5,000,000 odd in  18.38s | 0 matches |  282,609 odd/s | searching: 998,765,987,233,585
+  T2 (q=0.4099) Batch  12/100: 5,000,000 odd in  17.75s | 0 matches |  282,472 odd/s | searching: 998,765,997,233,585
+  T2 (q=0.4099) Batch  13/100: 5,000,000 odd in  17.70s | 0 matches |  282,423 odd/s | searching: 998,766,007,233,585
+  T2 (q=0.4099) Batch  14/100: 5,000,000 odd in  17.62s | 0 matches |  282,464 odd/s | searching: 998,766,017,233,585
+  T2 (q=0.4099) Batch  15/100: 5,000,000 odd in  17.66s | 0 matches |  282,464 odd/s | searching: 998,766,027,233,585
+  T2 (q=0.4099) Batch  16/100: 5,000,000 odd in  17.57s | 0 matches |  282,553 odd/s | searching: 998,766,037,233,585
+  T2 (q=0.4099) Batch  17/100: 5,000,000 odd in  17.74s | 0 matches |  282,473 odd/s | searching: 998,766,047,233,585
+  T2 (q=0.4099) Batch  18/100: 5,000,000 odd in  17.88s | 0 matches |  282,280 odd/s | searching: 998,766,057,233,585
+  T2 (q=0.4099) Batch  19/100: 5,000,000 odd in  17.46s | 0 matches |  282,453 odd/s | searching: 998,766,067,233,585
+  T2 (q=0.4099) Batch  20/100: 5,000,000 odd in  17.65s | 0 matches |  282,459 odd/s | searching: 998,766,077,233,585
+  T2 (q=0.4099) Batch  21/100: 5,000,000 odd in  17.53s | 0 matches |  282,559 odd/s | searching: 998,766,087,233,585
+  T2 (q=0.4099) Batch  22/100: 5,000,000 odd in  17.74s | 0 matches |  282,493 odd/s | searching: 998,766,097,233,585
+  T2 (q=0.4099) Batch  23/100: 5,000,000 odd in  17.63s | 0 matches |  282,512 odd/s | searching: 998,766,107,233,585
+  T2 (q=0.4099) Batch  24/100: 5,000,000 odd in  18.29s | 0 matches |  282,092 odd/s | searching: 998,766,117,233,585
+  T2 (q=0.4099) Batch  25/100: 5,000,000 odd in  18.22s | 0 matches |  281,750 odd/s | searching: 998,766,127,233,585
+  T2 (q=0.4099) Batch  26/100: 5,000,000 odd in  17.72s | 0 matches |  281,737 odd/s | searching: 998,766,137,233,585
+  T2 (q=0.4099) Batch  27/100: 5,000,000 odd in  17.76s | 0 matches |  281,705 odd/s | searching: 998,766,147,233,585
+  T2 (q=0.4099) Batch  28/100: 5,000,000 odd in  17.87s | 0 matches |  281,614 odd/s | searching: 998,766,157,233,585
+  T2 (q=0.4099) Batch  29/100: 5,000,000 odd in  17.95s | 0 matches |  281,482 odd/s | searching: 998,766,167,233,585
+  T2 (q=0.4099) Batch  30/100: 5,000,000 odd in  18.19s | 0 matches |  281,237 odd/s | searching: 998,766,177,233,585
+  T2 (q=0.4099) Batch  31/100: 5,000,000 odd in  18.08s | 0 matches |  281,060 odd/s | searching: 998,766,187,233,585
+  T2 (q=0.4099) Batch  32/100: 5,000,000 odd in  17.74s | 0 matches |  281,066 odd/s | searching: 998,766,197,233,585
+  T2 (q=0.4099) Batch  33/100: 5,000,000 odd in  17.33s | 0 matches |  281,265 odd/s | searching: 998,766,207,233,585
+  T2 (q=0.4099) Batch  34/100: 5,000,000 odd in  17.38s | 0 matches |  281,430 odd/s | searching: 998,766,217,233,585
+  T2 (q=0.4099) Batch  35/100: 5,000,000 odd in  17.23s | 0 matches |  281,654 odd/s | searching: 998,766,227,233,585
+  T2 (q=0.4099) Batch  36/100: 5,000,000 odd in  17.27s | 0 matches |  281,848 odd/s | searching: 998,766,237,233,585
+  T2 (q=0.4099) Batch  37/100: 5,000,000 odd in  17.74s | 0 matches |  281,830 odd/s | searching: 998,766,247,233,585
+  T2 (q=0.4099) Batch  38/100: 5,000,000 odd in  17.59s | 0 matches |  281,877 odd/s | searching: 998,766,257,233,585
+  T2 (q=0.4099) Batch  39/100: 5,000,000 odd in  17.63s | 0 matches |  281,903 odd/s | searching: 998,766,267,233,585
+  T2 (q=0.4099) Batch  40/100: 5,000,000 odd in  17.57s | 0 matches |  281,953 odd/s | searching: 998,766,277,233,585
+  T2 (q=0.4099) Batch  41/100: 5,000,000 odd in  17.56s | 0 matches |  282,002 odd/s | searching: 998,766,287,233,585
+  T2 (q=0.4099) Batch  42/100: 5,000,000 odd in  17.59s | 0 matches |  282,041 odd/s | searching: 998,766,297,233,585
+  T2 (q=0.4099) Batch  43/100: 5,000,000 odd in  17.56s | 0 matches |  282,089 odd/s | searching: 998,766,307,233,585
+  T2 (q=0.4099) Batch  44/100: 5,000,000 odd in  17.63s | 0 matches |  282,107 odd/s | searching: 998,766,317,233,585
+  T2 (q=0.4099) Batch  45/100: 5,000,000 odd in  17.91s | 0 matches |  282,027 odd/s | searching: 998,766,327,233,585
+  T2 (q=0.4099) Batch  46/100: 5,000,000 odd in  17.42s | 0 matches |  282,118 odd/s | searching: 998,766,337,233,585
+  T2 (q=0.4099) Batch  47/100: 5,000,000 odd in  17.86s | 0 matches |  282,056 odd/s | searching: 998,766,347,233,585
+  T2 (q=0.4099) Batch  48/100: 5,000,000 odd in  17.70s | 0 matches |  282,049 odd/s | searching: 998,766,357,233,585
+  T2 (q=0.4099) Batch  49/100: 5,000,000 odd in  17.75s | 0 matches |  282,028 odd/s | searching: 998,766,367,233,585
+  T2 (q=0.4099) Batch  50/100: 5,000,000 odd in  17.60s | 0 matches |  282,055 odd/s | searching: 998,766,377,233,585
+  T2 (q=0.4099) Batch  51/100: 5,000,000 odd in  17.82s | 0 matches |  282,012 odd/s | searching: 998,766,387,233,585
+  T2 (q=0.4099) Batch  52/100: 5,000,000 odd in  18.26s | 0 matches |  281,838 odd/s | searching: 998,766,397,233,585
+  T2 (q=0.4099) Batch  53/100: 5,000,000 odd in  17.70s | 0 matches |  281,837 odd/s | searching: 998,766,407,233,585
+  T2 (q=0.4099) Batch  54/100: 5,000,000 odd in  17.94s | 0 matches |  281,767 odd/s | searching: 998,766,417,233,585
+  T2 (q=0.4099) Batch  55/100: 5,000,000 odd in  17.55s | 0 matches |  281,811 odd/s | searching: 998,766,427,233,585
+  T2 (q=0.4099) Batch  56/100: 5,000,000 odd in  17.81s | 0 matches |  281,778 odd/s | searching: 998,766,437,233,585
+  T2 (q=0.4099) Batch  57/100: 5,000,000 odd in  17.92s | 0 matches |  281,718 odd/s | searching: 998,766,447,233,585
+  T2 (q=0.4099) Batch  58/100: 5,000,000 odd in  17.89s | 0 matches |  281,669 odd/s | searching: 998,766,457,233,585
+  T2 (q=0.4099) Batch  59/100: 5,000,000 odd in  17.97s | 0 matches |  281,598 odd/s | searching: 998,766,467,233,585
+  T2 (q=0.4099) Batch  60/100: 5,000,000 odd in  17.59s | 0 matches |  281,630 odd/s | searching: 998,766,477,233,585
+  T2 (q=0.4099) Batch  61/100: 5,000,000 odd in  17.63s | 0 matches |  281,653 odd/s | searching: 998,766,487,233,585
+  T2 (q=0.4099) Batch  62/100: 5,000,000 odd in  17.54s | 0 matches |  281,697 odd/s | searching: 998,766,497,233,585
+  T2 (q=0.4099) Batch  63/100: 5,000,000 odd in  17.71s | 0 matches |  281,696 odd/s | searching: 998,766,507,233,585
+  T2 (q=0.4099) Batch  64/100: 5,000,000 odd in  18.30s | 0 matches |  281,550 odd/s | searching: 998,766,517,233,585
+  T2 (q=0.4099) Batch  65/100: 5,000,000 odd in  17.95s | 0 matches |  281,493 odd/s | searching: 998,766,527,233,585
+  T2 (q=0.4099) Batch  66/100: 5,000,000 odd in  17.77s | 0 matches |  281,482 odd/s | searching: 998,766,537,233,585
+  T2 (q=0.4099) Batch  67/100: 5,000,000 odd in  17.97s | 0 matches |  281,424 odd/s | searching: 998,766,547,233,585
+  T2 (q=0.4099) Batch  68/100: 5,000,000 odd in  17.81s | 0 matches |  281,403 odd/s | searching: 998,766,557,233,585
+  T2 (q=0.4099) Batch  69/100: 5,000,000 odd in  17.98s | 0 matches |  281,345 odd/s | searching: 998,766,567,233,585
+  T2 (q=0.4099) Batch  70/100: 5,000,000 odd in  17.87s | 0 matches |  281,314 odd/s | searching: 998,766,577,233,585
+  T2 (q=0.4099) Batch  71/100: 5,000,000 odd in  17.93s | 0 matches |  281,271 odd/s | searching: 998,766,587,233,585
+  T2 (q=0.4099) Batch  72/100: 5,000,000 odd in  18.13s | 0 matches |  281,184 odd/s | searching: 998,766,597,233,585
+  T2 (q=0.4099) Batch  73/100: 5,000,000 odd in  17.68s | 0 matches |  281,196 odd/s | searching: 998,766,607,233,585
+  T2 (q=0.4099) Batch  74/100: 5,000,000 odd in  17.87s | 0 matches |  281,167 odd/s | searching: 998,766,617,233,585
+  T2 (q=0.4099) Batch  75/100: 5,000,000 odd in  17.69s | 0 matches |  281,179 odd/s | searching: 998,766,627,233,585
+  T2 (q=0.4099) Batch  76/100: 5,000,000 odd in  17.81s | 0 matches |  281,164 odd/s | searching: 998,766,637,233,585
+  T2 (q=0.4099) Batch  77/100: 5,000,000 odd in  18.14s | 0 matches |  281,083 odd/s | searching: 998,766,647,233,585
+  T2 (q=0.4099) Batch  78/100: 5,000,000 odd in  17.97s | 0 matches |  281,038 odd/s | searching: 998,766,657,233,585
+  T2 (q=0.4099) Batch  79/100: 5,000,000 odd in  18.60s | 0 matches |  280,867 odd/s | searching: 998,766,667,233,585
+  T2 (q=0.4099) Batch  80/100: 5,000,000 odd in  17.78s | 0 matches |  280,864 odd/s | searching: 998,766,677,233,585
+  T2 (q=0.4099) Batch  81/100: 5,000,000 odd in  18.10s | 0 matches |  280,798 odd/s | searching: 998,766,687,233,585
+  T2 (q=0.4099) Batch  82/100: 5,000,000 odd in  18.09s | 0 matches |  280,735 odd/s | searching: 998,766,697,233,585
+  T2 (q=0.4099) Batch  83/100: 5,000,000 odd in  17.93s | 0 matches |  280,704 odd/s | searching: 998,766,707,233,585
+  T2 (q=0.4099) Batch  84/100: 5,000,000 odd in  18.35s | 0 matches |  280,596 odd/s | searching: 998,766,717,233,585
+  T2 (q=0.4099) Batch  85/100: 5,000,000 odd in  17.23s | 0 matches |  280,697 odd/s | searching: 998,766,727,233,585
+  T2 (q=0.4099) Batch  86/100: 5,000,000 odd in  17.26s | 0 matches |  280,791 odd/s | searching: 998,766,737,233,585
+  T2 (q=0.4099) Batch  87/100: 5,000,000 odd in  17.19s | 0 matches |  280,895 odd/s | searching: 998,766,747,233,585
+  T2 (q=0.4099) Batch  88/100: 5,000,000 odd in  17.13s | 0 matches |  281,008 odd/s | searching: 998,766,757,233,585
+  T2 (q=0.4099) Batch  89/100: 5,000,000 odd in  17.15s | 0 matches |  281,114 odd/s | searching: 998,766,767,233,585
+  T2 (q=0.4099) Batch  90/100: 5,000,000 odd in  17.06s | 0 matches |  281,233 odd/s | searching: 998,766,777,233,585
+  T2 (q=0.4099) Batch  91/100: 5,000,000 odd in  17.41s | 0 matches |  281,290 odd/s | searching: 998,766,787,233,585
+  T2 (q=0.4099) Batch  92/100: 5,000,000 odd in  17.53s | 0 matches |  281,325 odd/s | searching: 998,766,797,233,585
+  T2 (q=0.4099) Batch  93/100: 5,000,000 odd in  17.32s | 0 matches |  281,394 odd/s | searching: 998,766,807,233,585
+  T2 (q=0.4099) Batch  94/100: 5,000,000 odd in  17.42s | 0 matches |  281,446 odd/s | searching: 998,766,817,233,585
+  T2 (q=0.4099) Batch  95/100: 5,000,000 odd in  17.25s | 0 matches |  281,525 odd/s | searching: 998,766,827,233,585
+  T2 (q=0.4099) Batch  96/100: 5,000,000 odd in  17.45s | 0 matches |  281,570 odd/s | searching: 998,766,837,233,585
+  T2 (q=0.4099) Batch  97/100: 5,000,000 odd in  17.59s | 0 matches |  281,590 odd/s | searching: 998,766,847,233,585
+  T2 (q=0.4099) Batch  98/100: 5,000,000 odd in  17.61s | 0 matches |  281,608 odd/s | searching: 998,766,857,233,585
+  T2 (q=0.4099) Batch  99/100: 5,000,000 odd in  18.02s | 0 matches |  281,560 odd/s | searching: 998,766,867,233,585
+  T2 (q=0.4099) Batch 100/100: 5,000,000 odd in  17.58s | 0 matches |  281,581 odd/s | searching: 998,766,877,233,585
+
+  Target 2 complete. Elapsed: 3631s (60.5 min). Remaining targets: 1
+
+--- [SEARCHING TARGET T3 (q=0.4113)] ---
+Starting at: 996,222,677,189,333
+Range: 996,222,677,189,333 to 996,223,677,189,333
+Batches: 100, batch size: 10,000,000 raw (5,000,000 odd)
+  T3 (q=0.4113) Batch   1/100: 5,000,000 odd in  18.61s | 0 matches |  268,045 odd/s | searching: 996,222,677,189,333
+  T3 (q=0.4113) Batch   2/100: 5,000,000 odd in  19.31s | 0 matches |  263,070 odd/s | searching: 996,222,687,189,333
+  T3 (q=0.4113) Batch   3/100: 5,000,000 odd in  18.01s | 0 matches |  267,549 odd/s | searching: 996,222,697,189,333
+  T3 (q=0.4113) Batch   4/100: 5,000,000 odd in  19.03s | 0 matches |  266,169 odd/s | searching: 996,222,707,189,333
+  T3 (q=0.4113) Batch   5/100: 5,000,000 odd in  18.00s | 0 matches |  268,293 odd/s | searching: 996,222,717,189,333
+  T3 (q=0.4113) Batch   6/100: 5,000,000 odd in  18.95s | 0 matches |  267,451 odd/s | searching: 996,222,727,189,333
+  T3 (q=0.4113) Batch   7/100: 5,000,000 odd in  19.00s | 0 matches |  266,751 odd/s | searching: 996,222,737,189,333
+  T3 (q=0.4113) Batch   8/100: 5,000,000 odd in  18.37s | 0 matches |  267,340 odd/s | searching: 996,222,747,189,333
+  T3 (q=0.4113) Batch   9/100: 5,000,000 odd in  17.72s | 0 matches |  268,836 odd/s | searching: 996,222,757,189,333
+  T3 (q=0.4113) Batch  10/100: 5,000,000 odd in  17.17s | 0 matches |  270,856 odd/s | searching: 996,222,767,189,333
+  T3 (q=0.4113) Batch  11/100: 5,000,000 odd in  17.49s | 0 matches |  272,100 odd/s | searching: 996,222,777,189,333
+  T3 (q=0.4113) Batch  12/100: 5,000,000 odd in  17.48s | 0 matches |  273,159 odd/s | searching: 996,222,787,189,333
+  T3 (q=0.4113) Batch  13/100: 5,000,000 odd in  18.14s | 0 matches |  273,303 odd/s | searching: 996,222,797,189,333
+  T3 (q=0.4113) Batch  14/100: 5,000,000 odd in  17.53s | 0 matches |  274,072 odd/s | searching: 996,222,807,189,333
+  T3 (q=0.4113) Batch  15/100: 5,000,000 odd in  17.32s | 0 matches |  274,962 odd/s | searching: 996,222,817,189,333
+  T3 (q=0.4113) Batch  16/100: 5,000,000 odd in  17.57s | 0 matches |  275,504 odd/s | searching: 996,222,827,189,333
+  T3 (q=0.4113) Batch  17/100: 5,000,000 odd in  17.04s | 0 matches |  276,464 odd/s | searching: 996,222,837,189,333
+  T3 (q=0.4113) Batch  18/100: 5,000,000 odd in  17.45s | 0 matches |  276,967 odd/s | searching: 996,222,847,189,333
+  T3 (q=0.4113) Batch  19/100: 5,000,000 odd in  17.77s | 0 matches |  277,159 odd/s | searching: 996,222,857,189,333
+  T3 (q=0.4113) Batch  20/100: 5,000,000 odd in  17.65s | 0 matches |  277,425 odd/s | searching: 996,222,867,189,333
+  T3 (q=0.4113) Batch  21/100: 5,000,000 odd in  17.51s | 0 matches |  277,768 odd/s | searching: 996,222,877,189,333
+  T3 (q=0.4113) Batch  22/100: 5,000,000 odd in  17.65s | 0 matches |  277,982 odd/s | searching: 996,222,887,189,333
+  T3 (q=0.4113) Batch  23/100: 5,000,000 odd in  17.37s | 0 matches |  278,372 odd/s | searching: 996,222,897,189,333
+  T3 (q=0.4113) Batch  24/100: 5,000,000 odd in  18.35s | 0 matches |  278,097 odd/s | searching: 996,222,907,189,333
+  T3 (q=0.4113) Batch  25/100: 5,000,000 odd in  18.06s | 0 matches |  278,023 odd/s | searching: 996,222,917,189,333
+  T3 (q=0.4113) Batch  26/100: 5,000,000 odd in  17.94s | 0 matches |  278,022 odd/s | searching: 996,222,927,189,333
+  T3 (q=0.4113) Batch  27/100: 5,000,000 odd in  17.71s | 0 matches |  278,153 odd/s | searching: 996,222,937,189,333
+  T3 (q=0.4113) Batch  28/100: 5,000,000 odd in  17.82s | 0 matches |  278,214 odd/s | searching: 996,222,947,189,333
+  T3 (q=0.4113) Batch  29/100: 5,000,000 odd in  17.91s | 0 matches |  278,226 odd/s | searching: 996,222,957,189,333
+  T3 (q=0.4113) Batch  30/100: 5,000,000 odd in  17.51s | 0 matches |  278,443 odd/s | searching: 996,222,967,189,333
+  T3 (q=0.4113) Batch  31/100: 5,000,000 odd in  18.45s | 0 matches |  278,175 odd/s | searching: 996,222,977,189,333
+  T3 (q=0.4113) Batch  32/100: 5,000,000 odd in  18.01s | 0 matches |  278,137 odd/s | searching: 996,222,987,189,333
+  T3 (q=0.4113) Batch  33/100: 5,000,000 odd in  18.00s | 0 matches |  278,104 odd/s | searching: 996,222,997,189,333
+  T3 (q=0.4113) Batch  34/100: 5,000,000 odd in  17.98s | 0 matches |  278,086 odd/s | searching: 996,223,007,189,333
+  T3 (q=0.4113) Batch  35/100: 5,000,000 odd in  17.99s | 0 matches |  278,063 odd/s | searching: 996,223,017,189,333
+  T3 (q=0.4113) Batch  36/100: 5,000,000 odd in  18.30s | 0 matches |  277,909 odd/s | searching: 996,223,027,189,333
+  T3 (q=0.4113) Batch  37/100: 5,000,000 odd in  17.79s | 0 matches |  277,974 odd/s | searching: 996,223,037,189,333
+  T3 (q=0.4113) Batch  38/100: 5,000,000 odd in  18.49s | 0 matches |  277,753 odd/s | searching: 996,223,047,189,333
+  T3 (q=0.4113) Batch  39/100: 5,000,000 odd in  17.81s | 0 matches |  277,812 odd/s | searching: 996,223,057,189,333
+  T3 (q=0.4113) Batch  40/100: 5,000,000 odd in  17.51s | 0 matches |  277,985 odd/s | searching: 996,223,067,189,333
+  T3 (q=0.4113) Batch  41/100: 5,000,000 odd in  18.18s | 0 matches |  277,896 odd/s | searching: 996,223,077,189,333
+  T3 (q=0.4113) Batch  42/100: 5,000,000 odd in  19.03s | 0 matches |  277,500 odd/s | searching: 996,223,087,189,333
+  T3 (q=0.4113) Batch  43/100: 5,000,000 odd in  18.23s | 0 matches |  277,407 odd/s | searching: 996,223,097,189,333
+  T3 (q=0.4113) Batch  44/100: 5,000,000 odd in  19.13s | 0 matches |  277,008 odd/s | searching: 996,223,107,189,333
+  T3 (q=0.4113) Batch  45/100: 5,000,000 odd in  18.52s | 0 matches |  276,834 odd/s | searching: 996,223,117,189,333
+  T3 (q=0.4113) Batch  46/100: 5,000,000 odd in  17.94s | 0 matches |  276,860 odd/s | searching: 996,223,127,189,333
+  T3 (q=0.4113) Batch  47/100: 5,000,000 odd in  17.70s | 0 matches |  276,965 odd/s | searching: 996,223,137,189,333
+  T3 (q=0.4113) Batch  48/100: 5,000,000 odd in  17.36s | 0 matches |  277,173 odd/s | searching: 996,223,147,189,333
+  T3 (q=0.4113) Batch  49/100: 5,000,000 odd in  17.58s | 0 matches |  277,305 odd/s | searching: 996,223,157,189,333
+  T3 (q=0.4113) Batch  50/100: 5,000,000 odd in  16.84s | 0 matches |  277,659 odd/s | searching: 996,223,167,189,333
+  T3 (q=0.4113) Batch  51/100: 5,000,000 odd in  17.80s | 0 matches |  277,710 odd/s | searching: 996,223,177,189,333
+  T3 (q=0.4113) Batch  52/100: 5,000,000 odd in  17.22s | 0 matches |  277,930 odd/s | searching: 996,223,187,189,333
+  T3 (q=0.4113) Batch  53/100: 5,000,000 odd in  17.25s | 0 matches |  278,133 odd/s | searching: 996,223,197,189,333
+  T3 (q=0.4113) Batch  54/100: 5,000,000 odd in  17.40s | 0 matches |  278,285 odd/s | searching: 996,223,207,189,333
+  T3 (q=0.4113) Batch  55/100: 5,000,000 odd in  17.39s | 0 matches |  278,437 odd/s | searching: 996,223,217,189,333
+  T3 (q=0.4113) Batch  56/100: 5,000,000 odd in  17.42s | 0 matches |  278,573 odd/s | searching: 996,223,227,189,333
+  T3 (q=0.4113) Batch  57/100: 5,000,000 odd in  17.24s | 0 matches |  278,754 odd/s | searching: 996,223,237,189,333
+  T3 (q=0.4113) Batch  58/100: 5,000,000 odd in  17.91s | 0 matches |  278,749 odd/s | searching: 996,223,247,189,333
+  T3 (q=0.4113) Batch  59/100: 5,000,000 odd in  17.48s | 0 matches |  278,859 odd/s | searching: 996,223,257,189,333
+  T3 (q=0.4113) Batch  60/100: 5,000,000 odd in  17.40s | 0 matches |  278,987 odd/s | searching: 996,223,267,189,333
+  T3 (q=0.4113) Batch  61/100: 5,000,000 odd in  18.80s | 0 matches |  278,752 odd/s | searching: 996,223,277,189,333
+  T3 (q=0.4113) Batch  62/100: 5,000,000 odd in  17.74s | 0 matches |  278,791 odd/s | searching: 996,223,287,189,333
+  T3 (q=0.4113) Batch  63/100: 5,000,000 odd in  17.89s | 0 matches |  278,792 odd/s | searching: 996,223,297,189,333
+  T3 (q=0.4113) Batch  64/100: 5,000,000 odd in  17.05s | 0 matches |  278,997 odd/s | searching: 996,223,307,189,333
+  T3 (q=0.4113) Batch  65/100: 5,000,000 odd in  17.96s | 0 matches |  278,977 odd/s | searching: 996,223,317,189,333
+  T3 (q=0.4113) Batch  66/100: 5,000,000 odd in  18.88s | 0 matches |  278,742 odd/s | searching: 996,223,327,189,333
+  T3 (q=0.4113) Batch  67/100: 5,000,000 odd in  18.67s | 0 matches |  278,563 odd/s | searching: 996,223,337,189,333
+  T3 (q=0.4113) Batch  68/100: 5,000,000 odd in  18.90s | 0 matches |  278,336 odd/s | searching: 996,223,347,189,333
+  T3 (q=0.4113) Batch  69/100: 5,000,000 odd in  19.11s | 0 matches |  278,070 odd/s | searching: 996,223,357,189,333
+  T3 (q=0.4113) Batch  70/100: 5,000,000 odd in  18.81s | 0 matches |  277,878 odd/s | searching: 996,223,367,189,333
+  T3 (q=0.4113) Batch  71/100: 5,000,000 odd in  18.71s | 0 matches |  277,714 odd/s | searching: 996,223,377,189,333
+  T3 (q=0.4113) Batch  72/100: 5,000,000 odd in  18.68s | 0 matches |  277,560 odd/s | searching: 996,223,387,189,333
+  T3 (q=0.4113) Batch  73/100: 5,000,000 odd in  18.90s | 0 matches |  277,364 odd/s | searching: 996,223,397,189,333
+  T3 (q=0.4113) Batch  74/100: 5,000,000 odd in  18.74s | 0 matches |  277,206 odd/s | searching: 996,223,407,189,333
+  T3 (q=0.4113) Batch  75/100: 5,000,000 odd in  18.91s | 0 matches |  277,019 odd/s | searching: 996,223,417,189,333
+  T3 (q=0.4113) Batch  76/100: 5,000,000 odd in  19.11s | 0 matches |  276,796 odd/s | searching: 996,223,427,189,333
+  T3 (q=0.4113) Batch  77/100: 5,000,000 odd in  18.54s | 0 matches |  276,693 odd/s | searching: 996,223,437,189,333
+  T3 (q=0.4113) Batch  78/100: 5,000,000 odd in  19.13s | 0 matches |  276,478 odd/s | searching: 996,223,447,189,333
+  T3 (q=0.4113) Batch  79/100: 5,000,000 odd in  19.50s | 0 matches |  276,197 odd/s | searching: 996,223,457,189,333
+  T3 (q=0.4113) Batch  80/100: 5,000,000 odd in  19.55s | 0 matches |  275,914 odd/s | searching: 996,223,467,189,333
+  T3 (q=0.4113) Batch  81/100: 5,000,000 odd in  19.17s | 0 matches |  275,709 odd/s | searching: 996,223,477,189,333
+  T3 (q=0.4113) Batch  82/100: 5,000,000 odd in  18.90s | 0 matches |  275,560 odd/s | searching: 996,223,487,189,333
+  T3 (q=0.4113) Batch  83/100: 5,000,000 odd in  19.09s | 0 matches |  275,380 odd/s | searching: 996,223,497,189,333
+  T3 (q=0.4113) Batch  84/100: 5,000,000 odd in  18.88s | 0 matches |  275,243 odd/s | searching: 996,223,507,189,333
+  T3 (q=0.4113) Batch  85/100: 5,000,000 odd in  18.83s | 0 matches |  275,116 odd/s | searching: 996,223,517,189,333
+  T3 (q=0.4113) Batch  86/100: 5,000,000 odd in  19.06s | 0 matches |  274,953 odd/s | searching: 996,223,527,189,333
+  T3 (q=0.4113) Batch  87/100: 5,000,000 odd in  18.99s | 0 matches |  274,805 odd/s | searching: 996,223,537,189,333
+  T3 (q=0.4113) Batch  88/100: 5,000,000 odd in  19.08s | 0 matches |  274,646 odd/s | searching: 996,223,547,189,333
+  T3 (q=0.4113) Batch  89/100: 5,000,000 odd in  19.42s | 0 matches |  274,434 odd/s | searching: 996,223,557,189,333
+  T3 (q=0.4113) Batch  90/100: 5,000,000 odd in  19.04s | 0 matches |  274,289 odd/s | searching: 996,223,567,189,333
+  T3 (q=0.4113) Batch  91/100: 5,000,000 odd in  18.52s | 0 matches |  274,235 odd/s | searching: 996,223,577,189,333
+  T3 (q=0.4113) Batch  92/100: 5,000,000 odd in  19.25s | 0 matches |  274,061 odd/s | searching: 996,223,587,189,333
+  T3 (q=0.4113) Batch  93/100: 5,000,000 odd in  18.86s | 0 matches |  273,955 odd/s | searching: 996,223,597,189,333
+  T3 (q=0.4113) Batch  94/100: 5,000,000 odd in  18.60s | 0 matches |  273,894 odd/s | searching: 996,223,607,189,333
+  T3 (q=0.4113) Batch  95/100: 5,000,000 odd in  18.89s | 0 matches |  273,787 odd/s | searching: 996,223,617,189,333
+  T3 (q=0.4113) Batch  96/100: 5,000,000 odd in  18.93s | 0 matches |  273,676 odd/s | searching: 996,223,627,189,333
+  T3 (q=0.4113) Batch  97/100: 5,000,000 odd in  18.57s | 0 matches |  273,624 odd/s | searching: 996,223,637,189,333
+  T3 (q=0.4113) Batch  98/100: 5,000,000 odd in  18.81s | 0 matches |  273,536 odd/s | searching: 996,223,647,189,333
+  T3 (q=0.4113) Batch  99/100: 5,000,000 odd in  18.74s | 0 matches |  273,460 odd/s | searching: 996,223,657,189,333
+  T3 (q=0.4113) Batch 100/100: 5,000,000 odd in  18.95s | 0 matches |  273,354 odd/s | searching: 996,223,667,189,333
+
+  Target 3 complete. Elapsed: 5460s (91.0 min). Remaining targets: 0
+
+======================================================================
+--- [FINAL RESULTS] ---
+Targets searched:     3
+Batches per target:   100
+Total raw candidates: 3,000,000,000
+Total odd candidates: ~1,500,000,000
+Total time:           5460.04s (91.00 min)
+AP-9 found:       NO
+======================================================================

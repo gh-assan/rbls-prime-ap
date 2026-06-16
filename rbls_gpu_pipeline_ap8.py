@@ -158,17 +158,18 @@ def run_gpu_sieve_chunked(mod, candidate_array, common_difference, k_length, bat
 # =====================================================================
 def estimate_probability(k, d):
     ln_n = math.log(10**15)
-    p_prime = 1.0 / ln_n
-    phi_d = d
-    for p in sympy.primerange(2, k + 1):
-        phi_d = phi_d * (p - 1) // p
-    filt = phi_d / d
-    p_cond = p_prime / filt
-    p_ap = p_cond ** k
+    singular = 1.0
+    for p in sympy.primerange(2, 100_000):
+        residues = len({(j * d) % p for j in range(k)})
+        if residues == p:
+            singular = 0.0
+            break
+        singular *= (1.0 - residues / p) / ((1.0 - 1.0 / p) ** k)
+    p_ap = singular / (ln_n ** k) if singular else 0.0
     print(f"\n--- AP-{k} Estimate ---")
-    print(f"d={d}, phi={phi_d}, admissible={filt:.4f}")
-    print(f"P(AP-{k})={p_ap:.2e}, expected candidates={1/p_ap:.2e}")
-    print(f"  Naive expected batches of 10M: {1/p_ap/10_000_000:.1f}")
+    print(f"d={d}, singular series≈{singular:.3e}")
+    print(f"P(AP-{k})≈{p_ap:.2e}, expected raw candidates≈{1/p_ap:.2e}")
+    print(f"  Expected batches of 10M raw: {1/p_ap/10_000_000:.1f}")
     return 1.0 / p_ap
 
 # =====================================================================

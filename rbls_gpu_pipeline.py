@@ -202,7 +202,7 @@ def run_gpu_sieve(mod, candidate_array, common_difference, k_length):
 # 4. MAIN PIPELINE EXECUTION
 # =====================================================================
 if __name__ == "__main__":
-    print("Compiling 128-bit CUDA C++ Kernel on Tesla T4...")
+    print("Compiling overflow-safe CUDA Miller-Rabin kernel on Tesla T4...")
     mod = SourceModule(cuda_source)
     print("CUDA compilation successful.\n")
 

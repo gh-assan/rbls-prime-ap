@@ -10,8 +10,8 @@ from numba import njit, prange
 # =====================================================================
 
 def get_required_primorial(k):
-    """Calculates the product of all primes strictly less than k."""
-    primes = list(sympy.primerange(2, k))
+    """Calculates the product of all primes <= k."""
+    primes = list(sympy.primerange(2, k + 1))
     primorial = 1
     for p in primes:
         primorial *= p
