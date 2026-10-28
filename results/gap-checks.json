@@ -1,0 +1,199 @@
+{
+  "status": "Exact small-family checks and rigorous constants. G2/G3 finite-height AP28 arithmetic remains open.",
+  "G1": {
+    "input_basis": [
+      2,
+      3,
+      3
+    ],
+    "a_divisor": 5,
+    "m_divisor": 1,
+    "intersection_basis": [
+      10,
+      3,
+      5
+    ],
+    "primitive_D": 6,
+    "A": 1,
+    "W": 2,
+    "X": 100,
+    "exact_primitive_count": 20,
+    "independent_brute_count": 20
+  },
+  "G2": {
+    "k": 7,
+    "D": 210,
+    "B": 29,
+    "X": 20000,
+    "m_cap": 10,
+    "rough_candidates": 960,
+    "distinct_composite_incidences": 2005,
+    "binomial_moments": [
+      960,
+      2005,
+      1772,
+      874,
+      281,
+      66
+    ],
+    "signed_score": "1069/15",
+    "covered_candidates": 882,
+    "zero_defect_count": 78,
+    "score_after_pruning": "78",
+    "coverage": "all starts and m in the stated finite range, all tail primes B<q<=sqrt(X)"
+  },
+  "G3": {
+    "r": 27,
+    "D": 223092870,
+    "P": 100000,
+    "precision": 60,
+    "status": "Rigorous constant enclosures only; finite-height AP28 count error remains unbounded.",
+    "beta_partial_interval": {
+      "lower": "3324621461220568134.308",
+      "upper": "3324621461220568134.309",
+      "exact_lower": "33246214612205681343081670674097859240522291313149141668877/10000000000000000000000000000000000000000",
+      "exact_upper": "83115536530514203357704176685244648101305728282872854177693/25000000000000000000000000000000000000000"
+    },
+    "beta_infinite_interval": {
+      "lower": "3312948771602789797.972",
+      "upper": "3324621461220568134.309",
+      "exact_lower": "33120874049221730726250538297171807323109195241640295897464673206108824173/9997400000000000000000000000000000000000000000000000000",
+      "exact_upper": "83115536530514203357704176685244648101305728282872854177693/25000000000000000000000000000000000000000"
+    },
+    "ratio_partial_interval": {
+      "lower": "3.549438062740978869797",
+      "upper": "3.549438062740978869798",
+      "exact_lower": "177471903137048943489868729958195794354063372190230492362409/50000000000000000000000000000000000000000000000000000000000",
+      "exact_upper": "70988761254819577395947491983278317741625348876092196949709/20000000000000000000000000000000000000000000000000000000000"
+    },
+    "ratio_infinite_interval": {
+      "lower": "3.549438062740978869797",
+      "upper": "3.550396938396844835386",
+      "exact_lower": "177471903137048943489868729958195794354063372190230492362409/50000000000000000000000000000000000000000000000000000000000",
+      "exact_upper": "7096959428928077611005058616044283259583511003189565205653257857/1998919994600000000000000000000000000000000000000000000000000000"
+    },
+    "beta_log_tail_bound": "3510070200351/999740000000000",
+    "ratio_log_tail_bound": "2700027/9997300000"
+  },
+  "G5": {
+    "k": 28,
+    "D": 223092870,
+    "B": 37,
+    "hidden_prime": 41,
+    "Q": 33263,
+    "residue": 125393140162291,
+    "period": 304250263527210,
+    "first": 1038143930743921,
+    "starts": [
+      1038143930743921,
+      1342394194271131,
+      1646644457798341,
+      1950894721325551,
+      2255144984852761,
+      2559395248379971,
+      2863645511907181,
+      3167895775434391,
+      3472146038961601,
+      3776396302488811
+    ],
+    "forced_first_term_cofactors": [
+      25320583676681,
+      32741321811491,
+      40162059946301,
+      47582798081111,
+      55003536215921,
+      62424274350731,
+      69845012485541,
+      77265750620351,
+      84686488755161,
+      92107226889971
+    ],
+    "actual_prime_progressions": 0,
+    "claim": "All terms pass primes <=37; first term is composite by factor 41.",
+    "limitation": "This deliberately selected subfamily has a fixed tail divisor; it does not contradict a full singular-series model that includes it."
+  },
+  "G4": {
+    "index": 0,
+    "oracle_calls": 10,
+    "trace": [
+      {
+        "lo": 0,
+        "hi": 960,
+        "mid": 480,
+        "parent": "1069/15",
+        "left": "133/3"
+      },
+      {
+        "lo": 0,
+        "hi": 480,
+        "mid": 240,
+        "parent": "133/3",
+        "left": "403/15"
+      },
+      {
+        "lo": 0,
+        "hi": 240,
+        "mid": 120,
+        "parent": "403/15",
+        "left": "53/3"
+      },
+      {
+        "lo": 0,
+        "hi": 120,
+        "mid": 60,
+        "parent": "53/3",
+        "left": "172/15"
+      },
+      {
+        "lo": 0,
+        "hi": 60,
+        "mid": 30,
+        "parent": "172/15",
+        "left": "178/15"
+      },
+      {
+        "lo": 0,
+        "hi": 30,
+        "mid": 15,
+        "parent": "178/15",
+        "left": "9"
+      },
+      {
+        "lo": 0,
+        "hi": 15,
+        "mid": 7,
+        "parent": "9",
+        "left": "4"
+      },
+      {
+        "lo": 0,
+        "hi": 7,
+        "mid": 3,
+        "parent": "4",
+        "left": "3"
+      },
+      {
+        "lo": 0,
+        "hi": 3,
+        "mid": 1,
+        "parent": "3",
+        "left": "1"
+      }
+    ],
+    "a": 47,
+    "m": 1,
+    "d": 210,
+    "terms": [
+      47,
+      257,
+      467,
+      677,
+      887,
+      1097,
+      1307
+    ],
+    "singleton_score": "1",
+    "independent_primality_checks": "all seven passed SymPy isprime",
+    "note": "localization uses a precomputed score on an explicit AP7 family, not an AP28 oracle"
+  }
+}

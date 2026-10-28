@@ -4,6 +4,8 @@ The goal is an explicit AP-28: 28 primes of the form `a + j*d`, for `j = 0,...,2
 
 The current work has a **new mathematical proposal**, an exact one-difference reference sieve, and historical RBLS experiments. No AP-28 has been found here. The new proposal has not yet demonstrated a feasible discovery budget.
 
+The [gap ledger](GAP_LEDGER.md) links five focused follow-up papers: primitive exclusions, signed aggregation, rigorous Euler-product errors, witness localization, and finite-height arithmetic remainders. It records which finite subproblems are resolved and which AP-28 claims remain open.
+
 The third paper, [Coupled Defect Moments and Exact Lattice Counts for AP-28](paper_ap28_coupled_bounds.md), proves sharp moment certificates, an explicit limited-independence obstruction, and a 64-bit sparsity obstruction to estimating individual five-prime intersections. It adds exact floor-sum counts and an arithmetic AP-7 check. Aggregate AP-28 bounds remain unproved. The [reproducible certificates](results/coupled-analysis.json) separate arithmetic checks from probability models and geometric proxies.
 
 The follow-up paper, [From Local Admissibility to Prime Completion](paper_ap28_completion.md), derives a finite certificate using five defect moments and identifies the arithmetic bounds still needed for AP-28. Its exact checks and separately labeled model tables are in [the completion analysis](results/completion-analysis.json).
@@ -43,6 +45,7 @@ A reproducible fixed demonstration found 11 AP-9s in five million starts; all 99
 ```bash
 python3 research/projective_lattice.py
 python3 research/run_coupled_analysis.py
+python3 research/run_gap_checks.py
 python3 estimate_ap28.py --start 1000000000000000
 python3 plan_prime_ap.py --start 1000000000000000 \
   --differences 223092870 6469693230 200560490130 --pilot-count 10000000

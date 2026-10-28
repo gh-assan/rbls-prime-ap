@@ -45,13 +45,13 @@ def augment_cell(F,I,c,D,tags):
     return int(F),int(I),int(c)
 
 
-def count_cell(F,I,c,A,W,X,lower_constraints=(),m_cap=None):
-    """Count a=F*u+c*I*v, m=I*v in a>=A,m>=1,a+W*m<=X.
+def count_triangular_cell(F,I,K,A,W,X,lower_constraints=(),m_cap=None):
+    """Count a=F*u+K*v, m=I*v in a>=A,m>=1,a+W*m<=X.
 
     Each lower constraint (ell,h) means a+ell*m>=h, with 0<=ell<=W.
     The count is exact before any additional primitive-point/roughness filters.
     """
-    F,I,c,A,W,X=map(index,(F,I,c,A,W,X))
+    F,I,K,A,W,X=map(index,(F,I,K,A,W,X))
     if min(F,I,A,W)<1:
         raise ValueError('F,I,A,W must be positive')
     lines=[(0,A)]
@@ -82,10 +82,16 @@ def count_cell(F,I,c,A,W,X,lower_constraints=(),m_cap=None):
     for lo,hi in zip(cuts,cuts[1:]):
         ell,h=max(lines,key=lambda line:line[1]-line[0]*I*lo)
         length=hi-lo
-        upper=-(W+c)*I
-        lower=(ell+c)*I
+        upper=-W*I-K
+        lower=ell*I+K
         answer+=floor_sum(length,F,upper,X+upper*lo)
         answer+=floor_sum(length,F,lower,-h+lower*lo)
         answer+=length
     assert answer>=0
     return answer
+
+
+def count_cell(F,I,c,A,W,X,lower_constraints=(),m_cap=None):
+    """Compatibility wrapper for cells with K=c*I."""
+    I,c=map(index,(I,c))
+    return count_triangular_cell(F,I,c*I,A,W,X,lower_constraints,m_cap)
