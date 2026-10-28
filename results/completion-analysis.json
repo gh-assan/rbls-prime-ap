@@ -1,0 +1,218 @@
+{
+  "status": "Certificates are exact; roughness/height tables are calibration models, not AP28 counts.",
+  "prime_product_bound": 100000,
+  "beta_partial": 3.324621461220697e+18,
+  "arithmetic_AP5": {
+    "k": 5,
+    "D": 30,
+    "B": 20,
+    "X": 5000,
+    "start_interval": [
+      21,
+      2000
+    ],
+    "multipliers": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rough_candidates": 105,
+    "defect_histogram": [
+      47,
+      44,
+      10,
+      4,
+      0,
+      0
+    ],
+    "binomial_moments": [
+      105,
+      76,
+      22,
+      4,
+      0,
+      0
+    ],
+    "tail_incidence": 76,
+    "polynomial_roots": [
+      2
+    ],
+    "certified_lower_bound": "47",
+    "actual_prime_progressions": 47,
+    "examples": [
+      {
+        "a": 29,
+        "d": 120,
+        "terms": [
+          29,
+          149,
+          269,
+          389,
+          509
+        ]
+      },
+      {
+        "a": 37,
+        "d": 30,
+        "terms": [
+          37,
+          67,
+          97,
+          127,
+          157
+        ]
+      },
+      {
+        "a": 43,
+        "d": 60,
+        "terms": [
+          43,
+          103,
+          163,
+          223,
+          283
+        ]
+      }
+    ]
+  },
+  "model_AP28": {
+    "label": "independent binomial calibration, not arithmetic AP28 evidence",
+    "k": 28,
+    "defect_probability": "1/10",
+    "roots": [
+      3,
+      7
+    ],
+    "coefficients": [
+      "1",
+      "-1",
+      "51/56",
+      "-41/56",
+      "13/28",
+      "-5/28"
+    ],
+    "normalized_moments": [
+      "1",
+      "14/5",
+      "189/50",
+      "819/250",
+      "819/400",
+      "2457/2500"
+    ],
+    "degree_five_bonferroni": "-2313/10000",
+    "paired_lower_bound": "153/8000",
+    "paired_lower_bound_float": 0.019125,
+    "actual_zero_probability": "523347633027360537213511521/10000000000000000000000000000",
+    "actual_zero_probability_float": 0.05233476330273605,
+    "uniform_moment_error_budget_float": 0.0044625
+  },
+  "single_integer_roughness_calibration": [
+    {
+      "theta": 0.3333333333333333,
+      "single_integer_asymptotic_prime_fraction": 0.5906161091496412,
+      "independent_model_expected_defects": 11.462748943810045,
+      "independent_model_zero_defects": 3.949554133966582e-07
+    },
+    {
+      "theta": 0.4,
+      "single_integer_asymptotic_prime_fraction": 0.7115082361212486,
+      "independent_model_expected_defects": 8.07776938860504,
+      "independent_model_zero_defects": 7.261696378211124e-05
+    },
+    {
+      "theta": 0.45,
+      "single_integer_asymptotic_prime_fraction": 0.8328678327699911,
+      "independent_model_expected_defects": 4.679700682440249,
+      "independent_model_zero_defects": 0.005972147032644912
+    },
+    {
+      "theta": 0.48,
+      "single_integer_asymptotic_prime_fraction": 0.9258893124273276,
+      "independent_model_expected_defects": 2.075099252034826,
+      "independent_model_zero_defects": 0.11578545040589353
+    },
+    {
+      "theta": 0.49,
+      "single_integer_asymptotic_prime_fraction": 0.9615335294135209,
+      "independent_model_expected_defects": 1.0770611764214153,
+      "independent_model_zero_defects": 0.333429579402154
+    },
+    {
+      "theta": 0.495,
+      "single_integer_asymptotic_prime_fraction": 0.9803915160455269,
+      "independent_model_expected_defects": 0.5490375507252474,
+      "independent_model_zero_defects": 0.5743640409338713
+    }
+  ],
+  "first_moment_threshold_in_independent_model": 0.49074179903855786,
+  "fifth_degree_example_theta": 0.47225076494548685,
+  "height_models": [
+    {
+      "X": 1000000000000000,
+      "integer_pair_volume": 8.300711459904274e+19,
+      "equal_log_model": 2.3348715023951198e-05,
+      "integral_model_by_quadrature": {
+        "32": 5.570667206424165e-05,
+        "64": 5.570991291973219e-05,
+        "128": 5.571093587210567e-05,
+        "256": 5.571111924844762e-05
+      }
+    },
+    {
+      "X": 100000000000000000,
+      "integer_pair_volume": 8.300810459603606e+23,
+      "equal_log_model": 0.007018650537050267,
+      "integral_model_by_quadrature": {
+        "32": 0.014737558478840932,
+        "64": 0.014737838791336472,
+        "128": 0.014737939386101151,
+        "256": 0.014737972321437373
+      }
+    },
+    {
+      "X": 1000000000000000000,
+      "integer_pair_volume": 8.300811359603581e+25,
+      "equal_log_model": 0.1416424147019209,
+      "integral_model_by_quadrature": {
+        "32": 0.2828172594514144,
+        "64": 0.2828212481701711,
+        "128": 0.2828227077713349,
+        "256": 0.2828231772202903
+      }
+    },
+    {
+      "X": 2000000000000000000,
+      "integer_pair_volume": 3.320324563841432e+26,
+      "equal_log_model": 0.3560971840388511,
+      "integral_model_by_quadrature": {
+        "32": 0.7012724834775582,
+        "64": 0.7012817972147237,
+        "128": 0.7012852187812103,
+        "256": 0.7012863150159875
+      }
+    },
+    {
+      "X": 5000000000000000000,
+      "integer_pair_volume": 2.0752028599008952e+27,
+      "equal_log_model": 1.2186199936400923,
+      "integral_model_by_quadrature": {
+        "32": 2.358468113330825,
+        "64": 2.3584975136880955,
+        "128": 2.3585083455467375,
+        "256": 2.3585117994125766
+      }
+    },
+    {
+      "X": 18446744073709551615,
+      "integer_pair_volume": 2.824619768993682e+28,
+      "equal_log_model": 7.187039265032706,
+      "integral_model_by_quadrature": {
+        "32": 13.589654274628375,
+        "64": 13.589812882989833,
+        "128": 13.58987129307811,
+        "256": 13.589889789827607
+      }
+    }
+  ]
+}

@@ -4,6 +4,8 @@ The goal is an explicit AP-28: 28 primes of the form `a + j*d`, for `j = 0,...,2
 
 The current work has a **new mathematical proposal**, an exact one-difference reference sieve, and historical RBLS experiments. No AP-28 has been found here. The new proposal has not yet demonstrated a feasible discovery budget.
 
+The follow-up paper, [From Local Admissibility to Prime Completion](paper_ap28_completion.md), derives a finite certificate using five defect moments and identifies the arithmetic bounds still needed for AP-28. Its exact checks and separately labeled model tables are in [the completion analysis](results/completion-analysis.json).
+
 Read [A Projective Lattice Approach to Prime Arithmetic Progressions](paper_projective_ap28.md) first. It studies both the start and difference, combines finite-field projective directions with CRT lattices, and derives the limits of the apparent probability gains. It includes proofs, quantitative estimates, research questions, and primary references.
 
 The earlier [RBLS paper](paper.md) is retained as a historical report with corrections. Its zeta-zero LLL scaling loses the measured phase alignment. The [review](research/review-2026-10-28.md) records that failure, arithmetic bugs, and unresolved historical exposure counts.

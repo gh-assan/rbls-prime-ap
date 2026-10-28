@@ -233,6 +233,10 @@ This is a mathematically coherent research direction with a substantial missing 
 
 The next mathematical deliverable should be a quantitative result for primitive points in the positive CRT lattices, or a predictive statistic that survives the conditioning test in Section 6. Until such a result exists, scaling the prototype into a long computation would be premature. A successful AP-28 construction would require the actual pair $(a,d)$ and independent verification of every term; none is supplied here.
 
+### Follow-up
+
+[From Local Admissibility to Prime Completion](paper_ap28_completion.md) develops a finite defect-moment certificate for the unresolved step, with exact supporting checks. It does not establish a positive AP-28 certificate.
+
 ### References
 
 1. Green, B., and Tao, T. (2008). *The primes contain arbitrarily long arithmetic progressions*. Annals of Mathematics 167, 481–547. [Author preprint](https://arxiv.org/abs/math/0404188).
