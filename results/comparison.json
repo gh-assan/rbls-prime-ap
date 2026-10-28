@@ -1,0 +1,573 @@
+{
+  "python": "3.9.6 (default, Aug 25 2026, 21:26:21) \n[Clang 21.0.0 (clang-2100.3.34.2)]",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "numpy": "2.0.2",
+  "sympy": "1.14.0",
+  "repeats": 3,
+  "raw_starts_per_case": 100000,
+  "witnesses": [
+    2,
+    3,
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23,
+    29,
+    31,
+    37
+  ],
+  "cases": [
+    {
+      "k": 7,
+      "d": 210,
+      "start": 999721467550000,
+      "runs": [
+        {
+          "direct": {
+            "matches": [
+              999721467601817
+            ],
+            "primality_tests": 103174,
+            "seconds": 0.328498792
+          },
+          "sieved": {
+            "k": 7,
+            "d": 210,
+            "start": 999721467550000,
+            "stop": 999721467650000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 2880,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 6233,
+            "sieve_survivors": 5,
+            "primality_tests": 12,
+            "matches": [
+              999721467601817
+            ],
+            "seconds": 0.010260250000000026
+          }
+        },
+        {
+          "direct": {
+            "matches": [
+              999721467601817
+            ],
+            "primality_tests": 103174,
+            "seconds": 0.32030683399999993
+          },
+          "sieved": {
+            "k": 7,
+            "d": 210,
+            "start": 999721467550000,
+            "stop": 999721467650000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 2880,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 6233,
+            "sieve_survivors": 5,
+            "primality_tests": 12,
+            "matches": [
+              999721467601817
+            ],
+            "seconds": 0.009510999999999936
+          }
+        },
+        {
+          "direct": {
+            "matches": [
+              999721467601817
+            ],
+            "primality_tests": 103174,
+            "seconds": 0.3431291249999999
+          },
+          "sieved": {
+            "k": 7,
+            "d": 210,
+            "start": 999721467550000,
+            "stop": 999721467650000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 2880,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 6233,
+            "sieve_survivors": 5,
+            "primality_tests": 12,
+            "matches": [
+              999721467601817
+            ],
+            "seconds": 0.009840459000000079
+          }
+        }
+      ],
+      "median_time_ratio": 33.38246640730858
+    },
+    {
+      "k": 8,
+      "d": 210,
+      "start": 999721631450000,
+      "runs": [
+        {
+          "direct": {
+            "matches": [
+              999721631514707
+            ],
+            "primality_tests": 103184,
+            "seconds": 0.45285741699999993
+          },
+          "sieved": {
+            "k": 8,
+            "d": 210,
+            "start": 999721631450000,
+            "stop": 999721631550000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 1485,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 3214,
+            "sieve_survivors": 1,
+            "primality_tests": 8,
+            "matches": [
+              999721631514707
+            ],
+            "seconds": 0.006029290999999937
+          }
+        },
+        {
+          "direct": {
+            "matches": [
+              999721631514707
+            ],
+            "primality_tests": 103184,
+            "seconds": 0.3326083329999998
+          },
+          "sieved": {
+            "k": 8,
+            "d": 210,
+            "start": 999721631450000,
+            "stop": 999721631550000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 1485,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 3214,
+            "sieve_survivors": 1,
+            "primality_tests": 8,
+            "matches": [
+              999721631514707
+            ],
+            "seconds": 0.005701874999999745
+          }
+        },
+        {
+          "direct": {
+            "matches": [
+              999721631514707
+            ],
+            "primality_tests": 103184,
+            "seconds": 0.3277703339999998
+          },
+          "sieved": {
+            "k": 8,
+            "d": 210,
+            "start": 999721631450000,
+            "stop": 999721631550000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 1485,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 3214,
+            "sieve_survivors": 1,
+            "primality_tests": 8,
+            "matches": [
+              999721631514707
+            ],
+            "seconds": 0.005673833999999989
+          }
+        }
+      ],
+      "median_time_ratio": 58.333150586432474
+    },
+    {
+      "k": 9,
+      "d": 210,
+      "start": 1000000000000000,
+      "runs": [
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 103197,
+            "seconds": 0.33739237499999986
+          },
+          "sieved": {
+            "k": 9,
+            "d": 210,
+            "start": 1000000000000000,
+            "stop": 1000000000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 640,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 1388,
+            "sieve_survivors": 0,
+            "primality_tests": 0,
+            "matches": [],
+            "seconds": 0.0025393750000000104
+          }
+        },
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 103197,
+            "seconds": 0.326643625
+          },
+          "sieved": {
+            "k": 9,
+            "d": 210,
+            "start": 1000000000000000,
+            "stop": 1000000000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 640,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 1388,
+            "sieve_survivors": 0,
+            "primality_tests": 0,
+            "matches": [],
+            "seconds": 0.0019302919999999446
+          }
+        },
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 103197,
+            "seconds": 0.3389924999999998
+          },
+          "sieved": {
+            "k": 9,
+            "d": 210,
+            "start": 1000000000000000,
+            "stop": 1000000000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 46189,
+            "wheel_classes": 640,
+            "wheel_primes": [
+              11,
+              13,
+              17,
+              19
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 1388,
+            "sieve_survivors": 0,
+            "primality_tests": 0,
+            "matches": [],
+            "seconds": 0.0018422500000001563
+          }
+        }
+      ],
+      "median_time_ratio": 174.78825742427028
+    },
+    {
+      "k": 9,
+      "d": 223092870,
+      "start": 1000000000,
+      "runs": [
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 106774,
+            "seconds": 0.23390770799999983
+          },
+          "sieved": {
+            "k": 9,
+            "d": 223092870,
+            "start": 1000000000,
+            "stop": 1000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 899,
+            "wheel_classes": 440,
+            "wheel_primes": [
+              29,
+              31
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 48941,
+            "sieve_survivors": 23,
+            "primality_tests": 57,
+            "matches": [],
+            "seconds": 0.02176816699999984
+          }
+        },
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 106774,
+            "seconds": 0.22891370899999997
+          },
+          "sieved": {
+            "k": 9,
+            "d": 223092870,
+            "start": 1000000000,
+            "stop": 1000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 899,
+            "wheel_classes": 440,
+            "wheel_primes": [
+              29,
+              31
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 48941,
+            "sieve_survivors": 23,
+            "primality_tests": 57,
+            "matches": [],
+            "seconds": 0.02032458299999984
+          }
+        },
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 106774,
+            "seconds": 0.22896337499999975
+          },
+          "sieved": {
+            "k": 9,
+            "d": 223092870,
+            "start": 1000000000,
+            "stop": 1000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 899,
+            "wheel_classes": 440,
+            "wheel_primes": [
+              29,
+              31
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 48941,
+            "sieve_survivors": 23,
+            "primality_tests": 57,
+            "matches": [],
+            "seconds": 0.02044179200000018
+          }
+        }
+      ],
+      "median_time_ratio": 11.200748691699715
+    },
+    {
+      "k": 28,
+      "d": 223092870,
+      "start": 1000000000000000,
+      "runs": [
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 103417,
+            "seconds": 0.3584097919999998
+          },
+          "sieved": {
+            "k": 28,
+            "d": 223092870,
+            "start": 1000000000000000,
+            "stop": 1000000000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 1363783,
+            "wheel_classes": 351,
+            "wheel_primes": [
+              29,
+              31,
+              37,
+              41
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 31,
+            "sieve_survivors": 0,
+            "primality_tests": 0,
+            "matches": [],
+            "seconds": 0.0012316249999999584
+          }
+        },
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 103417,
+            "seconds": 0.3556116659999997
+          },
+          "sieved": {
+            "k": 28,
+            "d": 223092870,
+            "start": 1000000000000000,
+            "stop": 1000000000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 1363783,
+            "wheel_classes": 351,
+            "wheel_primes": [
+              29,
+              31,
+              37,
+              41
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 31,
+            "sieve_survivors": 0,
+            "primality_tests": 0,
+            "matches": [],
+            "seconds": 0.00024316699999982205
+          }
+        },
+        {
+          "direct": {
+            "matches": [],
+            "primality_tests": 103417,
+            "seconds": 0.3668282500000002
+          },
+          "sieved": {
+            "k": 28,
+            "d": 223092870,
+            "start": 1000000000000000,
+            "stop": 1000000000100000,
+            "sieve_bound": 1000,
+            "segment_size": 1000000,
+            "wheel_modulus": 1363783,
+            "wheel_classes": 351,
+            "wheel_primes": [
+              29,
+              31,
+              37,
+              41
+            ],
+            "raw_starts": 100000,
+            "wheel_candidates": 31,
+            "sieve_survivors": 0,
+            "primality_tests": 0,
+            "matches": [],
+            "seconds": 0.00015004100000037823
+          }
+        }
+      ],
+      "median_time_ratio": 1473.9244716604724
+    }
+  ],
+  "estimates": [
+    {
+      "k": 7,
+      "d": 210,
+      "start": 1000000000000000,
+      "prime_bound": 100000,
+      "singular_series": 2590.6971653141454,
+      "probability": 4.418430372917159e-08,
+      "expected_raw_starts": 22632471.61547495
+    },
+    {
+      "k": 8,
+      "d": 210,
+      "start": 1000000000000000,
+      "prime_bound": 100000,
+      "singular_series": 7130.638354375834,
+      "probability": 3.5210551609134806e-09,
+      "expected_raw_starts": 284005775.0587941
+    },
+    {
+      "k": 9,
+      "d": 210,
+      "start": 1000000000000000,
+      "prime_bound": 100000,
+      "singular_series": 16130.11354656869,
+      "probability": 2.3060827903480141e-10,
+      "expected_raw_starts": 4336357758.643559
+    },
+    {
+      "k": 28,
+      "d": 223092870,
+      "start": 1000000000000000,
+      "prime_bound": 100000,
+      "singular_series": 9.366613538409778e+17,
+      "probability": 7.924776163145387e-26,
+      "expected_raw_starts": 1.2618652936224948e+25
+    },
+    {
+      "k": 28,
+      "d": 223092870,
+      "start": 1000000000,
+      "prime_bound": 100000,
+      "singular_series": 9.366613538409778e+17,
+      "probability": 2.4878734996788416e-20,
+      "expected_raw_starts": 4.019496972531319e+19
+    },
+    {
+      "k": 28,
+      "d": 200560490130,
+      "start": 1000000000,
+      "prime_bound": 100000,
+      "singular_series": 2.6226517907547462e+20,
+      "probability": 7.2626523886871e-21,
+      "expected_raw_starts": 1.3769074251132844e+20
+    }
+  ]
+}

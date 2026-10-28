@@ -1,194 +1,57 @@
-# RBLS (Resonance-Biased Lattice Sieving) — Arithmetic Progression Prime Finder
+# Prime arithmetic progressions: mathematical research and exact reference search
 
-This project searches for **long arithmetic progressions of primes** (AP-k) using an exploratory hybrid approach:
+The goal is an explicit AP-28: 28 primes of the form `a + j*d`, for `j = 0,...,27`.
 
-1. **Analytic Phase:** Uses the imaginary parts of the first three Riemann zeta zeros and SymPy's LLL lattice reduction to compute reproducible target regions near ~10¹⁵.
-2. **Discrete Sieve:** Tests candidate numbers in batches using a deterministic Miller-Rabin primality test (64-bit, 12-witness, guaranteed correct for all `n < 2⁶⁴`).
-3. **Dynamic Primorial Step Size:** The common difference `d` is computed as the **primorial of all primes less than or equal to `k`**, ensuring admissibility against the required small-prime obstructions.
+The current work has a **new mathematical proposal**, an exact one-difference reference sieve, and historical RBLS experiments. No AP-28 has been found here. The new proposal has not yet demonstrated a feasible discovery budget.
 
-RBLS is a heuristic target generator, not a proof of elevated prime density. The current AP-7/AP-8 results verify that the implementation finds genuine progressions; controlled baseline searches are still needed before claiming a statistical speedup.
+Read [A Projective Lattice Approach to Prime Arithmetic Progressions](paper_projective_ap28.md) first. It studies both the start and difference, combines finite-field projective directions with CRT lattices, and derives the limits of the apparent probability gains. It includes proofs, quantitative estimates, research questions, and primary references.
 
-Available implementations:
-
-| Script | k | Platform | Engine |
-|--------|---|----------|--------|
-| `rbls_gpu_pipeline.py` | 7 | Windows + NVIDIA GPU (Tesla T4, etc.) | CUDA via PyCUDA |
-| `rbls_m1_pipeline.py` | 7 | macOS Apple Silicon (M1/M2/M3) | Numba JIT + parallel CPU |
-| `rbls_gpu_pipeline_ap8.py` | 8 | Windows + NVIDIA GPU (Tesla T4, etc.) | CUDA via PyCUDA |
-| `rbls_m1_pipeline_ap8.py` | 8 | macOS Apple Silicon (M1/M2/M3) | Numba JIT + parallel CPU |
-| `rbls_gpu_pipeline_ap9.py` | 9 | Windows + NVIDIA GPU (Tesla T4, etc.) | CUDA via PyCUDA |
-| `rbls_m1_pipeline_ap9.py` | 9 | macOS Apple Silicon (M1/M2/M3) | Numba JIT + parallel CPU |
-| `rbls_gpu_pipeline_ap28.py` | 28 | Windows + NVIDIA GPU (Tesla T4, etc.) | CUDA via PyCUDA (prime-find then scan) |
-
----
-
-## Prerequisites
-
-### For GPU Pipelines (Windows)
-
-- Windows 10/11
-- Microsoft Visual Studio Build Tools 2022 (or VS 2022) with **VC++ toolset**
-- NVIDIA GPU with Compute Capability ≥ 3.0 (e.g., Tesla T4, RTX series)
-- NVIDIA CUDA Toolkit (matching your GPU driver)
-- Python 3.10+ (64-bit)
-
-### For Apple Silicon Pipeline (macOS)
-
-- macOS with Apple Silicon (M1, M2, M3, etc.)
-- Python 3.10+ (arm64)
-- LLVM (installed automatically via Numba)
-
----
+The earlier [RBLS paper](paper.md) is retained as a historical report with corrections. Its zeta-zero LLL scaling loses the measured phase alignment. The [review](research/review-2026-10-28.md) records that failure, arithmetic bugs, and unresolved historical exposure counts.
 
 ## Setup
 
-Create and activate the virtual environment, then install dependencies:
-
-```powershell
-# Create virtual environment
-python -m venv .venv
-
-# Activate it
-.venv\Scripts\activate
-```
-
-### Install Dependencies
-
-```powershell
-pip install numpy pycuda sympy
-```
-
-> **Note:** `pycuda` requires a CUDA-capable GPU and the NVIDIA CUDA Toolkit.
->
-> For Apple Silicon (`rbls_m1_pipeline.py`), install instead:
-> ```bash
-> pip install numpy numba sympy
-> ```
-
----
-
-## How to Run
-
-### GPU Pipelines (Windows)
-
-The GPU scripts require the Visual Studio Build Tools environment to be loaded **before** running. Use a single `cmd.exe` invocation:
-
-**AP-7 (k=7, d=210):**
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe rbls_gpu_pipeline.py 2>&1"
-```
-
-**AP-9 (k=9, d=210):**
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe rbls_gpu_pipeline_ap9.py 2>&1"
-```
-
-**AP-28 (k=28, d=223,092,870):** (GPU prime-find then CPU scan)
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe rbls_gpu_pipeline_ap28.py 2>&1"
-```
-
-**Explanation:**
-- `vcvars64.bat` — loads the VC++ environment variables (compiler, linker, etc.) needed by PyCUDA to compile the CUDA kernel at runtime.
-- `&&` — runs the Python script only after the environment is loaded.
-- `2>&1` — merges stderr into stdout so you see any compiler warnings.
-- The whole command is wrapped in `cmd.exe /c "..."` so it runs as a single cmd session, preserving environment variables.
-
-> **Note:** Adjust the path to `vcvars64.bat` if your Visual Studio or Build Tools installation is in a different location.
-
-### CPU Pipeline (Apple Silicon / macOS)
+Python 3.10+ is recommended. The current code was also checked on the available Python 3.9.6 environment.
 
 ```bash
-python rbls_m1_pipeline.py
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements-dev.txt
+python3 -m pytest -q
 ```
 
-Numba will JIT-compile the hot loops on first run (adds ~1–2 seconds initially).
+`numpy` and `sympy` suffice for the new reference sieve. `numba` supports the corrected historical CPU engines. PyCUDA and an NVIDIA CUDA toolchain are needed only for historical GPU scripts. The default test suite does not require a GPU; where a C++ compiler is available, it checks the actual CUDA device arithmetic as host C++. That does not establish GPU compilation, dispatch, or performance.
 
----
+## Exact reference search
 
-## Test Scripts
-
-### `test_prime_kernel.py`
-Verifies the CUDA Miller-Rabin kernel against known primes and composites:
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe test_prime_kernel.py 2>&1"
+```bash
+python3 search_prime_ap.py --k 9 --start 1000000000 --count 5000000 \
+  --difference 223092870 --output results/ap9-demo.json
 ```
 
-### `test_ap_finder.py`
-Validates the AP-finding kernel with known small progressions (AP-3, AP-5) and a small sample near the target range (~10¹⁵):
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe test_ap_finder.py 2>&1"
+This examines **every start** in `[start, start+count)`, finds all matches, and records misses, sieve survivors, primality-test counts, and elapsed time. Terms may extend beyond the start interval. The default difference is the product of all primes at most `k`.
+
+CRT generates admissible starts, a segmented sieve excludes small factors from every term, and the final verifier uses exact Python integer arithmetic with twelve Miller–Rabin bases valid below `2^64`. Inputs that would exceed that domain are rejected. Segment memory depends on the start interval block, not on the progression span.
+
+A reproducible fixed demonstration found 11 AP-9s in five million starts; all 99 terms were independently checked with SymPy. Its raw output is [here](results/ap9-structured.json). This supports the reference implementation; it is not evidence for the separate projective research proposal or for AP-28 feasibility.
+
+## Mathematical certificates and estimates
+
+```bash
+python3 research/projective_lattice.py
+python3 estimate_ap28.py --start 1000000000000000
+python3 plan_prime_ap.py --start 1000000000000000 \
+  --differences 223092870 6469693230 200560490130 --pilot-count 10000000
+python3 research/run_experiments.py
 ```
 
-### `estimate_ap28.py`
-Feasibility estimation for AP-28 search:
-```powershell
-.venv\Scripts\python.exe estimate_ap28.py
-```
+The lattice certificate checks exact finite-field counts and basis preservation. It does not search all projective cells. The planner ranks differences by a conjectural density and measured short-pilot work; repeat and enlarge pilots before using a ranking. The experiment runner records all repeats and misses and compares modular generation with direct testing using the same primality verifier.
 
----
+Increasing a raw-start probability is different from increasing success per unit work. In particular, adding primes to the difference multiplies both the raw density and the sieve survival fraction. The paper derives their cancellation and accounts for the logarithm of each term.
 
-## How It Works
+## Historical programs
 
-### Phase 1 — LLL Resonance Targeting
-- Takes imaginary parts of Riemann zeros `t₁, t₂, t₃`
-- Converts to angular frequencies `αᵢ = tᵢ / 2π`
-- Constructs a 4D integer lattice and runs LLL reduction (SymPy)
-- Extracts a resonant multiplier to target numbers near 10¹⁵
+`rbls_m1_pipeline*.py` retain the old LLL targets for reproducibility and now share corrected unsigned Numba arithmetic in `rbls_numba.py`. Their historical targeting is explicitly marked as unsupported. `rbls_gpu_pipeline*.py` retain CUDA variants with repaired modular addition; a CUDA hardware run remains outstanding.
 
-### Phase 2 — GPU/CPU Sieve
-- Generates a contiguous block of candidate starting values
-- For each candidate `a`, tests the sequence `a, a+d, a+2d, ..., a+(k-1)d`
-- Step size `d` is the **primorial of all primes less than or equal to `k`**, computed dynamically by `get_required_primorial(k)`:
+The legacy AP-28 GPU prototype collects primes in a complete term window. Its configured billion-integer window is shorter than the required 6,023,507,490 span, so it deliberately exits before GPU startup. Use the new reference sieve for bounded-memory searches on starting values. See [AP-28 notes](ap28_notes.md).
 
-  | k | Primes <= k | Primorial d |
-  |---|---:|---:|
-  | 7 | 2, 3, 5, 7 | 210 |
-  | 8 | 2, 3, 5, 7 | 210 |
-  | 9 | 2, 3, 5, 7 | 210 |
-  | 28 | 2, 3, 5, 7, 11, 13, 17, 19, 23 | 223,092,870 |
-
-- Uses deterministic Miller-Rabin with 12 witnesses (guaranteed for 64-bit)
-
-### Algorithm Variants
-
-| Script | Strategy | Description |
-|--------|----------|-------------|
-| `rbls_gpu_pipeline.py` | Direct AP test | Each candidate `a` tests if `a, a+d, ..., a+(k-1)d` are all prime. Early exit on first composite. |
-| `rbls_m1_pipeline.py` | Direct AP test | Same as GPU but uses Numba parallel CPU on Apple Silicon. |
-| `rbls_gpu_pipeline_ap8.py` | Direct AP test | CUDA AP-8 variant with a Hardy-Littlewood-style startup estimate. |
-| `rbls_m1_pipeline_ap8.py` | Direct AP test | Apple Silicon AP-8 variant that found the reported AP-8 progression. |
-| `rbls_gpu_pipeline_ap9.py` | Direct AP test | CUDA AP-9 variant with progress reporting during each batch. |
-| `rbls_m1_pipeline_ap9.py` | Direct AP test | Apple Silicon AP-9 variant used for the reported negative search. |
-| `rbls_gpu_pipeline_ap28.py` | Prime-find then scan | Experimental AP-28 prototype. It now exits early if the configured range is too narrow for the required AP-28 span. |
-
----
-
-## Known Results
-
-The AP-7 pipeline discovered:
-```
-a_n = 999,721,467,601,817 + n × 210,   for n = 0, 1, ..., 6
-```
-All 7 terms verified prime via independent CPU-side Miller-Rabin and trial division.
-
-The AP-8 M1 pipeline discovered:
-```
-a_n = 999,721,631,514,707 + n × 210,   for n = 0, 1, ..., 7
-```
-All 8 terms verified prime via deterministic Miller-Rabin and SymPy `isprime()`.
-
-AP-9 searches over roughly 7 billion raw candidate starts did not find a 9-term progression. Under a Hardy-Littlewood-style baseline for `d=210`, this is a plausible miss rather than a contradiction of the AP-7/AP-8 results.
-
----
-
-## Troubleshooting
-
-| Error | Likely Fix |
-|-------|------------|
-| `ModuleNotFoundError: No module named 'numpy'` | Activate venv and `pip install numpy` |
-| `ModuleNotFoundError: No module named 'pycuda'` | Install CUDA Toolkit, then `pip install pycuda` |
-| `OSError: nvcc not found` | Add CUDA Toolkit `bin` folder to PATH |
-| `fatal error C1083` / `cl.exe` errors | Run via `vcvars64.bat` as shown above |
-| `numba` errors (M1 pipeline) | `pip install numba` (requires LLVM) |
-| GPU at 100% but no output | First batch can take 20-60s depending on k; check `nvidia-smi` for GPU activity |
+The reported AP-7 and AP-8 tuples are genuine primes. Their old run logs do not establish a resonance speedup; the AP-7 exposure is inconsistent and the AP-9 total includes unreconciled coverage. Preserve those logs as historical evidence, not calibrated benchmarks.

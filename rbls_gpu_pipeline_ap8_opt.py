@@ -42,7 +42,7 @@ typedef unsigned long long uint64;
 // Works on all GPUs; __int128 not available on this machine
 __device__ inline uint64 mul_mod(uint64 a, uint64 b, uint64 m) {
     uint64 r = 0; a %= m;
-    while (b > 0) { if (b & 1) r = (r + a) % m; a = (a << 1) % m; b >>= 1; }
+    while (b > 0) { if (b & 1) r = (r >= m - a ? r - (m - a) : r + a); a = (a >= m - a ? a - (m - a) : a + a); b >>= 1; }
     return r;
 }
 
@@ -113,8 +113,9 @@ __global__ void evaluate_progressions_opt(
     // Candidate 0
     if (idx0 < num_candidates) {
         uint64 base_a = candidates[idx0];
-        bool valid = true;
-        for (int j = 0; j < k_len; j++) {
+        bool valid = k_len >= 2 && d_step > 0 &&
+            (uint64)(k_len - 1) <= (~(uint64)0 - base_a) / d_step;
+        for (int j = 0; valid && j < k_len; j++) {
             if (!is_prime_fast(base_a + j * d_step)) { valid = false; break; }
         }
         results[idx0] = valid ? 1 : 0;
@@ -123,8 +124,9 @@ __global__ void evaluate_progressions_opt(
     // Candidate 1 (independent - good for ILP)
     if (idx1 < num_candidates) {
         uint64 base_a = candidates[idx1];
-        bool valid = true;
-        for (int j = 0; j < k_len; j++) {
+        bool valid = k_len >= 2 && d_step > 0 &&
+            (uint64)(k_len - 1) <= (~(uint64)0 - base_a) / d_step;
+        for (int j = 0; valid && j < k_len; j++) {
             if (!is_prime_fast(base_a + j * d_step)) { valid = false; break; }
         }
         results[idx1] = valid ? 1 : 0;
@@ -136,6 +138,9 @@ __global__ void evaluate_progressions_opt(
 # 2. MULTI-RESONANCE LLL TARGETING
 # =====================================================================
 def get_resonance_parameters(k_length):
+    import warnings
+    warnings.warn("Legacy LLL scaling does not preserve phase alignment; "
+                  "use search_prime_ap.py for the modular search.", RuntimeWarning)
     """OPTIMIZATION 5: Extract top 3 LLL vectors as multiple targets."""
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION (MULTI-TARGET)] ---")
     t = [14.134725142, 21.022039638, 25.010857580]

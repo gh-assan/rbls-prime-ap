@@ -35,7 +35,7 @@ typedef unsigned long long uint64;
 // Russian peasant multiplication (safe for n < 2^64, no __int128 needed)
 __device__ inline uint64 mul_mod(uint64 a, uint64 b, uint64 m) {
     uint64 r = 0; a %= m;
-    while (b > 0) { if (b & 1) r = (r + a) % m; a = (a << 1) % m; b >>= 1; }
+    while (b > 0) { if (b & 1) r = (r >= m - a ? r - (m - a) : r + a); a = (a >= m - a ? a - (m - a) : a + a); b >>= 1; }
     return r;
 }
 
@@ -67,6 +67,10 @@ __global__ void evaluate_progressions(uint64* candidates, uint64 d_step, int k_l
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     if (idx >= num_candidates) return;
     uint64 base_a = candidates[idx];
+        if (k_len < 2 || d_step == 0 ||
+            (uint64)(k_len - 1) > (~(uint64)0 - base_a) / d_step) {
+            results[idx] = 0; return;
+        }
     bool valid = true;
     for (int j = 0; j < k_len; j++) {
         if (!is_prime(base_a + j * d_step)) { valid = false; break; }
@@ -79,6 +83,9 @@ __global__ void evaluate_progressions(uint64* candidates, uint64 d_step, int k_l
 # 2. LLL RESONANCE TARGETING
 # =====================================================================
 def get_resonance_parameters(k_length):
+    import warnings
+    warnings.warn("Legacy LLL scaling does not preserve phase alignment; "
+                  "use search_prime_ap.py for the modular search.", RuntimeWarning)
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION] ---")
     t = [14.134725142, 21.022039638, 25.010857580]
     alphas = [ti / (2 * math.pi) for ti in t]

@@ -27,77 +27,15 @@ def get_required_primorial(k):
 # =====================================================================
 # 1. NUMBA JIT ENGINE
 # =====================================================================
-@njit
-def mod_mul(a, b, m):
-    res = 0
-    a = a % m
-    while b > 0:
-        if b % 2 == 1:
-            res = (res + a) % m
-        a = (a * 2) % m
-        b //= 2
-    return res
-
-@njit
-def pow_mod(base, exp, mod):
-    res = 1
-    base = base % mod
-    while exp > 0:
-        if exp % 2 == 1:
-            res = mod_mul(res, base, mod)
-        base = mod_mul(base, base, mod)
-        exp //= 2
-    return res
-
-@njit
-def is_prime(n):
-    if n < 2:
-        return False
-    if n == 2 or n == 3:
-        return True
-    if n % 2 == 0 or n % 3 == 0:
-        return False
-    d = n - 1
-    s = 0
-    while d % 2 == 0:
-        d //= 2
-        s += 1
-    witnesses = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
-    for a in witnesses:
-        if n <= a:
-            break
-        x = pow_mod(a, d, n)
-        if x == 1 or x == n - 1:
-            continue
-        composite = True
-        for r in range(1, s):
-            x = mod_mul(x, x, n)
-            if x == n - 1:
-                composite = False
-                break
-        if composite:
-            return False
-    return True
-
-@njit(parallel=True)
-def evaluate_progressions(candidates, d_step, k_len):
-    num_candidates = len(candidates)
-    results = np.zeros(num_candidates, dtype=np.int32)
-    for idx in prange(num_candidates):
-        base_a = candidates[idx]
-        valid = True
-        for j in range(k_len):
-            if not is_prime(base_a + j * d_step):
-                valid = False
-                break
-        if valid:
-            results[idx] = 1
-    return results
+from rbls_numba import mod_mul, pow_mod, is_prime, evaluate_progressions
 
 # =====================================================================
 # 2. LLL RESONANCE
 # =====================================================================
 def get_resonance_parameters(k_length):
+    import warnings
+    warnings.warn("Legacy LLL scaling does not preserve phase alignment; "
+                  "use search_prime_ap.py for the modular search.", RuntimeWarning)
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION] ---")
     t = [14.134725142, 21.022039638, 25.010857580]
     alphas = [ti / (2 * math.pi) for ti in t]
@@ -119,7 +57,7 @@ def get_resonance_parameters(k_length):
     y = final_q / C
     a_target = int(math.exp(y))
     d_step = get_required_primorial(k_length)
-    print(f"LLL complete. Resonant ln(a) = {y:.6f}")
+    print(f"LLL complete. Historical target ln(a) = {y:.6f}")
     print(f"Target starting magnitude  = {a_target:,}")
     print(f"Primorial step size (d)    = {d_step}")
     return a_target, d_step

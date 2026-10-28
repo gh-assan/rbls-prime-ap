@@ -21,99 +21,16 @@ def get_required_primorial(k):
 # 1. THE CPU MULTIPROCESSING ENGINE (Compiled via Numba for Apple Silicon)
 # =====================================================================
 
-@njit
-def mod_mul(a, b, m):
-    """
-    Overflow-safe modular multiplication for 64-bit integers.
-    Uses Russian Peasant algorithm to prevent overflow without needing 128-bit ints.
-    """
-    res = 0
-    a = a % m
-    while b > 0:
-        if b % 2 == 1:
-            res = (res + a) % m
-        a = (a * 2) % m
-        b //= 2
-    return res
-
-@njit
-def pow_mod(base, exp, mod):
-    """Modular exponentiation: (base^exp) % mod"""
-    res = 1
-    base = base % mod
-    while exp > 0:
-        if exp % 2 == 1:
-            res = mod_mul(res, base, mod)
-        base = mod_mul(base, base, mod)
-        exp //= 2
-    return res
-
-@njit
-def is_prime(n):
-    """Deterministic 64-bit Miller-Rabin Primality Test (Guaranteed for n < 2^64)"""
-    if n < 2: return False
-    if n == 2 or n == 3: return True
-    if n % 2 == 0 or n % 3 == 0: return False
-
-    d = n - 1
-    s = 0
-    while d % 2 == 0:
-        d //= 2
-        s += 1
-
-    # Deterministic witnesses for all numbers < 2^64
-    witnesses = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
-    
-    for a in witnesses:
-        if n <= a:
-            break
-        
-        x = pow_mod(a, d, n)
-        if x == 1 or x == n - 1:
-            continue
-
-        composite = True
-        for r in range(1, s):
-            x = mod_mul(x, x, n)
-            if x == n - 1:
-                composite = False
-                break
-                
-        if composite:
-            return False
-            
-    return True
-
-@njit(parallel=True)
-def evaluate_progressions(candidates, d_step, k_len):
-    """
-    Scans candidate array for length-k arithmetic progressions.
-    parallel=True forces Numba to distribute this loop across all M1 CPU cores.
-    """
-    num_candidates = len(candidates)
-    results = np.zeros(num_candidates, dtype=np.int32)
-    
-    for idx in prange(num_candidates):
-        base_a = candidates[idx]
-        valid_progression = True
-
-    # Check all terms in the AP-k sequence
-        for j in range(k_len):
-            current_term = base_a + (j * d_step)
-            if not is_prime(current_term):
-                valid_progression = False
-                break # Early exit on composite
-                
-        if valid_progression:
-            results[idx] = 1
-            
-    return results
+from rbls_numba import mod_mul, pow_mod, is_prime, evaluate_progressions
 
 # =====================================================================
 # 2. THE ANALYTIC BRAIN (SymPy LLL Lattice Reduction)
 # =====================================================================
 
 def get_resonance_parameters(k_length):
+    import warnings
+    warnings.warn("Legacy LLL scaling does not preserve phase alignment; "
+                  "use search_prime_ap.py for the modular search.", RuntimeWarning)
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION] ---")
     
     # Imaginary parts of first 3 Riemann Zeros
@@ -136,7 +53,7 @@ def get_resonance_parameters(k_length):
     ])
     
     # Run Lenstra-Lenstra-Lovasz
-    L = M.LLL()
+    L = M.lll()
     
     # Extract the shortest vector's multiplier (q)
     base_q = abs(L[0, 3])
@@ -152,7 +69,7 @@ def get_resonance_parameters(k_length):
     # Compute primorial step size based on progression length
     d_step = get_required_primorial(k_length)
     
-    print(f"LLL complete. Resonant base ln(a) found at: {y:.6f}")
+    print(f"LLL complete. Historical target ln(a): {y:.6f}")
     print(f"Target discrete starting magnitude (a): {a_target:,}")
     print(f"Computed primorial step size (d): {d_step}")
     

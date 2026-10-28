@@ -1,16 +1,13 @@
 """
 RBLS GPU Pipeline - AP-28 Search
 =================================
-Novel algorithm: Uses GPU to find ALL primes in a range near the LLL-resonant target,
+Historical prototype: Uses GPU to find ALL primes in a range near the LLL-resonant target,
 then scans prime positions for long arithmetic progressions using difference sets.
 
 Key insight: Instead of testing every number as an AP starting point,
 we find all primes first, then look for arithmetic patterns among them.
 """
 import numpy as np
-import pycuda.autoinit
-import pycuda.driver as cuda
-from pycuda.compiler import SourceModule
 import sympy
 from sympy import Matrix, primerange
 import math
@@ -27,8 +24,8 @@ __device__ inline uint64 mul_mod(uint64 a, uint64 b, uint64 m) {
     uint64 r = 0;
     a %= m;
     while (b > 0) {
-        if (b & 1) { r = (r + a) % m; }
-        a = (a << 1) % m;
+        if (b & 1) { r = (r >= m - a ? r - (m - a) : r + a); }
+        a = (a >= m - a ? a - (m - a) : a + a);
         b >>= 1;
     }
     return r;
@@ -91,6 +88,9 @@ def get_required_primorial(k):
 # 2. LLL RESONANCE TARGETING
 # =====================================================================
 def get_resonance_parameters(k_length):
+    import warnings
+    warnings.warn("Legacy LLL scaling does not preserve phase alignment; "
+                  "use search_prime_ap.py for the modular search.", RuntimeWarning)
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION] ---")
     t = [14.134725142, 21.022039638, 25.010857580]
     alphas = [ti / (2 * math.pi) for ti in t]
@@ -125,6 +125,7 @@ def get_resonance_parameters(k_length):
 # 3. GPU PRIME FINDER
 # =====================================================================
 def run_gpu_prime_finder(mod, numbers):
+    import pycuda.driver as cuda
     n = len(numbers)
     h_nums = np.array(numbers, dtype=np.uint64)
     h_results = np.zeros(n, dtype=np.int32)
@@ -145,6 +146,11 @@ def run_gpu_prime_finder(mod, numbers):
 # 4. AP SCANNER
 # =====================================================================
 def scan_ap_from_primes(primes_sorted, k_target, min_d, max_d, result_writer):
+    if k_target < 2 or min_d < 1 or max_d < min_d:
+        raise ValueError("invalid progression length or difference bounds")
+    primes_sorted = sorted(set(map(int, primes_sorted)))
+    if not primes_sorted:
+        return []
     prime_set = set(primes_sorted)
     found = []
     d_step = get_required_primorial(k_target)
@@ -158,7 +164,7 @@ def scan_ap_from_primes(primes_sorted, k_target, min_d, max_d, result_writer):
         max_reasonable_d = (primes_sorted[-1] - p) // (k_target - 1)
         limit = min(max_reasonable_d, max_d)
         
-        for d in range(d_step, limit + 1, d_step):
+        for d in range(((min_d + d_step - 1) // d_step) * d_step, limit + 1, d_step):
             if p + (k_target - 1) * d > primes_sorted[-1]:
                 break
             valid = True
@@ -188,9 +194,6 @@ if __name__ == "__main__":
     write_result("RBLS GPU PIPELINE - AP-28 SEARCH")
     write_result("=" * 50)
     
-    print("Compiling CUDA kernel...")
-    mod = SourceModule(cuda_source)
-    print("CUDA compilation successful.")
     
     k_target = 28
     target_a, d_step = get_resonance_parameters(k_target)
@@ -209,6 +212,14 @@ if __name__ == "__main__":
         print(msg)
         write_result(msg)
         raise SystemExit(1)
+
+    import pycuda.autoinit
+    import pycuda.driver as cuda
+    from pycuda.compiler import SourceModule
+
+    print("Compiling CUDA kernel...")
+    mod = SourceModule(cuda_source)
+    print("CUDA compilation successful.")
 
     all_primes = []
     

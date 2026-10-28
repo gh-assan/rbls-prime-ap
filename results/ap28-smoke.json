@@ -1,0 +1,22 @@
+{
+  "k": 28,
+  "d": 223092870,
+  "start": 1000000000000000,
+  "stop": 1000000010000000,
+  "sieve_bound": 1000,
+  "segment_size": 1000000,
+  "wheel_modulus": 1363783,
+  "wheel_classes": 351,
+  "wheel_primes": [
+    29,
+    31,
+    37,
+    41
+  ],
+  "raw_starts": 10000000,
+  "wheel_candidates": 2582,
+  "sieve_survivors": 0,
+  "primality_tests": 0,
+  "matches": [],
+  "seconds": 0.0069482920000000226
+}

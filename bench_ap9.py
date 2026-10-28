@@ -13,8 +13,8 @@ __device__ inline uint64 mul_mod(uint64 a, uint64 b, uint64 m) {
     uint64 r = 0;
     a %= m;
     while (b > 0) {
-        if (b & 1) { r = (r + a) % m; }
-        a = (a << 1) % m;
+        if (b & 1) { r = (r >= m - a ? r - (m - a) : r + a); }
+        a = (a >= m - a ? a - (m - a) : a + a);
         b >>= 1;
     }
     return r;

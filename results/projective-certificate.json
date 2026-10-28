@@ -1,0 +1,58 @@
+{
+  "k": 28,
+  "D": 223092870,
+  "counts": [
+    {
+      "prime": 29,
+      "good_pairs": 56,
+      "allowed_directions": 2
+    },
+    {
+      "prime": 31,
+      "good_pairs": 120,
+      "allowed_directions": 4
+    },
+    {
+      "prime": 37,
+      "good_pairs": 360,
+      "allowed_directions": 10
+    },
+    {
+      "prime": 41,
+      "good_pairs": 560,
+      "allowed_directions": 14
+    },
+    {
+      "prime": 43,
+      "good_pairs": 672,
+      "allowed_directions": 16
+    }
+  ],
+  "choices": {
+    "29": null,
+    "31": 6,
+    "37": 2,
+    "41": 22
+  },
+  "basis": [
+    [
+      47027,
+      0
+    ],
+    [
+      610595,
+      29
+    ]
+  ],
+  "reduced_basis": [
+    [
+      47027,
+      0
+    ],
+    [
+      -756,
+      29
+    ]
+  ],
+  "determinant": 1363783
+}
