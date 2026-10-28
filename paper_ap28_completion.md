@@ -332,6 +332,10 @@ python3 research/ap28_completion_analysis.py
 python3 -m pytest -q
 ```
 
+### Follow-up
+
+[Coupled Defect Moments and Exact Lattice Counts for AP-28](paper_ap28_coupled_bounds.md) sharpens the moment bound, proves two obstructions to naive completion arguments, and replaces the row scan for an individual geometric cell with exact Euclidean floor sums. It does not establish aggregate AP-28 moment bounds.
+
 ### References
 
 1. Sibuya, M. (1991). *Bonferroni-type inequalities; Chebyshev-type inequalities for the distributions on [0,n]*. Annals of the Institute of Statistical Mathematics 43, 261–285. [Journal paper](https://www.ism.ac.jp/editsec/aism/pdf/043_2_0261.pdf).
