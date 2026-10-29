@@ -6,7 +6,9 @@ The current work has a **new mathematical proposal**, an exact one-difference re
 
 The requested discovery method is mathematical construction. Enumerating more starts, differences, or CRT cells does not meet that requirement. Search programs remain reference checks; final primality verification can validate a mathematically derived candidate.
 
-The latest note, [A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md), gives a finite prime-correlation criterion with an explicit prime-power correction. It specializes established analytic theorems and proves a finite-size obstruction to a crude global Fourier certificate. It supplies neither a usable numerical remainder nor a construction of the actual pair.
+The latest note, [Removing Prime Powers by Finite Group Structure](papers/gaps/G8-power-exclusion.md), constructs residue classes containing no perfect powers below `2^64`, eliminating the prime-power correction on a specified family. Exact group theory counts the retained classes without enumerating them. An explicit composite passing the conditions confirms that primality and an AP-28 construction remain unproved.
+
+[A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md) gives the preceding finite prime-correlation criterion and proves a finite-size obstruction to a crude global Fourier certificate. A usable numerical remainder and a mathematical recovery rule are still missing.
 
 The [closure plan](CLOSURE_PLAN.md) states what a verified AP-28 result requires. The preceding local result, [primitive tail decoding](papers/gaps/G6-primitive-tail-decoding.md), proves that sufficiently large tail intersections can be decoded exactly by rational reconstruction. It does not supply aggregate positivity.
 

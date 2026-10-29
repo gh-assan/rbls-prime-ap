@@ -7,11 +7,11 @@ The first three papers are committed through `a8ddcc9` on `codex/prime-ap-math-r
 | Gap | Dedicated paper | Status | Evidence required for full closure |
 |---|---|---|---|
 | G1. Primitive-point and origin exclusions in a geometric cell | [Primitive-point exclusions](papers/gaps/G1-primitive-exclusions.md) | Resolved for finite correctness; large-domain cost remains in G2 | Correct sublattice intersections, Möbius inversion, independent finite counts |
-| G2. Signed aggregation over tail-prime labels | [Signed tail aggregation](papers/gaps/G2-signed-aggregation.md) | Open arithmetic efficiency problem | Complete candidate/incidence coverage and a positive AP-28 signed bound within an established budget |
+| G2. Signed aggregation over tail-prime labels | [Signed tail aggregation](papers/gaps/G2-signed-aggregation.md) | Open arithmetic problem | A proved positive AP-28 arithmetic bound and witness recovery from mathematical structure |
 | G3a. Error from truncating the local-factor product | [Euler-product errors](papers/gaps/G3-euler-product-errors.md) | Resolved for the stated products and parameters | Outward-rounded partial products and a proved infinite-tail enclosure |
 | G3b/G5. Error between a finite-height model and actual AP-28 counts | [Finite-height remainders](papers/gaps/G5-finite-height-remainder.md) | Open; actual arithmetic counterfamily verifies a limitation | A valid finite-height arithmetic remainder; bounding the Euler tail alone does not supply one |
 | G4. Locate a witness from a positive finite-family certificate | [Witness localization](papers/gaps/G4-witness-localization.md) | Resolved as a finite localization contract; oracle cost remains in G2 | Additive score, certified child selection, finite termination, independent term verification |
-| Goal: an explicit verified AP-28 and feasible route to obtain it | All papers | Open | Actual `(a,d)` and verification of all 28 terms; no such witness is currently supplied |
+| Goal: an explicit verified AP-28 derived mathematically | All papers | Open | Actual `(a,d)`, a mathematical construction, and verification of all 28 terms; no such witness is currently supplied |
 
 Existing results are in [the projective formulation](paper_projective_ap28.md), [completion certificates](paper_ap28_completion.md), and [coupled bounds](paper_ap28_coupled_bounds.md). The third paper proves limits of certain five-moment strategies; it does not prove that AP-28 is impossible.
 
@@ -42,3 +42,9 @@ The user requires a mathematical construction, without brute-force discovery. En
 [A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md) gives a finite analytic certificate with the prime-power contribution explicitly removed. It correctly separates the effective quantitative theorem of Tao and Teräväinen from Leng's stronger error rate with an ineffective implied constant. It also proves a sharp norm-to-pointwise lower comparison that makes the crude global `U^27` certificate unhelpful at the current height unless its model already determines primality pointwise.
 
 This is a checked mathematical limitation and a precise analytic target. It does **not** close G2, the required numerical finite-height remainders in G3b/G5, or the explicit-construction goal. The published asymptotic theorem applies to the full convex cone, not automatically to the selected rough families used in earlier papers.
+
+## Prime-power correction resolved on a new finite family
+
+[Removing Prime Powers by Finite Group Structure](papers/gaps/G8-power-exclusion.md) proves a residue-class construction excluding all perfect powers below `2^64`. On the associated AP-28 family, the proper-prime-power correction in a von Mangoldt count is exactly zero. The proof counts the retained 152,755,199 classes algebraically, without a class scan or candidate search. [Exact evidence](results/power-exclusion-checks.json) includes the exceptional thirteenth power and the finite-group certificates.
+
+This closes the **prime-power correction for this family only**. It leaves the finite prime-correlation remainder and actual witness recovery open. The construction also proves that every retained class contains a composite progression below 90,575,705,251, so these congruences cannot by themselves be a primality construction. The former full-cone and rough-family claims retain their stated scopes.

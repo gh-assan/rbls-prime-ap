@@ -62,3 +62,9 @@ Small-length experiments and further identities can validate components, but the
 [The seventh note](papers/gaps/G7-structural-analytic-route.md) supplies an alternative sufficient condition on the full two-variable cone: a proved lower bound for the actual von Mangoldt correlation must exceed an explicit upper bound for contributions from proper prime powers. Published effective quantitative theorems imply this eventually at large heights. This repository does not extract a usable height, numerical remainder, or witness-recovery map.
 
 The note also proves that a crude global normalized `U^27`-norm error certificate below the current height requires nearly pointwise knowledge of primality. Applying that generic bound to a cheap density model cannot close the gap. This obstruction is specific to the stated certificate; it does not exclude relative or structured analytic methods.
+
+## Algebraic removal of the prime-power correction
+
+[The eighth note](papers/gaps/G8-power-exclusion.md) constructs 152,755,199 unit classes modulo `7*23#` containing no perfect powers below `2^64`. The count follows from independent primary components of finite unit groups; no progression candidates or full residue tables are enumerated. On progressions preserving one of these classes, a positive von Mangoldt product comes from primes, so that family's prime-power correction is zero.
+
+The theorem has a finite height restriction. Every fixed unit class contains perfect powers at sufficiently large heights. The same note constructs a composite progression in every retained class below 90,575,705,251, showing that the congruences alone do not force primality. A sufficiently strong joint arithmetic bound and a constructive recovery rule remain missing.

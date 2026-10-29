@@ -86,6 +86,8 @@ then an AP-28 with difference divisible by $D$ exists below $X$.
 
 This is an analytic sufficient condition. It does not evaluate $T(X)$ by enumerating progressions. However, this note has not proved a numerical $E(X)$ that makes (3) positive at an explicit useful height. The deliberately coarse prime-power correction can also require improvement.
 
+The subsequent [power-exclusion note](G8-power-exclusion.md) eliminates that correction on a different, explicitly selected family below $2^{64}$. It does not establish a finite correlation bound or remove prime powers from the full cone used here.
+
 ### 3. What published prime-correlation theorems actually provide
 
 Tao and Teräväinen [2, Theorem 1.6] establish, for fixed finite-complexity systems, an error of the form
