@@ -4,7 +4,11 @@ The goal is an explicit AP-28: 28 primes of the form `a + j*d`, for `j = 0,...,2
 
 The current work has a **new mathematical proposal**, an exact one-difference reference sieve, and historical RBLS experiments. No AP-28 has been found here. The new proposal has not yet demonstrated a feasible discovery budget.
 
-The [closure plan](CLOSURE_PLAN.md) states what a verified AP-28 result requires. The latest local result, [primitive tail decoding](papers/gaps/G6-primitive-tail-decoding.md), proves that sufficiently large tail intersections can be decoded exactly by rational reconstruction. It does not supply aggregate positivity.
+The requested discovery method is mathematical construction. Enumerating more starts, differences, or CRT cells does not meet that requirement. Search programs remain reference checks; final primality verification can validate a mathematically derived candidate.
+
+The latest note, [A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md), gives a finite prime-correlation criterion with an explicit prime-power correction. It specializes established analytic theorems and proves a finite-size obstruction to a crude global Fourier certificate. It supplies neither a usable numerical remainder nor a construction of the actual pair.
+
+The [closure plan](CLOSURE_PLAN.md) states what a verified AP-28 result requires. The preceding local result, [primitive tail decoding](papers/gaps/G6-primitive-tail-decoding.md), proves that sufficiently large tail intersections can be decoded exactly by rational reconstruction. It does not supply aggregate positivity.
 
 The [gap ledger](GAP_LEDGER.md) links focused follow-up papers: primitive exclusions, signed aggregation, rigorous Euler-product errors, witness localization, and finite-height arithmetic remainders. It records which finite subproblems are resolved and which AP-28 claims remain open.
 

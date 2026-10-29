@@ -34,3 +34,11 @@ The series has **not** established a positive AP-28 arithmetic bound, complete f
 [Primitive Tail Intersections as Rational Reconstruction](papers/gaps/G6-primitive-tail-decoding.md) proves that every specified fifth-order tail intersection in the cube-root, 64-bit AP-28 regime has at most one primitive candidate and meets a complete rational-reconstruction size bound. The exact decoder recovers all 66 nonempty fifth-order intersections in the existing small validation family. Aggregate AP-28 positivity remains open; recovered defect candidates are not prime witnesses.
 
 The [closure plan](CLOSURE_PLAN.md) distinguishes the original witness goal from the additional count-model theorem. A verified witness settles the construction goal even if the global model-error claim remains open.
+
+## Required mathematical discovery method
+
+The user requires a mathematical construction, without brute-force discovery. Enumeration cost improvements alone no longer satisfy the completion gate. Reference searches and small proof checks remain validation tools.
+
+[A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md) gives a finite analytic certificate with the prime-power contribution explicitly removed. It correctly separates the effective quantitative theorem of Tao and Teräväinen from Leng's stronger error rate with an ineffective implied constant. It also proves a sharp norm-to-pointwise lower comparison that makes the crude global `U^27` certificate unhelpful at the current height unless its model already determines primality pointwise.
+
+This is a checked mathematical limitation and a precise analytic target. It does **not** close G2, the required numerical finite-height remainders in G3b/G5, or the explicit-construction goal. The published asymptotic theorem applies to the full convex cone, not automatically to the selected rough families used in earlier papers.
