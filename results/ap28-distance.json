@@ -1,0 +1,86 @@
+{
+  "status": "Calibration of a heuristic model against actual record counts; no AP28 and no arithmetic bound supplied.",
+  "primegrid_stats": "https://www.primegrid.com/stats_ap26.php",
+  "primegrid_accessed": "2026-10-29",
+  "primegrid_found": {
+    "20": 1723364,
+    "21": 413368,
+    "22": 93527,
+    "23": 20660,
+    "24": 4144,
+    "25": 663,
+    "26": 71,
+    "27": 4,
+    "28": 0
+  },
+  "ap27_discovery_dates": [
+    "2019-09-23",
+    "2023-05-26",
+    "2023-12-10",
+    "2026-08-02"
+  ],
+  "cone_cells_below_2_64": 2.824619768993682e+28,
+  "model_counts_below_2_64": {
+    "26": 3572.371805201984,
+    "27": 241.47857803519773,
+    "28": 13.58537767743603
+  },
+  "model_ratio_26_27": 14.793742096167545,
+  "model_ratio_27_28": 17.77488883774426,
+  "bits_to_isolate_one_ap28": 90.74806056335396,
+  "q_from_primegrid_26_27": 0.0821917808219178,
+  "maximal_ap27_per_ap28_from_data": 22.333333333333336,
+  "ap27_poisson_95": [
+    1.0899,
+    10.2416
+  ],
+  "maximal_ap27_per_ap28_data_range": [
+    7.910014060303077,
+    85.52478820686913
+  ],
+  "q_model_by_height": {
+    "2e+17": 0.09505880546537235,
+    "1e+18": 0.0913675135949108,
+    "2e+18": 0.08986462757003562
+  },
+  "maximal_ap27_per_ap28_model": {
+    "2e+17": 19.039607958555216,
+    "1e+18": 19.889618326129,
+    "2e+18": 20.25569786556238
+  },
+  "predicted_ap26_per_ap27_model_1e18": 15.91721374459675,
+  "observed_ap26_per_ap27": 17.75,
+  "local_information": [
+    {
+      "y": 23,
+      "bits": 2.611859448786165,
+      "cells_per_expected_ap28": 3.401263193020167e+26
+    },
+    {
+      "y": 59,
+      "bits": 17.721009484845023,
+      "cells_per_expected_ap28": 9.623495986304424e+21
+    },
+    {
+      "y": 541,
+      "bits": 36.176232081457,
+      "cells_per_expected_ap28": 2.677671469868103e+16
+    },
+    {
+      "y": 10000,
+      "bits": 51.525280935746544,
+      "cells_per_expected_ap28": 641553947028.3567
+    },
+    {
+      "y": 1000000,
+      "bits": 67.86101732453108,
+      "cells_per_expected_ap28": 7756870.248742681
+    },
+    {
+      "y": 10000000,
+      "bits": 74.08685017562335,
+      "cells_per_expected_ap28": 103639.2092604418
+    }
+  ],
+  "ap28_witness_supplied": false
+}

@@ -1,0 +1,474 @@
+{
+  "status": "Every published AP26/AP27 record listed here is maximal toward AP28; no AP28 is supplied.",
+  "record_table": "https://www.pzktupel.de/PAP/aprecords.php",
+  "record_table_last_updated": "2026-10-12",
+  "longest_known_on_record_table": 27,
+  "records": [
+    {
+      "label": "Gahan 2019",
+      "discoverer": "Rob Gahan, PrimeGrid",
+      "date": "2019-09-23",
+      "source": "https://oeis.org/A327760",
+      "length": 27,
+      "start": 224584605939537911,
+      "difference": 18135696597948930,
+      "multiplier_of_23_primorial": 81292139,
+      "last_term": 696112717486210091,
+      "all_terms_verified_prime": true,
+      "zero_index_modulo_29": 27,
+      "neighbor_blocks": [
+        {
+          "index": -1,
+          "value": 206448909341588981,
+          "reason": "proper divisor",
+          "divisor": 31,
+          "cofactor": 6659642236825451
+        },
+        {
+          "index": 27,
+          "value": 714248414084159021,
+          "reason": "proper divisor",
+          "divisor": 29,
+          "cofactor": 24629255658074449
+        }
+      ],
+      "ap28_windows": [
+        {
+          "window_first_index": -1,
+          "survives_modulo_29": true,
+          "blocking_term": {
+            "index": -1,
+            "value": 206448909341588981,
+            "reason": "proper divisor",
+            "divisor": 31,
+            "cofactor": 6659642236825451
+          }
+        },
+        {
+          "window_first_index": 0,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": 27,
+            "value": 714248414084159021,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 24629255658074449
+          }
+        }
+      ]
+    },
+    {
+      "label": "Greer 2023",
+      "discoverer": "Tom Greer, PrimeGrid",
+      "date": "2023-05-26",
+      "source": "https://oeis.org/A363980",
+      "length": 27,
+      "start": 277699295941594831,
+      "difference": 38110169025918990,
+      "multiplier_of_23_primorial": 170826477,
+      "last_term": 1268563690615488571,
+      "all_terms_verified_prime": true,
+      "zero_index_modulo_29": 28,
+      "neighbor_blocks": [
+        {
+          "index": -1,
+          "value": 239589126915675841,
+          "reason": "proper divisor",
+          "divisor": 29,
+          "cofactor": 8261694031575029
+        },
+        {
+          "index": 27,
+          "value": 1306673859641407561,
+          "reason": "proper divisor",
+          "divisor": 353,
+          "cofactor": 3701625664706537
+        }
+      ],
+      "ap28_windows": [
+        {
+          "window_first_index": -1,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": -1,
+            "value": 239589126915675841,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 8261694031575029
+          }
+        },
+        {
+          "window_first_index": 0,
+          "survives_modulo_29": true,
+          "blocking_term": {
+            "index": 27,
+            "value": 1306673859641407561,
+            "reason": "proper divisor",
+            "divisor": 353,
+            "cofactor": 3701625664706537
+          }
+        }
+      ]
+    },
+    {
+      "label": "Kwok 2023",
+      "discoverer": "Michael Kwok, PrimeGrid",
+      "date": "2023-12-10",
+      "source": "https://oeis.org/A374949",
+      "length": 27,
+      "start": 605185576317848261,
+      "difference": 34661666592412860,
+      "multiplier_of_23_primorial": 155368778,
+      "last_term": 1506388907720582621,
+      "all_terms_verified_prime": true,
+      "zero_index_modulo_29": 27,
+      "neighbor_blocks": [
+        {
+          "index": -1,
+          "value": 570523909725435401,
+          "reason": "proper divisor",
+          "divisor": 31,
+          "cofactor": 18403997087917271
+        },
+        {
+          "index": 27,
+          "value": 1541050574312995481,
+          "reason": "proper divisor",
+          "divisor": 29,
+          "cofactor": 53139674976310189
+        }
+      ],
+      "ap28_windows": [
+        {
+          "window_first_index": -1,
+          "survives_modulo_29": true,
+          "blocking_term": {
+            "index": -1,
+            "value": 570523909725435401,
+            "reason": "proper divisor",
+            "divisor": 31,
+            "cofactor": 18403997087917271
+          }
+        },
+        {
+          "window_first_index": 0,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": 27,
+            "value": 1541050574312995481,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 53139674976310189
+          }
+        }
+      ]
+    },
+    {
+      "label": "Presler 2026",
+      "discoverer": "Kai Presler, PrimeGrid",
+      "date": "2026-08-02",
+      "source": "https://www.primegrid.com/forum_thread.php?id=7012&nowrap=true",
+      "length": 27,
+      "start": 973044677408627339,
+      "difference": 38931014031589680,
+      "multiplier_of_23_primorial": 174505864,
+      "last_term": 1985251042229959019,
+      "all_terms_verified_prime": true,
+      "zero_index_modulo_29": 27,
+      "neighbor_blocks": [
+        {
+          "index": -1,
+          "value": 934113663377037659,
+          "reason": "proper divisor",
+          "divisor": 2971,
+          "cofactor": 314410522846529
+        },
+        {
+          "index": 27,
+          "value": 2024182056261548699,
+          "reason": "proper divisor",
+          "divisor": 29,
+          "cofactor": 69799381250398231
+        }
+      ],
+      "ap28_windows": [
+        {
+          "window_first_index": -1,
+          "survives_modulo_29": true,
+          "blocking_term": {
+            "index": -1,
+            "value": 934113663377037659,
+            "reason": "proper divisor",
+            "divisor": 2971,
+            "cofactor": 314410522846529
+          }
+        },
+        {
+          "window_first_index": 0,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": 27,
+            "value": 2024182056261548699,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 69799381250398231
+          }
+        }
+      ]
+    },
+    {
+      "label": "Perichon 2010",
+      "discoverer": "Benoit Perichon, PrimeGrid",
+      "date": "2010-04-12",
+      "source": "https://www.pzktupel.de/PAP/aprecords.php",
+      "length": 26,
+      "start": 43142746595714191,
+      "difference": 5283234035979900,
+      "multiplier_of_23_primorial": 23681770,
+      "last_term": 175223597495211691,
+      "all_terms_verified_prime": true,
+      "zero_index_modulo_29": 27,
+      "neighbor_blocks": [
+        {
+          "index": -1,
+          "value": 37859512559734291,
+          "reason": "proper divisor",
+          "divisor": 43,
+          "cofactor": 880453780458937
+        },
+        {
+          "index": 26,
+          "value": 180506831531191591,
+          "reason": "proper divisor",
+          "divisor": 113,
+          "cofactor": 1597405588771607
+        }
+      ],
+      "ap28_windows": [
+        {
+          "window_first_index": -2,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": -2,
+            "value": 32576278523754391,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 1123319949094979
+          }
+        },
+        {
+          "window_first_index": -1,
+          "survives_modulo_29": true,
+          "blocking_term": {
+            "index": -1,
+            "value": 37859512559734291,
+            "reason": "proper divisor",
+            "divisor": 43,
+            "cofactor": 880453780458937
+          }
+        },
+        {
+          "window_first_index": 0,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": 27,
+            "value": 185790065567171491,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 6406553985074879
+          }
+        }
+      ]
+    },
+    {
+      "label": "Fry 2012",
+      "discoverer": "James Fry",
+      "date": "2012-03-26",
+      "source": "https://www.pzktupel.de/PAP/aprecords.php",
+      "length": 26,
+      "start": 3486107472997423,
+      "difference": 371891575525470,
+      "multiplier_of_23_primorial": 1666981,
+      "last_term": 12783396861134173,
+      "all_terms_verified_prime": true,
+      "zero_index_modulo_29": 27,
+      "neighbor_blocks": [
+        {
+          "index": -1,
+          "value": 3114215897471953,
+          "reason": "proper divisor",
+          "divisor": 6807329,
+          "cofactor": 457479857
+        },
+        {
+          "index": 26,
+          "value": 13155288436659643,
+          "reason": "proper divisor",
+          "divisor": 31,
+          "cofactor": 424364143118053
+        }
+      ],
+      "ap28_windows": [
+        {
+          "window_first_index": -2,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": -2,
+            "value": 2742324321946483,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 94562907653327
+          }
+        },
+        {
+          "window_first_index": -1,
+          "survives_modulo_29": true,
+          "blocking_term": {
+            "index": 26,
+            "value": 13155288436659643,
+            "reason": "proper divisor",
+            "divisor": 31,
+            "cofactor": 424364143118053
+          }
+        },
+        {
+          "window_first_index": 0,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": 27,
+            "value": 13527180012185113,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 466454483178797
+          }
+        }
+      ]
+    },
+    {
+      "label": "Jayaputera 2025",
+      "discoverer": "James Jayaputera, PrimeGrid",
+      "date": "2025",
+      "source": "https://www.pzktupel.de/PAP/aprecords.php",
+      "length": 26,
+      "start": 376654424609576207,
+      "difference": 88644728453200920,
+      "multiplier_of_23_primorial": 397344516,
+      "last_term": 2592772635939599207,
+      "all_terms_verified_prime": true,
+      "zero_index_modulo_29": 26,
+      "neighbor_blocks": [
+        {
+          "index": -1,
+          "value": 288009696156375287,
+          "reason": "proper divisor",
+          "divisor": 137,
+          "cofactor": 2102260555885951
+        },
+        {
+          "index": 26,
+          "value": 2681417364392800127,
+          "reason": "proper divisor",
+          "divisor": 29,
+          "cofactor": 92462667737682763
+        }
+      ],
+      "ap28_windows": [
+        {
+          "window_first_index": -2,
+          "survives_modulo_29": true,
+          "blocking_term": {
+            "index": -1,
+            "value": 288009696156375287,
+            "reason": "proper divisor",
+            "divisor": 137,
+            "cofactor": 2102260555885951
+          }
+        },
+        {
+          "window_first_index": -1,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": 26,
+            "value": 2681417364392800127,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 92462667737682763
+          }
+        },
+        {
+          "window_first_index": 0,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": 26,
+            "value": 2681417364392800127,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 92462667737682763
+          }
+        }
+      ]
+    },
+    {
+      "label": "Carquillat 2026",
+      "discoverer": "Christian Carquillat, PrimeGrid",
+      "date": "2026-09-12",
+      "source": "https://www.pzktupel.de/PAP/aprecords.php",
+      "length": 26,
+      "start": 48303572425689683,
+      "difference": 118577211706093140,
+      "multiplier_of_23_primorial": 531515022,
+      "last_term": 3012733865078018183,
+      "all_terms_verified_prime": true,
+      "zero_index_modulo_29": 27,
+      "neighbor_blocks": [
+        {
+          "index": -1,
+          "value": -70273639280403457,
+          "reason": "not an integer at least 2"
+        },
+        {
+          "index": 26,
+          "value": 3131311076784111323,
+          "reason": "proper divisor",
+          "divisor": 31,
+          "cofactor": 101010034734971333
+        }
+      ],
+      "ap28_windows": [
+        {
+          "window_first_index": -2,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": -2,
+            "value": -188850850986496597,
+            "reason": "not an integer at least 2"
+          }
+        },
+        {
+          "window_first_index": -1,
+          "survives_modulo_29": true,
+          "blocking_term": {
+            "index": -1,
+            "value": -70273639280403457,
+            "reason": "not an integer at least 2"
+          }
+        },
+        {
+          "window_first_index": 0,
+          "survives_modulo_29": false,
+          "blocking_term": {
+            "index": 27,
+            "value": 3249888288490204463,
+            "reason": "proper divisor",
+            "divisor": 29,
+            "cofactor": 112065113396213947
+          }
+        }
+      ]
+    }
+  ],
+  "windows_excluded": 20,
+  "max_shared_terms_with_any_prime_ap28": 14,
+  "overlap_bound_scope": "Each listed record, by the overlap lemma of G12 and the exact blocking terms.",
+  "ap28_witness_supplied": false
+}

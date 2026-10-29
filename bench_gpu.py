@@ -9,7 +9,7 @@ import time
 src = """
 __device__ inline unsigned long long mul_mod(unsigned long long a, unsigned long long b, unsigned long long m) {
     unsigned long long r = 0; a %= m;
-    while (b > 0) { if (b & 1) r = (r + a) % m; a = (a << 1) % m; b >>= 1; } return r;
+    while (b > 0) { if (b & 1) r = (r >= m - a ? r - (m - a) : r + a); a = (a >= m - a ? a - (m - a) : a + a); b >>= 1; } return r;
 }
 __device__ unsigned long long pow_mod(unsigned long long base, unsigned long long exp, unsigned long long mod) {
     unsigned long long res = 1; base %= mod;

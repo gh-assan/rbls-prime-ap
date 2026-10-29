@@ -1,43 +1,17 @@
-# AP-28 Search — Algorithm Changes
+# AP-28: mathematical direction and search limits
 
-## Why the new approach?
+The new paper is [A Projective Lattice Approach to Prime Arithmetic Progressions](paper_projective_ap28.md). It treats `(a,m)` as variables in `a+j*23#*m`, proves exact local direction counts and a CRT lattice basis, and states the remaining obstacle: a practical reduction in work after sieving and term-size costs.
 
-The AP-7 brute-force method (testing every number) would need ~10^25 candidates for AP-28.
-That's not feasible. Instead:
+The one-difference reference implementation is `search_prime_ap.py`. It sieves start intervals and checks their terms directly. The start interval can be shorter than a progression's span. It stores no prime set spanning all 28 terms.
 
-## New Algorithm
-
-1. **LLL + Riemann zeros** → target region ~10^15 (same as before)
-2. **GPU finds primes** in a window around the target
-3. **CPU scans prime positions** for AP-28 patterns using hash-set lookups
-
-For AP-28, the admissible primorial step is `23# = 223,092,870`, because
-23 is the largest prime less than or equal to 28. A step of `19# = 9,699,690`
-would be impossible for AP-28: the first 23 terms would cover every residue
-class modulo 23, forcing one term to be divisible by 23.
-
-With `d = 223,092,870`, one AP-28 spans more than 6.0 billion integers. The
-current script keeps the original 1 billion-number prototype setting but now
-exits early with a warning instead of reporting a meaningless AP-28 miss. A
-real AP-28 run needs a larger segmented scan that does not keep the entire
-prime list in memory at once.
-
-This is much faster because we only test primality once per number (not 28 times),
-and the post-scan only looks at actual primes (~29 million out of 1 billion numbers).
-
-## Files
-
-| File | Purpose |
-|------|---------|
-| `rbls_gpu_pipeline_ap28.py` | New AP-28 pipeline script |
-| `ap28_search_*.txt` | Run log (minimal, only results & progress) |
-| `ap28_search_*_ap.txt` | Any AP progressions found (if any) |
-
-## How to run
-
-```powershell
-cmd.exe /c "`"...vcvars64.bat`" && .venv\Scripts\python.exe rbls_gpu_pipeline_ap28.py 2>&1"
+```bash
+python3 search_prime_ap.py --k 28 --start 1000000000000000 --count 10000000
 ```
 
-The script writes all results to timestamped files automatically.
-No per-number logging — just chunk progress and final results.
+This is a correctness smoke test with negligible discovery expectation. A run with no match is not evidence against existence or a serious feasibility experiment.
+
+For all terms above 28, `d` must be divisible by `23# = 223092870`. The smallest span is `27*d = 6023507490`. The old `rbls_gpu_pipeline_ap28.py` instead collects every prime in a whole term window; its billion-number setting cannot contain one AP-28 and now fails before GPU initialization. Increasing that window alone does not fix its memory cost or establish a speed advantage.
+
+A partial prime-tuple model near `10^15` at the minimum difference gives a local intensity near `7.9e-26` per raw start. Its reciprocal is about `1.3e25`; it cannot be extrapolated as a constant waiting distance over an interval that large. Adding 29 and 31 to the difference raises raw intensity there, but also raises the fraction of candidates surviving a sieve containing those primes. The new paper derives this cancellation.
+
+There is currently no demonstrated practical AP-28 discovery budget in this repository. The projective-lattice prototype checks mathematical certificates; a complete multi-cell enumeration and a proven or measured advantage remain research work.

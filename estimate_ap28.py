@@ -1,58 +1,36 @@
-"""
-Estimate the feasibility of finding an AP-28 (28-term arithmetic progression of
-primes) near 10^15.
-"""
-import math
-import sympy
+"""Conjectural prime-tuple density using the actual logarithm of every term."""
+import argparse
+
+from prime_ap import expected_probability, get_required_primorial, singular_series
 
 
-def get_required_primorial(k):
-    """Calculates the product of all primes <= k."""
-    primorial = 1
-    for p in sympy.primerange(2, k + 1):
-        primorial *= p
-    return primorial
+def main(argv=None):
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--k',type=int,default=28)
+    parser.add_argument('--start',type=int,default=10**15)
+    parser.add_argument('--difference',type=int)
+    parser.add_argument('--starts-per-second',type=float,
+                        help='measured raw-start rate for this exact algorithm and tuple')
+    args=parser.parse_args(argv)
+    try:
+        d=get_required_primorial(args.k) if args.difference is None else args.difference
+        probability=expected_probability(args.k,d,args.start)
+    except ValueError as error:
+        parser.error(str(error))
+    print(f'Step d: {d:,}; span: {(args.k-1)*d:,}')
+    print(f'Partial singular series (primes <= 100000): {singular_series(args.k,d):.6e}')
+    print(f'Conjectured probability per raw start near the specified start: {probability:.6e}')
+    if probability == 0:
+        print('Local prime obstruction: no all-large prime progression for this difference.')
+        return 0
+    print(f'Local reciprocal intensity (not a guarantee): {1/probability:.6e} raw starts')
+    if args.starts_per_second is not None:
+        if args.starts_per_second <= 0:
+            parser.error('--starts-per-second must be positive')
+        print(f'Local reciprocal rate: {1/probability/args.starts_per_second:.6e} seconds')
+    print('This local estimate cannot be extrapolated unchanged over enormous intervals.')
+    return 0
 
 
-def singular_series(k, d, prime_bound=100_000):
-    """Truncated Hardy-Littlewood singular series for {0, d, ..., (k-1)d}."""
-    series = 1.0
-    for p in sympy.primerange(2, prime_bound):
-        residues = len({(j * d) % p for j in range(k)})
-        if residues == p:
-            return 0.0
-        series *= (1.0 - residues / p) / ((1.0 - 1.0 / p) ** k)
-    return series
-
-
-k = 28
-d = get_required_primorial(k)
-x = 10**15
-ln_x = math.log(x)
-
-print(f"Step size d = {d:,}")
-print(f"Spread (k-1)d = {(k - 1) * d:,}")
-print(f"Prime probability near 10^15: {1 / ln_x:.6f} ({ln_x:.1f} numbers per prime)")
-print()
-
-p_naive = (1.0 / ln_x) ** k
-print(f"Naive independent probability: {p_naive:.2e}")
-print(f"Naive expected raw starts: {1 / p_naive:.2e}")
-print()
-
-series = singular_series(k, d)
-p_hl = series / (ln_x ** k) if series else 0.0
-print(f"Truncated singular series: {series:.3e}")
-print(f"Hardy-Littlewood-style probability per raw start: {p_hl:.2e}")
-print(f"Expected raw starts: {1 / p_hl:.2e}")
-print()
-
-time_per_10m = 18  # seconds, rough historical GPU timing
-batches_needed = (1 / p_hl) / 10_000_000
-total_seconds = batches_needed * time_per_10m
-print("--- Time Estimation ---")
-print(f"Batches of 10M needed: {batches_needed:.2e}")
-print(f"Total GPU time: {total_seconds:.2e} seconds")
-print(f"  = {total_seconds / 3600:.2e} hours")
-print(f"  = {total_seconds / 86400:.2e} days")
-print(f"  = {total_seconds / (86400 * 365):.2e} years")
+if __name__ == '__main__':
+    raise SystemExit(main())

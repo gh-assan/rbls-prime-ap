@@ -1,0 +1,27 @@
+{
+  "status": "Rigorous enclosure of a defined density-model main term; not an actual prime count or success probability.",
+  "height": 18446744073709551615,
+  "k": 28,
+  "difference_unit": 1561650090,
+  "precision": 28,
+  "active_cells": 8000,
+  "unselected_M_model": {
+    "lower": "1.89584262379524548",
+    "upper": "1.98226281580813542"
+  },
+  "selected_M_model": {
+    "lower": "1.12916167816953473",
+    "upper": "1.18063344476884256"
+  },
+  "unselected_D_model": {
+    "lower": "13.2708983665667183",
+    "upper": "13.8758398361444122"
+  },
+  "selected_to_D_model_ratio_upper": "1651/19404",
+  "strict_one_sided_character_threshold": "693733/6015973",
+  "necessary_quadratic_support": 11,
+  "support_refers_to": "Occupied quadratic classes of nonzero von Mangoldt tuples, which may include prime powers outside the selected set.",
+  "finite_prime_count_error_bound_available": false,
+  "AP28_witness_available": false,
+  "beta_source": "research.euler_tail_bounds.certified_constants: P=100000, precision=60"
+}

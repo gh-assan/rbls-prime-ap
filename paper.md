@@ -2,17 +2,19 @@
 
 **Author:** Ghassan Al Hamoud
 **Location:** Berlin, Germany
-**Date:** May 2026
+**Date:** May 2026; audit note added 28 October 2026
+
+> Historical experiment report. The LLL scaling below does not preserve its input phase alignment. Historical search exposure is not fully reconciled, and the results do not validate a resonance advantage. See [the new projective-lattice proposal](paper_projective_ap28.md) for a separate mathematical direction and [the audit](research/review-2026-10-28.md) for reproducible corrections.
 
 ### Abstract
 
-The search for long arithmetic progressions of primes (AP-$k$) is a computationally intensive problem usually approached through discrete sieving, wheel constraints, and large-scale parallel search. This note describes Resonance-Biased Lattice Sieving (RBLS), an exploratory heuristic that uses a low-dimensional lattice construction from the phases of the first Riemann zeta zeros to choose reproducible starting regions for prime-progression searches. The method is not presented as a theorem or as a proven statistical accelerator. Its current value is experimental: it combines an analytic target generator with deterministic Miller-Rabin sieving, and it produced verified AP-7 and AP-8 examples near $10^{15}$ with common difference $210$. A subsequent AP-9 search over roughly $7 \times 10^9$ raw candidates did not find a progression. Reinterpreted against a Hardy-Littlewood-style baseline, these results are compatible with ordinary AP densities and should be viewed as a starting point for controlled baseline experiments rather than evidence of a large speedup.
+The search for long arithmetic progressions of primes (AP-$k$) is a computationally intensive problem usually approached through discrete sieving, wheel constraints, and large-scale parallel search. This note describes Resonance-Biased Lattice Sieving (RBLS), an exploratory heuristic that uses a low-dimensional lattice construction from the phases of the first Riemann zeta zeros to choose reproducible starting regions for prime-progression searches. The method is not presented as a theorem or as a proven statistical accelerator. Its current value is experimental: it combines an analytic target generator with deterministic Miller-Rabin sieving, and it produced verified AP-7 and AP-8 examples near $10^{15}$ with common difference $210$. Historical AP-9 runs reported roughly $7 \times 10^9$ raw candidate attempts without a progression; overlapping coverage and inconsistent counters prevent treating this as verified distinct exposure. Reinterpreted against a Hardy-Littlewood-style baseline, these results are compatible with ordinary AP densities and should be viewed as a starting point for controlled baseline experiments rather than evidence of a large speedup.
 
 ---
 
 ### 1. Introduction
 
-The Green-Tao theorem establishes that the primes contain arbitrarily long arithmetic progressions. The theorem is non-constructive, and practical searches for long prime progressions rely on careful arithmetic constraints and high-throughput computation. Record searches, including PrimeGrid AP searches, use primorial structure and massive parallelism to reduce a very sparse search problem to a tractable distributed computation.
+The Green-Tao theorem establishes that the primes contain arbitrarily long arithmetic progressions. The existence theorem does not give a practical search budget, and practical searches for long prime progressions rely on careful arithmetic constraints and high-throughput computation. Record searches, including PrimeGrid AP searches, use primorial structure and massive parallelism to reduce a very sparse search problem to a tractable distributed computation.
 
 This note proposes and tests a heuristic targeting layer, Resonance-Biased Lattice Sieving (RBLS). The idea is to use a small number of low-frequency Riemann-zero phases to select a logarithmic region, then run an ordinary discrete AP sieve in that region. RBLS does not replace primality testing, does not prove elevated prime density, and does not currently establish a statistically significant advantage over standard structured search. The contribution is a reproducible experimental pipeline and a set of observations that can be tested against random and residue-class baselines.
 
@@ -34,22 +36,22 @@ Thus, over the short spans considered here, the terms in the progression share a
 
 #### 2.2 LLL Target Generation
 
-Let $\alpha_i = t_i / 2\pi$ for the first three non-trivial zeros. The implementation constructs an integer lattice from the scaled values $\lfloor C\alpha_i \rceil$, with $C = 10^8$:
+Let $\alpha_i = t_i / 2\pi$ for the first three non-trivial zeros. The implementation constructs an integer lattice from the scaled values $\lfloor C\alpha_i \rfloor$, with $C = 10^8$:
 
 $$M = \begin{bmatrix}
 C & 0 & 0 & 0 \\
 0 & C & 0 & 0 \\
 0 & 0 & C & 0 \\
-\lfloor C\alpha_1 \rceil & \lfloor C\alpha_2 \rceil & \lfloor C\alpha_3 \rceil & 1
+\lfloor C\alpha_1 \rfloor & \lfloor C\alpha_2 \rfloor & \lfloor C\alpha_3 \rfloor & 1
 \end{bmatrix}.$$
 
 LLL reduction returns short vectors whose final coordinate is treated as a candidate denominator $q$. The code then scales $q$ to a logarithmic magnitude close to $\log(10^{15})$ and converts the resulting $y$ to a target $a_{\text{target}} = \lfloor e^y \rfloor$.
 
-This construction should be interpreted cautiously. Scaling an LLL-derived denominator to a prescribed magnitude does not by itself prove strong phase alignment at that magnitude. In the current implementation, it is best described as a deterministic target generator inspired by simultaneous Diophantine approximation.
+This construction should be interpreted cautiously. The reduced vector approximates integer phases at $q$, while the code evaluates phases at $y=q\lfloor C\log(10^{15})/q\rfloor/C$. These are different arguments. For $q=70109$, the original phase errors are about $(0.00393,0.00544,0.00139)$ cycles, but the final errors are $(0.30180,0.44242,0.48400)$ cycles. The operation destroys the measured alignment. In the current implementation, it is best described as a deterministic target generator inspired by simultaneous Diophantine approximation.
 
 #### 2.3 Parameter Choices
 
-**Number of zeros ($N=3$):** Three zeros give the smallest non-trivial lattice used in this implementation. This is a computational choice, not an optimized theoretical parameter. In particular, the current experiments do not prove that three zeros are better than two, four, or five. A publishable statistical claim would require a sensitivity study over $N$.
+**Number of zeros ($N=3$):** Three zeros give the smallest non-trivial lattice used in this implementation. This is a computational choice, not an optimized theoretical parameter. In particular, the current experiments do not prove that three zeros are better than two, four, or five. A statistical claim would require matched controls and a sensitivity study over $N$.
 
 **Scaling constant ($C=10^8$):** The scale $C$ maps floating-point approximations of $\alpha_i$ into integer lattice entries. It is large enough to preserve several decimal places while keeping the lattice small and fast to reduce. Robustness to $C$ should be measured directly rather than assumed.
 
@@ -78,7 +80,7 @@ In May 2026, the RBLS pipeline generated a target region near
 
 $$a_{\text{target}} \approx 999,721,403,904,414.$$
 
-The GPU search evaluated batches of $10,000,000$ raw candidate starts and found a valid AP-7 in the sixth batch, after roughly $60,000,000$ raw candidates. The recorded GPU execution time was 139.44 seconds.
+The historical summary reports six batches of $10,000,000$ starts and 139.44 seconds. However, the verified start is $63,697,403$ above the stated target, outside the first $60,000,000$ starts. These figures cannot describe the same contiguous search as written. The progression is verified; its candidates-to-discovery and timing provenance remain unresolved.
 
 | Index ($n$) | Term ($a_n$) | Status |
 | --- | --- | --- |
@@ -94,7 +96,7 @@ The progression is
 
 $$a_n = 999,721,467,601,817 + 210n,\qquad 0 \leq n \leq 6.$$
 
-All seven terms were verified independently with CPU-side Miller-Rabin and trial division checks.
+All seven terms were rechecked with the corrected integer verifier and SymPy. Bounded trial division is only a small-factor check, not an independent primality proof.
 
 #### 4.2 AP-8 Follow-Up
 
@@ -128,7 +130,7 @@ All eight terms were verified with deterministic Miller-Rabin and independently 
 
 #### 4.3 AP-9 Negative Result
 
-The AP-9 searches used $d=210$ and covered approximately $7 \times 10^9$ raw candidate starts across multiple target windows. No AP-9 was found. Under the corrected baseline in Section 5, this miss is not decisive evidence against the code or the heuristic; it is compatible with expected AP-9 rarity at this magnitude.
+The AP-9 summaries report approximately $7 \times 10^9$ raw attempts at $d=210$ across several windows, with no match. Some windows repeat prior coverage, and the first run reports an odd-candidate count inconsistent with its allocated range. Therefore $7\times10^9$ is not established distinct exposure. The rarity calculation in Section 5 is illustrative; no calibrated miss probability should be assigned to these logs without reconstructing actual coverage.
 
 ### 5. Statistical Interpretation
 
@@ -152,11 +154,11 @@ Using a truncated singular-series computation for $d=210$ near $x=10^{15}$ gives
 
 | $k$ | Partial $\mathfrak{S}(H_k)$ | Expected raw starts per success | Observed result |
 |-----|------------------------------|---------------------------------|-----------------|
-| 7 | $\approx 2.59 \times 10^3$ | $\approx 2.26 \times 10^7$ | Found after $\sim 6.0 \times 10^7$ raw starts |
+| 7 | $\approx 2.59 \times 10^3$ | $\approx 2.26 \times 10^7$ | Verified example; discovery exposure unresolved |
 | 8 | $\approx 7.13 \times 10^3$ | $\approx 2.84 \times 10^8$ | Found after $\sim 2.28 \times 10^8$ raw starts |
-| 9 | $\approx 1.61 \times 10^4$ | $\approx 4.34 \times 10^9$ | Not found after $\sim 7.0 \times 10^9$ raw starts |
+| 9 | $\approx 1.61 \times 10^4$ | $\approx 4.34 \times 10^9$ | No match reported; distinct exposure unresolved |
 
-These estimates are approximate, but they materially change the interpretation. The AP-7 and AP-8 discoveries validate that the implementation can find genuine progressions, yet they do not establish a large speedup over structured baseline search. The AP-9 miss is also not surprising enough to invalidate the pipeline.
+These estimates are approximate, but they materially change the interpretation. The AP-7 and AP-8 discoveries validate that the implementation can find genuine progressions, yet they do not establish a large speedup over structured baseline search. An accurately measured negative AP-9 search could be interpreted with this model; the historical logs are insufficient for a calibrated test.
 
 #### 5.1 Required Baselines
 
@@ -200,7 +202,7 @@ This is small, so first-order phase drift is not the immediate bottleneck for th
 
 #### 6.3 Direct Test vs. Prime-Find-Then-Scan
 
-For larger $k$, a "prime-find then scan" strategy can be preferable. It tests each integer once, collects primes in a window, and scans the resulting set for arithmetic patterns. This trades repeated Miller-Rabin evaluations for hash lookups over the prime set. The AP-28 prototype follows this direction, but a corrected AP-28 run requires a window wider than $6.0 \times 10^9$ integers for the minimal admissible step, so a practical implementation should use segmented storage rather than keeping the full prime set in memory.
+For some search geometries, a "prime-find then scan" strategy can be preferable; a general speed advantage does not follow from progression length alone. It tests each integer once, collects primes in a window, and scans the resulting set for arithmetic patterns. This trades repeated Miller-Rabin evaluations for hash lookups over the prime set. The AP-28 prototype follows this direction, but a corrected AP-28 run requires a window wider than $6.0 \times 10^9$ integers for the minimal admissible step, so a practical implementation should use segmented storage rather than keeping the full prime set in memory.
 
 #### 6.4 Scope
 
@@ -208,9 +210,9 @@ The same experimental framework could be adapted to other prime constellations, 
 
 ### 7. Conclusion
 
-RBLS is best viewed as an exploratory computational framework. It successfully found verified AP-7 and AP-8 progressions near $10^{15}$ and produced a useful negative AP-9 experiment. After correcting the statistical baseline, the current evidence supports the correctness of the search implementation but does not yet prove that the LLL target generator improves over ordinary structured sampling.
+RBLS is best viewed as an exploratory computational framework. It successfully found verified AP-7 and AP-8 progressions near $10^{15}$ and produced a useful negative AP-9 experiment. The verified tuples establish those particular examples. They do not establish full-range implementation correctness, calibrated historical exposure, or an advantage from LLL target selection. The 28 October review found arithmetic defects and loss of phase alignment; the corrected reference sieve has separate regression evidence.
 
-The next step is therefore not a stronger claim, but a cleaner experiment: run matched random and deterministic baseline windows, report all misses, and compare candidates-to-success under identical stopping rules. If RBLS consistently outperforms those controls, the resonance hypothesis becomes a serious empirical result. Until then, the method should be published as an open, reproducible heuristic and a call for independent testing.
+For the resonance hypothesis, a necessary next step would be a controlled experiment: run matched random and deterministic baseline windows, report all misses, and compare candidates-to-success under identical stopping rules. Such experiments would first need a target construction that preserves its stated objective. The present generator has no demonstrated phase-alignment or density advantage. The separate projective-lattice proposal instead formulates exact modular constraints and identifies its own unresolved feasibility question.
 
 ### Acknowledgements
 

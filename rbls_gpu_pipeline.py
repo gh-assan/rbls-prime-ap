@@ -30,8 +30,8 @@ __device__ inline uint64 mul_mod(uint64 a, uint64 b, uint64 m) {
     uint64 r = 0;
     a %= m;
     while (b > 0) {
-        if (b & 1) r = (r + a) % m;
-        a = (a << 1) % m;
+        if (b & 1) r = (r >= m - a ? r - (m - a) : r + a);
+        a = (a >= m - a ? a - (m - a) : a + a);
         b >>= 1;
     }
     return r;
@@ -90,6 +90,10 @@ __global__ void evaluate_progressions(uint64* candidates, uint64 d_step, int k_l
     if (idx >= num_candidates) return;
 
     uint64 base_a = candidates[idx];
+        if (k_len < 2 || d_step == 0 ||
+            (uint64)(k_len - 1) > (~(uint64)0 - base_a) / d_step) {
+            results[idx] = 0; return;
+        }
     bool valid_progression = true;
 
     // Check all terms in the AP-k sequence
@@ -109,6 +113,9 @@ __global__ void evaluate_progressions(uint64* candidates, uint64 d_step, int k_l
 # 2. THE ANALYTIC BRAIN (SymPy LLL Lattice Reduction)
 # =====================================================================
 def get_resonance_parameters(k_length):
+    import warnings
+    warnings.warn("Legacy LLL scaling does not preserve phase alignment; "
+                  "use search_prime_ap.py for the modular search.", RuntimeWarning)
     print("--- [PHASE 1: ANALYTIC LLL REDUCTION] ---")
     
     # Imaginary parts of first 3 Riemann Zeros

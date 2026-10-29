@@ -1,194 +1,103 @@
-# RBLS (Resonance-Biased Lattice Sieving) — Arithmetic Progression Prime Finder
+# Prime arithmetic progressions: mathematical research and exact reference search
 
-This project searches for **long arithmetic progressions of primes** (AP-k) using an exploratory hybrid approach:
+The goal is an explicit AP-28: 28 primes of the form `a + j*d`, for `j = 0,...,27`.
 
-1. **Analytic Phase:** Uses the imaginary parts of the first three Riemann zeta zeros and SymPy's LLL lattice reduction to compute reproducible target regions near ~10¹⁵.
-2. **Discrete Sieve:** Tests candidate numbers in batches using a deterministic Miller-Rabin primality test (64-bit, 12-witness, guaranteed correct for all `n < 2⁶⁴`).
-3. **Dynamic Primorial Step Size:** The common difference `d` is computed as the **primorial of all primes less than or equal to `k`**, ensuring admissibility against the required small-prime obstructions.
+The current work has a **new mathematical proposal**, an exact one-difference reference sieve, and historical RBLS experiments. No AP-28 has been found here. The proposal has not yet supplied a mathematical AP-28 construction.
 
-RBLS is a heuristic target generator, not a proof of elevated prime density. The current AP-7/AP-8 results verify that the implementation finds genuine progressions; controlled baseline searches are still needed before claiming a statistical speedup.
+The requested discovery method is mathematical construction. Enumerating more starts, differences, or CRT cells does not meet that requirement. Search programs remain reference checks; final primality verification can validate a mathematically derived candidate.
 
-Available implementations:
+A [fixed candidate check](research/fixed-ap27-candidate-check.md) independently verifies the August 2026 published AP-27 and derives its only direct extension not excluded modulo 29. The new endpoint has proper divisor 2971, so the candidate fails. Both composite neighbors also imply that any prime AP-28 can share at most 14 terms with this fixed source progression. This is a failed construction check, not an AP-28 discovery or a closed arithmetic gap.
 
-| Script | k | Platform | Engine |
-|--------|---|----------|--------|
-| `rbls_gpu_pipeline.py` | 7 | Windows + NVIDIA GPU (Tesla T4, etc.) | CUDA via PyCUDA |
-| `rbls_m1_pipeline.py` | 7 | macOS Apple Silicon (M1/M2/M3) | Numba JIT + parallel CPU |
-| `rbls_gpu_pipeline_ap8.py` | 8 | Windows + NVIDIA GPU (Tesla T4, etc.) | CUDA via PyCUDA |
-| `rbls_m1_pipeline_ap8.py` | 8 | macOS Apple Silicon (M1/M2/M3) | Numba JIT + parallel CPU |
-| `rbls_gpu_pipeline_ap9.py` | 9 | Windows + NVIDIA GPU (Tesla T4, etc.) | CUDA via PyCUDA |
-| `rbls_m1_pipeline_ap9.py` | 9 | macOS Apple Silicon (M1/M2/M3) | Numba JIT + parallel CPU |
-| `rbls_gpu_pipeline_ap28.py` | 28 | Windows + NVIDIA GPU (Tesla T4, etc.) | CUDA via PyCUDA (prime-find then scan) |
+[Garner Tree Search Is the Wheel](papers/gaps/G16-garner-tree.md) tests mixed-radix tree search with box pruning. Its best order saves a constant 12-23% of wheel work at every sieve bound; every level past the window modulus costs exactly `S_i(|G_p|-2)+S_{i+1}` more. Closed, with one practical constant: order filter primes by survival fraction.
 
----
+[Meissel–Lehmer for Prime Patterns](papers/gaps/G15-pattern-counting.md) tests the second brainstorm candidate. The exact analogue of Legendre's recursion exists for every pattern and agrees with direct sieving on 39 sizes. For primes its states collapse to one per sieve prime; for twins, 3-term and 5-term progressions they grow faster than `x` (exponents 1.16-1.30). A substitution records its residue whenever a pattern has two forms, so the collapse behind sublinear prime counting does not extend. Closed.
 
-## Prerequisites
+[Resonance Bisection](papers/gaps/G14-resonance-bisection.md) tests the first candidate from the [domain-ladder brainstorm](research/brainstorm-domain-ladder.md). Sieve counts are exact sums of products of Dirichlet kernels; LLL on the CRT dual finds resonant frequencies carrying 88% of the count fluctuation at sieve bound 23, against 4% for low-complexity frequencies. The captured share falls as sieve primes are added, and bisection even with optimal frequencies costs 380 to 93,000 times the wheel. Rejected as a discovery method; the resonance finder is kept as a tool.
 
-### For GPU Pipelines (Windows)
+[How Far Is an AP-28?](papers/gaps/G13-calibrated-distance.md) calibrates the density model against PrimeGrid's actual counts (71 AP-26s, 4 AP-27s, no AP-28). A window model predicts the observed AP-26/AP-27 ratio (15.9 against 17.75) and about 20 AP-27 finds per AP-28. Isolating one of the roughly 13.6 expected AP-28s below `2^64` takes about 91 bits; congruences supply 36 bits cheaply. **Verdict: no known mathematical method yields an AP-28 without a search of roughly PrimeGrid's scale.** This is a limit of current mathematics; see the paper's Section 5.
 
-- Windows 10/11
-- Microsoft Visual Studio Build Tools 2022 (or VS 2022) with **VC++ toolset**
-- NVIDIA GPU with Compute Capability ≥ 3.0 (e.g., Tesla T4, RTX series)
-- NVIDIA CUDA Toolkit (matching your GPU driver)
-- Python 3.10+ (64-bit)
+[No Published AP-26 or AP-27 Record Extends to AP-28](papers/gaps/G12-record-extension-census.md) extends that check to all four known AP-27s and four published AP-26s. As of the record table updated 12 October 2026, 27 is still the longest known length. Both neighbors of every listed record have an exact proper divisor or are nonpositive, so any prime AP-28 shares at most 14 terms with each. Modulo 29, the only full extension window is the one Wróblewski's program already tests. The route of extending known records is closed; no AP-28 is supplied.
 
-### For Apple Silicon Pipeline (macOS)
+The [finite transference assessment](research/transference-route-assessment-2026-10-29.md) checks a March 2026 primary result against the actual scale. On both stated intervals, a `U^56` majorant error below one forces a pointwise bound below 2.01, incompatible with the indicated unscaled prime weights. Scaling the weights subject to the stated mean control leaves a density-only argument unable to guarantee AP-28: explicit sets with higher density contain no AP-28. This rules out the direct finite recipe assessed here, not all transference arguments or heights. It supplies no positive arithmetic bound or witness.
 
-- macOS with Apple Silicon (M1, M2, M3, etc.)
-- Python 3.10+ (arm64)
-- LLVM (installed automatically via Numba)
+[A Sparsity and Confidence Audit of the AP-28 Route](papers/gaps/G11-sparsity-confidence-audit.md) proves that even the uniform one-sided character criterion needs at least 11 occupied quadratic classes of positive von Mangoldt tuple weight. It rigorously encloses the selected family's density-model main term between 1.129 and 1.181 at the full 64-bit height. These are model-integral bounds, not actual prime counts or success probabilities. The audit supports low confidence in the current uniform-mixing route and retains the full `23#` family with a prime-only weight as a simpler arithmetic target.
 
----
+[A Sharp Character-Error Threshold and the Remaining Arithmetic Gap](papers/gaps/G10-sharp-character-threshold.md) proves the existing exact coefficient ratio is optimal for the fixed residue conditions and uniform-error metric. A matching abstract dual distribution supplies the proof. A parameter audit rejects one direct numerical substitution into a published uniformity theorem. Actual prime-correlation bounds and the AP-28 construction remain open.
+
+[Signed Character Minorants for Finite AP-28 Certificates](papers/gaps/G9-character-minorant.md) reduces the modular error transfer to 174 character coefficients with a relative error factor below nine. It proves a finite sufficient inequality and a limitation of uniform absolute errors during localization. Actual arithmetic estimates meeting the inequality remain unproved.
+
+[Removing Prime Powers by Finite Group Structure](papers/gaps/G8-power-exclusion.md) constructs residue classes containing no perfect powers below `2^64`, eliminating the prime-power correction on a specified family. Exact group theory counts the retained classes without enumerating them. An explicit composite passing the conditions confirms that primality and an AP-28 construction remain unproved.
+
+[A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md) gives the preceding finite prime-correlation criterion and proves a finite-size obstruction to a crude global Fourier certificate. A usable numerical remainder and a mathematical recovery rule are still missing.
+
+The [closure plan](CLOSURE_PLAN.md) states what a verified AP-28 result requires. The preceding local result, [primitive tail decoding](papers/gaps/G6-primitive-tail-decoding.md), proves that sufficiently large tail intersections can be decoded exactly by rational reconstruction. It does not supply aggregate positivity.
+
+The [gap ledger](GAP_LEDGER.md) links focused follow-up papers: primitive exclusions, signed aggregation, rigorous Euler-product errors, witness localization, and finite-height arithmetic remainders. It records which finite subproblems are resolved and which AP-28 claims remain open.
+
+The third paper, [Coupled Defect Moments and Exact Lattice Counts for AP-28](paper_ap28_coupled_bounds.md), proves sharp moment certificates, an explicit limited-independence obstruction, and a 64-bit sparsity obstruction to estimating individual five-prime intersections. It adds exact floor-sum counts and an arithmetic AP-7 check. Aggregate AP-28 bounds remain unproved. The [reproducible certificates](results/coupled-analysis.json) separate arithmetic checks from probability models and geometric proxies.
+
+The follow-up paper, [From Local Admissibility to Prime Completion](paper_ap28_completion.md), derives a finite certificate using five defect moments and identifies the arithmetic bounds still needed for AP-28. Its exact checks and separately labeled model tables are in [the completion analysis](results/completion-analysis.json).
+
+Read [A Projective Lattice Approach to Prime Arithmetic Progressions](paper_projective_ap28.md) first. It studies both the start and difference, combines finite-field projective directions with CRT lattices, and derives the limits of the apparent probability gains. It includes proofs, quantitative estimates, research questions, and primary references.
+
+The earlier [RBLS paper](paper.md) is retained as a historical report with corrections. Its zeta-zero LLL scaling loses the measured phase alignment. The [review](research/review-2026-10-28.md) records that failure, arithmetic bugs, and unresolved historical exposure counts.
 
 ## Setup
 
-Create and activate the virtual environment, then install dependencies:
-
-```powershell
-# Create virtual environment
-python -m venv .venv
-
-# Activate it
-.venv\Scripts\activate
-```
-
-### Install Dependencies
-
-```powershell
-pip install numpy pycuda sympy
-```
-
-> **Note:** `pycuda` requires a CUDA-capable GPU and the NVIDIA CUDA Toolkit.
->
-> For Apple Silicon (`rbls_m1_pipeline.py`), install instead:
-> ```bash
-> pip install numpy numba sympy
-> ```
-
----
-
-## How to Run
-
-### GPU Pipelines (Windows)
-
-The GPU scripts require the Visual Studio Build Tools environment to be loaded **before** running. Use a single `cmd.exe` invocation:
-
-**AP-7 (k=7, d=210):**
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe rbls_gpu_pipeline.py 2>&1"
-```
-
-**AP-9 (k=9, d=210):**
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe rbls_gpu_pipeline_ap9.py 2>&1"
-```
-
-**AP-28 (k=28, d=223,092,870):** (GPU prime-find then CPU scan)
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe rbls_gpu_pipeline_ap28.py 2>&1"
-```
-
-**Explanation:**
-- `vcvars64.bat` — loads the VC++ environment variables (compiler, linker, etc.) needed by PyCUDA to compile the CUDA kernel at runtime.
-- `&&` — runs the Python script only after the environment is loaded.
-- `2>&1` — merges stderr into stdout so you see any compiler warnings.
-- The whole command is wrapped in `cmd.exe /c "..."` so it runs as a single cmd session, preserving environment variables.
-
-> **Note:** Adjust the path to `vcvars64.bat` if your Visual Studio or Build Tools installation is in a different location.
-
-### CPU Pipeline (Apple Silicon / macOS)
+Python 3.10+ is recommended. The current code was also checked on the available Python 3.9.6 environment.
 
 ```bash
-python rbls_m1_pipeline.py
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements-dev.txt
+python3 -m pytest -q
 ```
 
-Numba will JIT-compile the hot loops on first run (adds ~1–2 seconds initially).
+`numpy` and `sympy` suffice for the new reference sieve. `numba` supports the corrected historical CPU engines. PyCUDA and an NVIDIA CUDA toolchain are needed only for historical GPU scripts. The default test suite does not require a GPU; where a C++ compiler is available, it checks the actual CUDA device arithmetic as host C++. That does not establish GPU compilation, dispatch, or performance.
 
----
+## Exact reference search
 
-## Test Scripts
-
-### `test_prime_kernel.py`
-Verifies the CUDA Miller-Rabin kernel against known primes and composites:
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe test_prime_kernel.py 2>&1"
+```bash
+python3 search_prime_ap.py --k 9 --start 1000000000 --count 5000000 \
+  --difference 223092870 --output results/ap9-demo.json
 ```
 
-### `test_ap_finder.py`
-Validates the AP-finding kernel with known small progressions (AP-3, AP-5) and a small sample near the target range (~10¹⁵):
-```powershell
-cmd.exe /c "`"D:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build\vcvars64.bat`" && .venv\Scripts\python.exe test_ap_finder.py 2>&1"
+This examines **every start** in `[start, start+count)`, finds all matches, and records misses, sieve survivors, primality-test counts, and elapsed time. Terms may extend beyond the start interval. The default difference is the product of all primes at most `k`.
+
+CRT generates admissible starts, a segmented sieve excludes small factors from every term, and the final verifier uses exact Python integer arithmetic with twelve Miller–Rabin bases valid below `2^64`. Inputs that would exceed that domain are rejected. Segment memory depends on the start interval block, not on the progression span.
+
+A reproducible fixed demonstration found 11 AP-9s in five million starts; all 99 terms were independently checked with SymPy. Its raw output is [here](results/ap9-structured.json). This supports the reference implementation; it is not evidence for the separate projective research proposal or for AP-28 feasibility.
+
+## Mathematical certificates and estimates
+
+```bash
+python3 research/projective_lattice.py
+python3 research/run_coupled_analysis.py
+python3 research/run_gap_checks.py
+python3 -m research.character_minorant
+python3 -m research.character_optimality
+python3 -m research.archimedean_enclosure
+python3 -m research.transference_audit
+python3 -m research.check_published_ap27
+python3 -m research.record_extensions
+python3 -m research.ap28_distance
+python3 -m research.resonance_bisection
+python3 -m research.pattern_counting
+python3 -m research.garner_tree
+python3 estimate_ap28.py --start 1000000000000000
+python3 plan_prime_ap.py --start 1000000000000000 \
+  --differences 223092870 6469693230 200560490130 --pilot-count 10000000
+python3 research/run_experiments.py
 ```
 
-### `estimate_ap28.py`
-Feasibility estimation for AP-28 search:
-```powershell
-.venv\Scripts\python.exe estimate_ap28.py
-```
+The lattice certificate checks exact finite-field counts and basis preservation. It does not search all projective cells. The planner ranks differences by a conjectural density and measured short-pilot work; repeat and enlarge pilots before using a ranking. The experiment runner records all repeats and misses and compares modular generation with direct testing using the same primality verifier.
 
----
+Increasing a raw-start probability is different from increasing success per unit work. In particular, adding primes to the difference multiplies both the raw density and the sieve survival fraction. The paper derives their cancellation and accounts for the logarithm of each term.
 
-## How It Works
+## Historical programs
 
-### Phase 1 — LLL Resonance Targeting
-- Takes imaginary parts of Riemann zeros `t₁, t₂, t₃`
-- Converts to angular frequencies `αᵢ = tᵢ / 2π`
-- Constructs a 4D integer lattice and runs LLL reduction (SymPy)
-- Extracts a resonant multiplier to target numbers near 10¹⁵
+`rbls_m1_pipeline*.py` retain the old LLL targets for reproducibility and now share corrected unsigned Numba arithmetic in `rbls_numba.py`. Their historical targeting is explicitly marked as unsupported. `rbls_gpu_pipeline*.py` retain CUDA variants with repaired modular addition; a CUDA hardware run remains outstanding.
 
-### Phase 2 — GPU/CPU Sieve
-- Generates a contiguous block of candidate starting values
-- For each candidate `a`, tests the sequence `a, a+d, a+2d, ..., a+(k-1)d`
-- Step size `d` is the **primorial of all primes less than or equal to `k`**, computed dynamically by `get_required_primorial(k)`:
+The legacy AP-28 GPU prototype collects primes in a complete term window. Its configured billion-integer window is shorter than the required 6,023,507,490 span, so it deliberately exits before GPU startup. Use the new reference sieve for bounded-memory searches on starting values. See [AP-28 notes](ap28_notes.md).
 
-  | k | Primes <= k | Primorial d |
-  |---|---:|---:|
-  | 7 | 2, 3, 5, 7 | 210 |
-  | 8 | 2, 3, 5, 7 | 210 |
-  | 9 | 2, 3, 5, 7 | 210 |
-  | 28 | 2, 3, 5, 7, 11, 13, 17, 19, 23 | 223,092,870 |
-
-- Uses deterministic Miller-Rabin with 12 witnesses (guaranteed for 64-bit)
-
-### Algorithm Variants
-
-| Script | Strategy | Description |
-|--------|----------|-------------|
-| `rbls_gpu_pipeline.py` | Direct AP test | Each candidate `a` tests if `a, a+d, ..., a+(k-1)d` are all prime. Early exit on first composite. |
-| `rbls_m1_pipeline.py` | Direct AP test | Same as GPU but uses Numba parallel CPU on Apple Silicon. |
-| `rbls_gpu_pipeline_ap8.py` | Direct AP test | CUDA AP-8 variant with a Hardy-Littlewood-style startup estimate. |
-| `rbls_m1_pipeline_ap8.py` | Direct AP test | Apple Silicon AP-8 variant that found the reported AP-8 progression. |
-| `rbls_gpu_pipeline_ap9.py` | Direct AP test | CUDA AP-9 variant with progress reporting during each batch. |
-| `rbls_m1_pipeline_ap9.py` | Direct AP test | Apple Silicon AP-9 variant used for the reported negative search. |
-| `rbls_gpu_pipeline_ap28.py` | Prime-find then scan | Experimental AP-28 prototype. It now exits early if the configured range is too narrow for the required AP-28 span. |
-
----
-
-## Known Results
-
-The AP-7 pipeline discovered:
-```
-a_n = 999,721,467,601,817 + n × 210,   for n = 0, 1, ..., 6
-```
-All 7 terms verified prime via independent CPU-side Miller-Rabin and trial division.
-
-The AP-8 M1 pipeline discovered:
-```
-a_n = 999,721,631,514,707 + n × 210,   for n = 0, 1, ..., 7
-```
-All 8 terms verified prime via deterministic Miller-Rabin and SymPy `isprime()`.
-
-AP-9 searches over roughly 7 billion raw candidate starts did not find a 9-term progression. Under a Hardy-Littlewood-style baseline for `d=210`, this is a plausible miss rather than a contradiction of the AP-7/AP-8 results.
-
----
-
-## Troubleshooting
-
-| Error | Likely Fix |
-|-------|------------|
-| `ModuleNotFoundError: No module named 'numpy'` | Activate venv and `pip install numpy` |
-| `ModuleNotFoundError: No module named 'pycuda'` | Install CUDA Toolkit, then `pip install pycuda` |
-| `OSError: nvcc not found` | Add CUDA Toolkit `bin` folder to PATH |
-| `fatal error C1083` / `cl.exe` errors | Run via `vcvars64.bat` as shown above |
-| `numba` errors (M1 pipeline) | `pip install numba` (requires LLVM) |
-| GPU at 100% but no output | First batch can take 20-60s depending on k; check `nvidia-smi` for GPU activity |
+The reported AP-7 and AP-8 tuples are genuine primes. Their old run logs do not establish a resonance speedup; the AP-7 exposure is inconsistent and the AP-9 total includes unreconciled coverage. Preserve those logs as historical evidence, not calibrated benchmarks.

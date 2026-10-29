@@ -1,0 +1,354 @@
+{
+  "k": 10,
+  "difference": 210,
+  "start": 1000000000,
+  "length": 4194304,
+  "status": "Exact work counts on a small analog; no AP28 and no proof supplied.",
+  "rows": [
+    {
+      "y": 23,
+      "survivors": 2203,
+      "wheel": {
+        "switch": 7,
+        "modulus": 510510,
+        "generated": 1259,
+        "kept": 1008,
+        "work": 21745
+      },
+      "orders": {
+        "ascending": {
+          "best": {
+            "switch": 8,
+            "modulus": 9699690,
+            "generated": 10331,
+            "kept": 3926,
+            "work": 18183
+          },
+          "best_over_wheel": 0.8361922280984134,
+          "beyond_window_identity_holds": true
+        },
+        "by_survival": {
+          "best": {
+            "switch": 7,
+            "modulus": 6374082,
+            "generated": 7774,
+            "kept": 3220,
+            "work": 16794
+          },
+          "best_over_wheel": 0.7723154748217981,
+          "beyond_window_identity_holds": true
+        },
+        "big_first": {
+          "best": {
+            "switch": 7,
+            "modulus": 6374082,
+            "generated": 10042,
+            "kept": 3220,
+            "work": 19062
+          },
+          "best_over_wheel": 0.8766153138652564,
+          "beyond_window_identity_holds": true
+        },
+        "descending": {
+          "best": {
+            "switch": 5,
+            "modulus": 1062347,
+            "generated": 5863,
+            "kept": 2457,
+            "work": 44663
+          },
+          "best_over_wheel": 2.0539434352724766,
+          "beyond_window_identity_holds": true
+        },
+        "random": {
+          "best": {
+            "switch": 7,
+            "modulus": 570570,
+            "generated": 3330,
+            "kept": 1296,
+            "work": 27772
+          },
+          "best_over_wheel": 1.2771671648654863,
+          "beyond_window_identity_holds": true
+        }
+      },
+      "wheel_work_per_survivor": 9.870630957784838
+    },
+    {
+      "y": 47,
+      "survivors": 332,
+      "wheel": {
+        "switch": 7,
+        "modulus": 510510,
+        "generated": 1259,
+        "kept": 1008,
+        "work": 28030
+      },
+      "orders": {
+        "ascending": {
+          "best": {
+            "switch": 8,
+            "modulus": 9699690,
+            "generated": 10331,
+            "kept": 3926,
+            "work": 24468
+          },
+          "best_over_wheel": 0.8729218694256154,
+          "beyond_window_identity_holds": true
+        },
+        "by_survival": {
+          "best": {
+            "switch": 6,
+            "modulus": 2124694,
+            "generated": 2860,
+            "kept": 2457,
+            "work": 22517
+          },
+          "best_over_wheel": 0.8033178737067428,
+          "beyond_window_identity_holds": true
+        },
+        "big_first": {
+          "best": {
+            "switch": 5,
+            "modulus": 1062347,
+            "generated": 2671,
+            "kept": 2457,
+            "work": 43042
+          },
+          "best_over_wheel": 1.535569033178737,
+          "beyond_window_identity_holds": true
+        },
+        "descending": {
+          "best": {
+            "switch": 4,
+            "modulus": 3065857,
+            "generated": 1061086,
+            "kept": 1021977,
+            "work": 6030360
+          },
+          "best_over_wheel": 215.13949339992865,
+          "beyond_window_identity_holds": true
+        },
+        "random": {
+          "best": {
+            "switch": 5,
+            "modulus": 1297257,
+            "generated": 67874,
+            "kept": 64638,
+            "work": 910811
+          },
+          "best_over_wheel": 32.494149125936495,
+          "beyond_window_identity_holds": true
+        }
+      },
+      "wheel_work_per_survivor": 84.42771084337349
+    },
+    {
+      "y": 97,
+      "survivors": 56,
+      "wheel": {
+        "switch": 7,
+        "modulus": 510510,
+        "generated": 1259,
+        "kept": 1008,
+        "work": 29551
+      },
+      "orders": {
+        "ascending": {
+          "best": {
+            "switch": 8,
+            "modulus": 9699690,
+            "generated": 10331,
+            "kept": 3926,
+            "work": 25989
+          },
+          "best_over_wheel": 0.8794626239382762,
+          "beyond_window_identity_holds": true
+        },
+        "by_survival": {
+          "best": {
+            "switch": 6,
+            "modulus": 2124694,
+            "generated": 2860,
+            "kept": 2457,
+            "work": 23989
+          },
+          "best_over_wheel": 0.811783019187168,
+          "beyond_window_identity_holds": true
+        },
+        "big_first": {
+          "best": {
+            "switch": 5,
+            "modulus": 1062347,
+            "generated": 2671,
+            "kept": 2457,
+            "work": 47925
+          },
+          "best_over_wheel": 1.6217725288484315,
+          "beyond_window_identity_holds": true
+        },
+        "descending": {
+          "best": {
+            "switch": 3,
+            "modulus": 716539,
+            "generated": 508689,
+            "kept": 501729,
+            "work": 20531742
+          },
+          "best_over_wheel": 694.7900917058645,
+          "beyond_window_identity_holds": true
+        },
+        "random": {
+          "best": {
+            "switch": 5,
+            "modulus": 9528874,
+            "generated": 1335885,
+            "kept": 513367,
+            "work": 2650964
+          },
+          "best_over_wheel": 89.70809786470846,
+          "beyond_window_identity_holds": true
+        }
+      },
+      "wheel_work_per_survivor": 527.6964285714286
+    },
+    {
+      "y": 199,
+      "survivors": 18,
+      "wheel": {
+        "switch": 7,
+        "modulus": 510510,
+        "generated": 1259,
+        "kept": 1008,
+        "work": 30174
+      },
+      "orders": {
+        "ascending": {
+          "best": {
+            "switch": 8,
+            "modulus": 9699690,
+            "generated": 10331,
+            "kept": 3926,
+            "work": 26612
+          },
+          "best_over_wheel": 0.8819513488433751,
+          "beyond_window_identity_holds": true
+        },
+        "by_survival": {
+          "best": {
+            "switch": 6,
+            "modulus": 2124694,
+            "generated": 2860,
+            "kept": 2457,
+            "work": 24612
+          },
+          "best_over_wheel": 0.8156691191091668,
+          "beyond_window_identity_holds": true
+        },
+        "big_first": {
+          "best": {
+            "switch": 5,
+            "modulus": 1062347,
+            "generated": 2671,
+            "kept": 2457,
+            "work": 50894
+          },
+          "best_over_wheel": 1.6866839000463976,
+          "beyond_window_identity_holds": true
+        },
+        "descending": {
+          "best": {
+            "switch": 2,
+            "modulus": 39203,
+            "generated": 35532,
+            "kept": 35343,
+            "work": 53289522
+          },
+          "best_over_wheel": 1766.0741698150725,
+          "beyond_window_identity_holds": true
+        },
+        "random": {
+          "best": {
+            "switch": 4,
+            "modulus": 96942,
+            "generated": 54904,
+            "kept": 27354,
+            "work": 7179125
+          },
+          "best_over_wheel": 237.92420627029892,
+          "beyond_window_identity_holds": true
+        }
+      },
+      "wheel_work_per_survivor": 1676.3333333333333
+    },
+    {
+      "y": 541,
+      "survivors": 1,
+      "wheel": {
+        "switch": 7,
+        "modulus": 510510,
+        "generated": 1259,
+        "kept": 1008,
+        "work": 30556
+      },
+      "orders": {
+        "ascending": {
+          "best": {
+            "switch": 8,
+            "modulus": 9699690,
+            "generated": 10331,
+            "kept": 3926,
+            "work": 26994
+          },
+          "best_over_wheel": 0.8834271501505433,
+          "beyond_window_identity_holds": true
+        },
+        "by_survival": {
+          "best": {
+            "switch": 6,
+            "modulus": 2124694,
+            "generated": 2860,
+            "kept": 2457,
+            "work": 24994
+          },
+          "best_over_wheel": 0.8179735567482654,
+          "beyond_window_identity_holds": true
+        },
+        "big_first": {
+          "best": {
+            "switch": 5,
+            "modulus": 1062347,
+            "generated": 2671,
+            "kept": 2457,
+            "work": 52887
+          },
+          "best_over_wheel": 1.7308220971331325,
+          "beyond_window_identity_holds": true
+        },
+        "descending": {
+          "best": {
+            "switch": 2,
+            "modulus": 282943,
+            "generated": 272934,
+            "kept": 272403,
+            "work": 136446973
+          },
+          "best_over_wheel": 4465.472345856788,
+          "beyond_window_identity_holds": true
+        },
+        "random": {
+          "best": {
+            "switch": 4,
+            "modulus": 1439041,
+            "generated": 278396,
+            "kept": 249561,
+            "work": 7142487
+          },
+          "best_over_wheel": 233.75071998952743,
+          "beyond_window_identity_holds": true
+        }
+      },
+      "wheel_work_per_survivor": 30556.0
+    }
+  ]
+}

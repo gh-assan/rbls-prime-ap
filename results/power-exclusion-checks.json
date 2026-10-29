@@ -1,0 +1,32 @@
+{
+  "status": "Perfect-power exclusion only; no primality or AP28 certificate.",
+  "domain": [
+    2,
+    18446744073709551615
+  ],
+  "difference_unit": 1561650090,
+  "unit_residues": 255467520,
+  "power_subgroup_indices": {
+    "2": 256,
+    "3": 27,
+    "5": 5,
+    "7": 7,
+    "11": 11
+  },
+  "classes_before_exception": 152755200,
+  "classes_after_exception": 152755199,
+  "retained_unit_fraction": "152755199/255467520",
+  "excluded_power": 10260628712958602189,
+  "excluded_residue": 839436809,
+  "next_base_to_exponent_13": 24417546297445042591,
+  "explicit_allowed_residue": 780825047,
+  "composite_counterexample": {
+    "value": 19520626127,
+    "factors": [
+      31,
+      629697617
+    ]
+  },
+  "composite_progression_height_bound_for_every_unit_class": 90575705251,
+  "coverage": "Group-theoretic proof; no AP candidate enumeration."
+}

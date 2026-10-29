@@ -1,0 +1,96 @@
+{
+  "k": 28,
+  "start": 1000000000000000,
+  "sieve_bound": 1000,
+  "warning": "Heuristic ranking from a short pilot; not a discovery guarantee. Local density changes over large search ranges. Repeat and scale pilots.",
+  "ranked_differences": [
+    {
+      "d": 200560490130,
+      "probability_per_raw_start": 2.214086721389825e-23,
+      "sieve_survival_fraction": 7.447959067394046e-11,
+      "probability_per_survivor": 2.972742870033667e-13,
+      "pilot_seconds": 0.06187541599999996,
+      "pilot": {
+        "k": 28,
+        "d": 200560490130,
+        "start": 1000000000000000,
+        "stop": 1000000010000000,
+        "sieve_bound": 1000,
+        "segment_size": 1000000,
+        "wheel_modulus": 65231,
+        "wheel_classes": 1755,
+        "wheel_primes": [
+          37,
+          41,
+          43
+        ],
+        "raw_starts": 10000000,
+        "wheel_candidates": 269045,
+        "sieve_survivors": 0,
+        "primality_tests": 0,
+        "matches": [],
+        "seconds": 0.06147479099999997
+      },
+      "estimated_hits_per_second": 3.578297916235143e-15
+    },
+    {
+      "d": 6469693230,
+      "probability_per_raw_start": 2.218785644621911e-24,
+      "sieve_survival_fraction": 7.447959067394064e-12,
+      "probability_per_survivor": 2.9790518778968435e-13,
+      "pilot_seconds": 0.013777874999999995,
+      "pilot": {
+        "k": 28,
+        "d": 6469693230,
+        "start": 1000000000000000,
+        "stop": 1000000010000000,
+        "sieve_bound": 1000,
+        "segment_size": 1000000,
+        "wheel_modulus": 47027,
+        "wheel_classes": 351,
+        "wheel_primes": [
+          31,
+          37,
+          41
+        ],
+        "raw_starts": 10000000,
+        "wheel_candidates": 74640,
+        "sieve_survivors": 0,
+        "primality_tests": 0,
+        "matches": [],
+        "seconds": 0.013582207999999985
+      },
+      "estimated_hits_per_second": 1.6103975719201343e-15
+    },
+    {
+      "d": 223092870,
+      "probability_per_raw_start": 7.924776163145387e-26,
+      "sieve_survival_fraction": 2.65998538121216e-13,
+      "probability_per_survivor": 2.979255532424788e-13,
+      "pilot_seconds": 0.008334708000000024,
+      "pilot": {
+        "k": 28,
+        "d": 223092870,
+        "start": 1000000000000000,
+        "stop": 1000000010000000,
+        "sieve_bound": 1000,
+        "segment_size": 1000000,
+        "wheel_modulus": 1363783,
+        "wheel_classes": 351,
+        "wheel_primes": [
+          29,
+          31,
+          37,
+          41
+        ],
+        "raw_starts": 10000000,
+        "wheel_candidates": 2582,
+        "sieve_survivors": 0,
+        "primality_tests": 0,
+        "matches": [],
+        "seconds": 0.008134958000000025
+      },
+      "estimated_hits_per_second": 9.508162929217632e-17
+    }
+  ]
+}
