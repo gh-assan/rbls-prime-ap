@@ -100,6 +100,8 @@ $$\frac Lb=\frac{6015973}{693733}<9.\tag{3}$$
 
 All these constants follow from five subgroup indices. Neither the residue classes nor a full character table need be listed.
 
+The subsequent [sharp-threshold paper](G10-sharp-character-threshold.md) proves that the exact ratio in (3) is optimal for these fixed residue conditions under uniform absolute character errors. The number nine is a convenient rounding, not the exact optimum.
+
 Conjugate characters have the same real correlation because the tuple weights are real. The 127 nonprincipal quadratic characters are real, while the remaining 46 characters form 23 conjugate pairs. Thus the 174 coefficients involve only 151 distinct real correlations, including the principal one. The coefficient mass is unchanged by pairing them.
 
 ### 5. The finite arithmetic certificate

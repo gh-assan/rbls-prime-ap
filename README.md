@@ -6,7 +6,9 @@ The current work has a **new mathematical proposal**, an exact one-difference re
 
 The requested discovery method is mathematical construction. Enumerating more starts, differences, or CRT cells does not meet that requirement. Search programs remain reference checks; final primality verification can validate a mathematically derived candidate.
 
-The latest note, [Signed Character Minorants for Finite AP-28 Certificates](papers/gaps/G9-character-minorant.md), reduces the modular error transfer to 174 character correlations with a relative error factor below nine. It proves a finite sufficient inequality and a limitation of uniform absolute errors during localization. Actual arithmetic estimates meeting the inequality remain unproved.
+The latest note, [A Sharp Character-Error Threshold and the Remaining Arithmetic Gap](papers/gaps/G10-sharp-character-threshold.md), proves the existing exact coefficient ratio is optimal for the fixed residue conditions and uniform-error metric. A matching abstract dual distribution supplies the proof. A parameter audit rejects one direct numerical substitution into a published uniformity theorem. Actual prime-correlation bounds and the AP-28 construction remain open.
+
+[Signed Character Minorants for Finite AP-28 Certificates](papers/gaps/G9-character-minorant.md) reduces the modular error transfer to 174 character coefficients with a relative error factor below nine. It proves a finite sufficient inequality and a limitation of uniform absolute errors during localization. Actual arithmetic estimates meeting the inequality remain unproved.
 
 [Removing Prime Powers by Finite Group Structure](papers/gaps/G8-power-exclusion.md) constructs residue classes containing no perfect powers below `2^64`, eliminating the prime-power correction on a specified family. Exact group theory counts the retained classes without enumerating them. An explicit composite passing the conditions confirms that primality and an AP-28 construction remain unproved.
 
@@ -57,6 +59,7 @@ python3 research/projective_lattice.py
 python3 research/run_coupled_analysis.py
 python3 research/run_gap_checks.py
 python3 -m research.character_minorant
+python3 -m research.character_optimality
 python3 estimate_ap28.py --start 1000000000000000
 python3 plan_prime_ap.py --start 1000000000000000 \
   --differences 223092870 6469693230 200560490130 --pilot-count 10000000

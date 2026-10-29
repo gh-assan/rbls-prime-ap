@@ -74,3 +74,12 @@ The theorem has a finite height restriction. Every fixed unit class contains per
 [The ninth note](papers/gaps/G9-character-minorant.md) proves an exact signed minorant using one principal and 173 nonprincipal characters. A valid principal lower bound `T0 >= V_M(X)*beta_L - E0` and valid upper bounds `Re(Tchi) <= epsilon` imply a positive AP-28 certificate whenever `E0 + 9*epsilon < V_M(X)*beta_L`, in the stated height range. Only one-sided weighted information is fundamentally required; absolute-value bounds are a stronger optional assumption.
 
 The modular coefficient loss is now bounded independently of the number of selected residue classes. The arithmetic bounds themselves remain unproved. A uniform absolute-error version fails near a singleton, as proved by Parseval, so the existing bisection contract still needs a sharper arithmetic oracle or a phase-aware structural recovery rule. This note does not close finite prime-correlation positivity or produce the actual pair.
+
+## Results of the next proof-and-review loop
+
+[The tenth note](papers/gaps/G10-sharp-character-threshold.md) checks two possible ways forward:
+
+1. **Improve the residue minorant:** closed by an exact optimality proof. The existing ratio `6015973/693733` already attains the best possible uniform character-error ratio for the fixed safe set. A matching dual distribution proves the lower bound for every pointwise minorant, including those with more character terms.
+2. **Insert a published quantitative estimate directly:** the proposed `w>23` substitution fails the stated `w<=Q(N)` range at natural 64-bit scale; the stronger cited logarithmic theorem has an ineffective implied constant. These facts do not rule out other applications or a separately derived finite bound, but neither substitution supplies the required numerical errors.
+
+The decisive unresolved work is still actual arithmetic positivity and constructive recovery. The dual measure is abstract and does not show that an arithmetic AP-28 distribution has the same obstruction. Subsequent passes need new arithmetic information, nonuniform signed control, or a different proved construction. A conditional rewrite, uninstantiated asymptotic constant, or another rearrangement of this optimal minorant does not close a gap. No finite termination guarantee for this research loop has been established.

@@ -1,0 +1,41 @@
+{
+  "status": "Optimal modular error ratio proved; no finite arithmetic bound or AP28 witness.",
+  "quotient_sizes": [
+    128,
+    27,
+    5,
+    7,
+    11
+  ],
+  "uniform_character_threshold": "693733/6015973",
+  "optimal_nonprincipal_to_principal_ratio": "6015973/693733",
+  "dual_mixture_weights": [
+    "735313/6015973",
+    "890853/6015973",
+    "1758181/6015973",
+    "1454053/6015973",
+    "1177573/6015973"
+  ],
+  "nonprincipal_profile_types": 31,
+  "dual_mass_on_safe_residues": 0,
+  "dual_is_actual_prime_progression_distribution": false,
+  "largest_multicomponent_profile": {
+    "active_coordinates": [
+      2,
+      3
+    ],
+    "value": "-12953303/144383352",
+    "absolute_value": "12953303/144383352"
+  },
+  "all_profile_bounds_verified": true,
+  "scope": "All pointwise minorants for the fixed five bad subgroups, with uniform absolute Fourier errors.",
+  "actual_arithmetic_bounds_supplied": false,
+  "direct_published_parameter_audit": {
+    "N_range": "1<N<2^64",
+    "Q_definition": "exp((log N)^(1/10))",
+    "strict_Q_upper_bound": "121/16 < 8",
+    "cutoff_needed_to_include_prime_23": "w>23",
+    "w_above_23_inside_stated_2_to_Q_range": false,
+    "scope": "This direct use of Theorem 1.4's parameter range only; not an impossibility result for other analytic methods."
+  }
+}
