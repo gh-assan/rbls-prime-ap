@@ -76,3 +76,9 @@ This closes evaluation of this continuous model term at this height, **not the a
 The [new source assessment](research/transference-route-assessment-2026-10-29.md) checks the actual interval norm rather than assuming a cyclic-group obstruction transfers automatically. Its sharp comparison rules out a `U^56` majorant error below one for the stated unscaled prime peaks on the two assessed intervals. For scaled/thinned weights with the specified mean control, exact digit-defined counterexamples also rule out a positive universal AP-28 bound based only on the resulting density at these scales. The prescribed `W` of the cited theorem is separately checked.
 
 [The exact certificate](results/transference-audit-checks.json) records these finite obstructions and explicitly leaves the actual AP-28 arithmetic lower bound and witness unavailable. This eliminates the direct finite recipe under its stated hypotheses. It does not rule out AP-28, larger heights, or arguments exploiting additional arithmetic structure, and it closes none of G2, G3b/G5, or the construction goal.
+
+## Published records cannot be extended
+
+[No Published AP-26 or AP-27 Record Extends to AP-28](papers/gaps/G12-record-extension-census.md) checks the four known AP-27s and four published AP-26s against the record table updated 12 October 2026, which still lists 27 as the longest length. An overlap lemma forces any prime AP-28 sharing at least 15 terms with a record to contain one of its two adjacent neighbors. All 16 neighbors have an exact proper divisor or are nonpositive. [The certificate](results/record-extension-checks.json) also blocks all 20 full-containment windows and shows exactly one window per record survives modulo 29.
+
+This closes the record-extension route completely. It supplies no new candidate and closes none of G2, G3b/G5, or the construction goal.
