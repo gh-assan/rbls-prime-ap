@@ -1,0 +1,23 @@
+{
+  "unit_residues": 255467520,
+  "selected_classes": 152156160,
+  "selected_unit_fraction": "1651/2772",
+  "principal_coefficient": "693733/1330560",
+  "nonprincipal_coefficient_mass": "6015973/1330560",
+  "relative_error_factor": "6015973/693733",
+  "character_count": 174,
+  "distinct_real_correlations": 151,
+  "full_quotient_order": 1330560,
+  "status": "Error transfer proved; actual prime-correlation bounds and AP28 remain open.",
+  "subgroup_indices": {
+    "2": 128,
+    "3": 27,
+    "5": 5,
+    "7": 7,
+    "11": 11
+  },
+  "sufficient_numeric_condition": "E0 + 9*epsilon < V_M(X)*beta_L, for 27*M+2<=X<2^64",
+  "actual_arithmetic_bounds_supplied": false,
+  "absolute_amplitude_gate_necessary_quadratic_cosets": 48,
+  "coverage": "Group identities only; no AP candidates or full character table enumerated."
+}

@@ -2,11 +2,13 @@
 
 The goal is an explicit AP-28: 28 primes of the form `a + j*d`, for `j = 0,...,27`.
 
-The current work has a **new mathematical proposal**, an exact one-difference reference sieve, and historical RBLS experiments. No AP-28 has been found here. The new proposal has not yet demonstrated a feasible discovery budget.
+The current work has a **new mathematical proposal**, an exact one-difference reference sieve, and historical RBLS experiments. No AP-28 has been found here. The proposal has not yet supplied a mathematical AP-28 construction.
 
 The requested discovery method is mathematical construction. Enumerating more starts, differences, or CRT cells does not meet that requirement. Search programs remain reference checks; final primality verification can validate a mathematically derived candidate.
 
-The latest note, [Removing Prime Powers by Finite Group Structure](papers/gaps/G8-power-exclusion.md), constructs residue classes containing no perfect powers below `2^64`, eliminating the prime-power correction on a specified family. Exact group theory counts the retained classes without enumerating them. An explicit composite passing the conditions confirms that primality and an AP-28 construction remain unproved.
+The latest note, [Signed Character Minorants for Finite AP-28 Certificates](papers/gaps/G9-character-minorant.md), reduces the modular error transfer to 174 character correlations with a relative error factor below nine. It proves a finite sufficient inequality and a limitation of uniform absolute errors during localization. Actual arithmetic estimates meeting the inequality remain unproved.
+
+[Removing Prime Powers by Finite Group Structure](papers/gaps/G8-power-exclusion.md) constructs residue classes containing no perfect powers below `2^64`, eliminating the prime-power correction on a specified family. Exact group theory counts the retained classes without enumerating them. An explicit composite passing the conditions confirms that primality and an AP-28 construction remain unproved.
 
 [A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md) gives the preceding finite prime-correlation criterion and proves a finite-size obstruction to a crude global Fourier certificate. A usable numerical remainder and a mathematical recovery rule are still missing.
 
@@ -54,6 +56,7 @@ A reproducible fixed demonstration found 11 AP-9s in five million starts; all 99
 python3 research/projective_lattice.py
 python3 research/run_coupled_analysis.py
 python3 research/run_gap_checks.py
+python3 -m research.character_minorant
 python3 estimate_ap28.py --start 1000000000000000
 python3 plan_prime_ap.py --start 1000000000000000 \
   --differences 223092870 6469693230 200560490130 --pilot-count 10000000

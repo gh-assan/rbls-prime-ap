@@ -68,3 +68,9 @@ The note also proves that a crude global normalized `U^27`-norm error certificat
 [The eighth note](papers/gaps/G8-power-exclusion.md) constructs 152,755,199 unit classes modulo `7*23#` containing no perfect powers below `2^64`. The count follows from independent primary components of finite unit groups; no progression candidates or full residue tables are enumerated. On progressions preserving one of these classes, a positive von Mangoldt product comes from primes, so that family's prime-power correction is zero.
 
 The theorem has a finite height restriction. Every fixed unit class contains perfect powers at sufficiently large heights. The same note constructs a composite progression in every retained class below 90,575,705,251, showing that the congruences alone do not force primality. A sufficiently strong joint arithmetic bound and a constructive recovery rule remain missing.
+
+## Compact arithmetic target after modular aggregation
+
+[The ninth note](papers/gaps/G9-character-minorant.md) proves an exact signed minorant using one principal and 173 nonprincipal characters. A valid principal lower bound `T0 >= V_M(X)*beta_L - E0` and valid upper bounds `Re(Tchi) <= epsilon` imply a positive AP-28 certificate whenever `E0 + 9*epsilon < V_M(X)*beta_L`, in the stated height range. Only one-sided weighted information is fundamentally required; absolute-value bounds are a stronger optional assumption.
+
+The modular coefficient loss is now bounded independently of the number of selected residue classes. The arithmetic bounds themselves remain unproved. A uniform absolute-error version fails near a singleton, as proved by Parseval, so the existing bisection contract still needs a sharper arithmetic oracle or a phase-aware structural recovery rule. This note does not close finite prime-correlation positivity or produce the actual pair.
