@@ -6,7 +6,9 @@ The current work has a **new mathematical proposal**, an exact one-difference re
 
 The requested discovery method is mathematical construction. Enumerating more starts, differences, or CRT cells does not meet that requirement. Search programs remain reference checks; final primality verification can validate a mathematically derived candidate.
 
-The latest note, [A Sharp Character-Error Threshold and the Remaining Arithmetic Gap](papers/gaps/G10-sharp-character-threshold.md), proves the existing exact coefficient ratio is optimal for the fixed residue conditions and uniform-error metric. A matching abstract dual distribution supplies the proof. A parameter audit rejects one direct numerical substitution into a published uniformity theorem. Actual prime-correlation bounds and the AP-28 construction remain open.
+The latest note, [A Sparsity and Confidence Audit of the AP-28 Route](papers/gaps/G11-sparsity-confidence-audit.md), proves that even the uniform one-sided character criterion needs at least 11 occupied quadratic classes of positive von Mangoldt tuple weight. It rigorously encloses the selected family's density-model main term between 1.129 and 1.181 at the full 64-bit height. These are model-integral bounds, not actual prime counts or success probabilities. The audit supports low confidence in the current uniform-mixing route and retains the full `23#` family with a prime-only weight as a simpler arithmetic target.
+
+[A Sharp Character-Error Threshold and the Remaining Arithmetic Gap](papers/gaps/G10-sharp-character-threshold.md) proves the existing exact coefficient ratio is optimal for the fixed residue conditions and uniform-error metric. A matching abstract dual distribution supplies the proof. A parameter audit rejects one direct numerical substitution into a published uniformity theorem. Actual prime-correlation bounds and the AP-28 construction remain open.
 
 [Signed Character Minorants for Finite AP-28 Certificates](papers/gaps/G9-character-minorant.md) reduces the modular error transfer to 174 character coefficients with a relative error factor below nine. It proves a finite sufficient inequality and a limitation of uniform absolute errors during localization. Actual arithmetic estimates meeting the inequality remain unproved.
 
@@ -60,6 +62,7 @@ python3 research/run_coupled_analysis.py
 python3 research/run_gap_checks.py
 python3 -m research.character_minorant
 python3 -m research.character_optimality
+python3 -m research.archimedean_enclosure
 python3 estimate_ap28.py --start 1000000000000000
 python3 plan_prime_ap.py --start 1000000000000000 \
   --differences 223092870 6469693230 200560490130 --pilot-count 10000000

@@ -39,7 +39,7 @@ The [closure plan](CLOSURE_PLAN.md) distinguishes the original witness goal from
 
 The user requires a mathematical construction, without brute-force discovery. Enumeration cost improvements alone no longer satisfy the completion gate. Reference searches and small proof checks remain validation tools.
 
-[A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md) gives a finite analytic certificate with the prime-power contribution explicitly removed. It correctly separates the effective quantitative theorem of Tao and Teräväinen from Leng's stronger error rate with an ineffective implied constant. It also proves a sharp norm-to-pointwise lower comparison that makes the crude global `U^27` certificate unhelpful at the current height unless its model already determines primality pointwise.
+[A Structural Analytic Route to AP-28](papers/gaps/G7-structural-analytic-route.md) gives a finite analytic certificate accounting explicitly for prime-power contributions. It correctly separates the effective quantitative theorem of Tao and Teräväinen from Leng's stronger error rate with an ineffective implied constant. It also proves a sharp norm-to-pointwise lower comparison that makes the crude global `U^27` certificate unhelpful at the current height unless its model already determines primality pointwise.
 
 This is a checked mathematical limitation and a precise analytic target. It does **not** close G2, the required numerical finite-height remainders in G3b/G5, or the explicit-construction goal. The published asymptotic theorem applies to the full convex cone, not automatically to the selected rough families used in earlier papers.
 
@@ -62,3 +62,11 @@ This closes the modular error-aggregation step. G2 and G3b/G5 remain open. A sep
 This closes the weight-optimization question within that framework. It does not close the arithmetic remainder. A separate source audit finds that the direct use of the published `2<=w<=Q(N)` uniformity range cannot take `w>23` when `N<2^64`; another cited stronger rate has an ineffective constant. These checks reject those numerical shortcuts, not AP-28 or all other analytic applications. [The certificate](results/character-optimality-checks.json) records the exact dual weights and scopes.
 
 The loop still lacks a proved positive finite arithmetic score and a mathematical witness-recovery rule. Further coefficient rearrangements inside the optimized uniform framework cannot supply them. No AP-28 is supplied, and the remaining research gaps are not marked closed.
+
+## Sparsity audit and enclosure of the continuous model term
+
+[A Sparsity and Confidence Audit of the AP-28 Route](papers/gaps/G11-sparsity-confidence-audit.md) proves that the uniform one-sided character criterion requires at least 11 occupied quadratic quotient classes of nonzero von Mangoldt tuples. This population can include prime powers outside the selected family; it is not a claim of 11 prime progressions.
+
+The same note encloses the defined continuous main terms at `2^64-1`: the selected `7*23#` family has model term between 1.129 and 1.181, while the unrestricted `23#` family has model term between 13.270 and 13.876. The selected model is at most `1651/19404 < 8.51%` of the latter. Exact box areas, logarithm enclosures, outward rounding, and the earlier Euler-product enclosure establish these numerical statements. [The certificate](results/archimedean-enclosure-checks.json) explicitly marks the actual finite prime-count error and witness as unavailable.
+
+This closes evaluation of this continuous model term at this height, **not the arithmetic discrepancy in G3b/G5**. The audit lowers confidence in uniform mixing as the main construction route. The full `23#` family with the prime-only weight `mu(n)^2*Lambda(n)` is retained as a simpler target for a new finite arithmetic bound; the weight's definition is not such a bound or a recovery algorithm.
