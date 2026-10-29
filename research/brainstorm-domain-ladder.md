@@ -71,7 +71,7 @@ Resonant frequencies are those where `xi*c_p/p` is near an integer for many `p` 
 
 ## Level 10: computation
 
-25. **Garner tree search.** In mixed radix (Garner's algorithm) the condition at the `i`-th prime involves only the first `i` digits. Order primes so the box constraint bites early and run branch-and-bound with interval pruning, like Schnorr–Euchner lattice enumeration but with avoidance constraints. *Test:* nodes visited per survivor versus wheel enumeration.
+25. **Garner tree search.** In mixed radix (Garner's algorithm) the condition at the `i`-th prime involves only the first `i` digits. Order primes so the box constraint bites early and run branch-and-bound with interval pruning, like Schnorr–Euchner lattice enumeration but with avoidance constraints. *Test:* nodes visited per survivor versus wheel enumeration. **Tested in [G16](../papers/gaps/G16-garner-tree.md): the tree is the wheel; best order saves a constant 12-23%, and every level past the window modulus costs exactly `S_i(|G_p|-2)+S_{i+1}` more. Closed.**
 26. **Message passing.** Belief propagation or survey propagation on the factor graph of CRT digits and divisibility constraints. *Test:* does it find survivors of a 12-prime sieve in a box faster than enumeration?
 27. **Amplitude amplification.** Grover search over sieve survivors gives a square-root speedup: about `1.6*10^8` oracle calls per expected AP-28 after primes to 541. Needs fault-tolerant hardware; worth a resource estimate only.
 
@@ -91,7 +91,20 @@ Resonant frequencies are those where `xi*c_p/p` is near an integer for many `p` 
 
 1. ~~**C1 Resonance bisection**~~ at AP-10 scale: done in [G14](../papers/gaps/G14-resonance-bisection.md), rejected.
 2. ~~**Idea 7 / C2**~~ on 2-term patterns: done in [G15](../papers/gaps/G15-pattern-counting.md), no collapse.
-3. **Idea 25 Garner tree** with box pruning: cheap to implement, gives a clean nodes-per-survivor number.
+3. ~~**Idea 25 Garner tree**~~: done in [G16](../papers/gaps/G16-garner-tree.md), equals the wheel up to a constant.
 4. **Idea 17 Maynard sampler** and **idea 16 Heegner family**: cheap per-test hit-rate measurements.
 
 Each experiment reports tests and operations per progression found against the wheel baseline, and is committed as its own round.
+
+## Status after three experiments
+
+Three candidates were tested, each against the wheel on an AP-10 analog: C1 resonance bisection ([G14](../papers/gaps/G14-resonance-bisection.md)), idea 7 / C2 pattern counting ([G15](../papers/gaps/G15-pattern-counting.md)), and idea 25 Garner trees ([G16](../papers/gaps/G16-garner-tree.md)). All three were closed, each for a measured and explained reason. Sorting the remaining ideas by the information they use gives predictions, not proofs:
+
+- **Re-expressions of congruence choices** (1, 2, 3, 9, 10, 16, 20, 24, 26): they choose CRT classes by other means. G13's information budget and G16's identity bound their work below by the survivors at the window modulus, so they are predicted to match the wheel up to constants. Message passing (26) is a special case: CRT makes residues at different primes independent, so its messages carry nothing beyond the box.
+- **Weighted sampling from local data** (11, 17, 21): Maynard weights, character steering and Maier offsets are functions of residues. After full wheel sieving every admissible candidate has the same local density, so per-test gains are predicted to vanish. Idea 17 is quick to measure and remains the cheapest check of this prediction.
+- **Global analytic information** (12, 14, 15): zeros up to height `T` resolve prime density only at scale `x/T`, and each evaluation costs more than sieving that stretch. Idea 14 can be measured at AP-6 scale to confirm.
+- **New identities** (5, 6): like pattern counting, these need an identity for patterns that is not known even for twin primes.
+- **Hardware** (27): Grover's square-root speedup is real but needs fault-tolerant quantum computers.
+- **Combinatorial and function-field** (19, 22, 23): after the W-trick, Green-Tao-Ziegler theory says primes carry no further bounded-complexity structure, so these are predicted to reduce to local structure.
+
+On this evidence no rung of the ladder yet escapes the information budget. The cheapest remaining tests of the predictions are idea 17 (Maynard sampler) and idea 14 (stationary-phase zeros).
