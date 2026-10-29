@@ -1,0 +1,147 @@
+{
+  "status": "Exact local decoding, not an AP28 positive score or a prime-label enumeration method.",
+  "family": {
+    "k": 7,
+    "D": 210,
+    "B": 29,
+    "X": 20000,
+    "m_cap": 10
+  },
+  "defect_histogram": [
+    78,
+    230,
+    320,
+    225,
+    81,
+    21,
+    4,
+    1
+  ],
+  "fifth_order_intersections": 66,
+  "distinct_points": 26,
+  "coverage": "catalog obtained from complete direct enumeration of this small rough family",
+  "examples": [
+    {
+      "a": 10399,
+      "m": 1,
+      "tags": [
+        [
+          1,
+          103
+        ],
+        [
+          2,
+          31
+        ],
+        [
+          3,
+          41
+        ],
+        [
+          5,
+          107
+        ],
+        [
+          6,
+          89
+        ]
+      ],
+      "modulus": 1246684499,
+      "residue": 10399,
+      "independent_primitive_count": 1
+    },
+    {
+      "a": 9143,
+      "m": 2,
+      "tags": [
+        [
+          0,
+          41
+        ],
+        [
+          1,
+          73
+        ],
+        [
+          2,
+          67
+        ],
+        [
+          3,
+          101
+        ],
+        [
+          4,
+          79
+        ]
+      ],
+      "modulus": 1600036849,
+      "residue": 800022996,
+      "independent_primitive_count": 1
+    },
+    {
+      "a": 9143,
+      "m": 2,
+      "tags": [
+        [
+          0,
+          41
+        ],
+        [
+          1,
+          73
+        ],
+        [
+          2,
+          67
+        ],
+        [
+          3,
+          101
+        ],
+        [
+          6,
+          107
+        ]
+      ],
+      "modulus": 2167138517,
+      "residue": 1083573830,
+      "independent_primitive_count": 1
+    }
+  ],
+  "nontrivial_denominator_example": {
+    "a": 9143,
+    "m": 2,
+    "tags": [
+      [
+        0,
+        41
+      ],
+      [
+        1,
+        73
+      ],
+      [
+        2,
+        67
+      ],
+      [
+        3,
+        101
+      ],
+      [
+        4,
+        79
+      ]
+    ],
+    "modulus": 1600036849,
+    "residue": 800022996,
+    "continued_fraction_numerator": 1
+  },
+  "uint64_proof": {
+    "X_max": 18446744073709551615,
+    "cube_root_integer_upper": 2642246,
+    "W": 6023507490,
+    "W_exceeds_twice_cube_upper": true
+  }
+}

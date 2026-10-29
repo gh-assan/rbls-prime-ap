@@ -28,3 +28,9 @@ Reproduce all five checks with `python3 research/run_gap_checks.py`. The machine
 ## Open completion gate
 
 The series has **not** established a positive AP-28 arithmetic bound, complete feasible AP-28 coverage, or an explicit AP-28. Further papers count as progress only when they add a checked result or a concrete counterexample; restating these requirements does not close them.
+
+## New local result: primitive tail decoding
+
+[Primitive Tail Intersections as Rational Reconstruction](papers/gaps/G6-primitive-tail-decoding.md) proves that every specified fifth-order tail intersection in the cube-root, 64-bit AP-28 regime has at most one primitive candidate and meets a complete rational-reconstruction size bound. The exact decoder recovers all 66 nonempty fifth-order intersections in the existing small validation family. Aggregate AP-28 positivity remains open; recovered defect candidates are not prime witnesses.
+
+The [closure plan](CLOSURE_PLAN.md) distinguishes the original witness goal from the additional count-model theorem. A verified witness settles the construction goal even if the global model-error claim remains open.

@@ -4,7 +4,9 @@ The goal is an explicit AP-28: 28 primes of the form `a + j*d`, for `j = 0,...,2
 
 The current work has a **new mathematical proposal**, an exact one-difference reference sieve, and historical RBLS experiments. No AP-28 has been found here. The new proposal has not yet demonstrated a feasible discovery budget.
 
-The [gap ledger](GAP_LEDGER.md) links five focused follow-up papers: primitive exclusions, signed aggregation, rigorous Euler-product errors, witness localization, and finite-height arithmetic remainders. It records which finite subproblems are resolved and which AP-28 claims remain open.
+The [closure plan](CLOSURE_PLAN.md) states what a verified AP-28 result requires. The latest local result, [primitive tail decoding](papers/gaps/G6-primitive-tail-decoding.md), proves that sufficiently large tail intersections can be decoded exactly by rational reconstruction. It does not supply aggregate positivity.
+
+The [gap ledger](GAP_LEDGER.md) links focused follow-up papers: primitive exclusions, signed aggregation, rigorous Euler-product errors, witness localization, and finite-height arithmetic remainders. It records which finite subproblems are resolved and which AP-28 claims remain open.
 
 The third paper, [Coupled Defect Moments and Exact Lattice Counts for AP-28](paper_ap28_coupled_bounds.md), proves sharp moment certificates, an explicit limited-independence obstruction, and a 64-bit sparsity obstruction to estimating individual five-prime intersections. It adds exact floor-sum counts and an arithmetic AP-7 check. Aggregate AP-28 bounds remain unproved. The [reproducible certificates](results/coupled-analysis.json) separate arithmetic checks from probability models and geometric proxies.
 
