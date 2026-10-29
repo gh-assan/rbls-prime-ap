@@ -16,6 +16,8 @@ The user requires a mathematical method of finding the pair, without brute-force
 
 This settles the construction goal without requiring a global finite-height count-model error theorem. That separate theoretical claim would remain open unless proved.
 
+The [fixed August 2026 AP-27 check](research/fixed-ap27-candidate-check.md) derived and rejected one concrete extension using an exact proper divisor. Both adjacent terms are composite. An integer-overlap lemma then proves that no prime AP-28 can retain 15 or more terms of that particular seed, even with a different difference. This rules out a small repair preserving most of this seed; it supplies no replacement candidate or positive AP-28 bound. Further seed-variant enumeration is not an authorized discovery method.
+
 ### Analytic-certificate route
 
 1. Define one finite family `R` precisely, including term-height limits, difference restrictions, roughness, primitivity, and boundary handling.

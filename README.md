@@ -6,7 +6,9 @@ The current work has a **new mathematical proposal**, an exact one-difference re
 
 The requested discovery method is mathematical construction. Enumerating more starts, differences, or CRT cells does not meet that requirement. Search programs remain reference checks; final primality verification can validate a mathematically derived candidate.
 
-The latest [finite transference assessment](research/transference-route-assessment-2026-10-29.md) checks a March 2026 primary result against the actual scale. On both stated intervals, a `U^56` majorant error below one forces a pointwise bound below 2.01, incompatible with the indicated unscaled prime weights. Scaling the weights subject to the stated mean control leaves a density-only argument unable to guarantee AP-28: explicit sets with higher density contain no AP-28. This rules out the direct finite recipe assessed here, not all transference arguments or heights. It supplies no positive arithmetic bound or witness.
+A [fixed candidate check](research/fixed-ap27-candidate-check.md) independently verifies the August 2026 published AP-27 and derives its only direct extension not excluded modulo 29. The new endpoint has proper divisor 2971, so the candidate fails. Both composite neighbors also imply that any prime AP-28 can share at most 14 terms with this fixed source progression. This is a failed construction check, not an AP-28 discovery or a closed arithmetic gap.
+
+The [finite transference assessment](research/transference-route-assessment-2026-10-29.md) checks a March 2026 primary result against the actual scale. On both stated intervals, a `U^56` majorant error below one forces a pointwise bound below 2.01, incompatible with the indicated unscaled prime weights. Scaling the weights subject to the stated mean control leaves a density-only argument unable to guarantee AP-28: explicit sets with higher density contain no AP-28. This rules out the direct finite recipe assessed here, not all transference arguments or heights. It supplies no positive arithmetic bound or witness.
 
 [A Sparsity and Confidence Audit of the AP-28 Route](papers/gaps/G11-sparsity-confidence-audit.md) proves that even the uniform one-sided character criterion needs at least 11 occupied quadratic classes of positive von Mangoldt tuple weight. It rigorously encloses the selected family's density-model main term between 1.129 and 1.181 at the full 64-bit height. These are model-integral bounds, not actual prime counts or success probabilities. The audit supports low confidence in the current uniform-mixing route and retains the full `23#` family with a prime-only weight as a simpler arithmetic target.
 
@@ -66,6 +68,7 @@ python3 -m research.character_minorant
 python3 -m research.character_optimality
 python3 -m research.archimedean_enclosure
 python3 -m research.transference_audit
+python3 -m research.check_published_ap27
 python3 estimate_ap28.py --start 1000000000000000
 python3 plan_prime_ap.py --start 1000000000000000 \
   --differences 223092870 6469693230 200560490130 --pilot-count 10000000
