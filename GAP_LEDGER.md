@@ -88,3 +88,9 @@ This closes the record-extension route completely. It supplies no new candidate 
 [How Far Is an AP-28?](papers/gaps/G13-calibrated-distance.md) uses PrimeGrid's totals (71 AP-26s, 4 AP-27s, 0 AP-28s, accessed 29 October 2026). An independent neighbor probability predicts the AP-26/AP-27 ratio as 15.9; the observed 17.75 is within Poisson noise. This is actual-count evidence for the density model at record heights. It is not the finite-height theorem G3b/G5 requires. The model predicts about 20 maximal AP-27s per AP-28, with a data-only range of 8 to 86.
 
 The paper also measures the information congruences supply: 36 of the roughly 91 bits needed through prime 541, and output-sensitive CRT enumeration stops paying near prime 83. With the existence, deterministic-prime and structure barriers in its Section 5, this supports a firm verdict: **G2 and G3b/G5 are open problems of current mathematics, and the search-free construction goal cannot be met with known methods.** [The calibration](results/ap28-distance.json) is reproducible.
+
+## Brainstorm experiments
+
+The [domain-ladder brainstorm](research/brainstorm-domain-ladder.md) lists unproved candidate methods; each tested one gets its own note.
+
+- C1, [Resonance Bisection](papers/gaps/G14-resonance-bisection.md): rejected. LLL finds the resonant frequencies of a sieve's exact Fourier expansion, but their share of the deciding information falls with each added sieve prime, and guided bisection costs 380 to 93,000 times wheel enumeration on an AP-10 analog. [Results](results/resonance-bisection.json).

@@ -79,7 +79,7 @@ Resonant frequencies are those where `xi*c_p/p` is near an integer for many `p` 
 
 ## Random combinations
 
-- **C1 Resonance bisection** = 4 + 8 + G4. Dirichlet-kernel products give sub-box counts; LLL finds the resonant frequencies; bisection walks to an AP. The original RBLS idea, moved to the domain where resonance is real.
+- **C1 Resonance bisection** = 4 + 8 + G4. Dirichlet-kernel products give sub-box counts; LLL finds the resonant frequencies; bisection walks to an AP. The original RBLS idea, moved to the domain where resonance is real. **Tested in [G14](../papers/gaps/G14-resonance-bisection.md): resonance is real and LLL finds it, but the captured share falls as sieve primes are added and bisection costs 380x to 93,000x the wheel. Rejected as a discovery method; LLL resonance finder kept as a tool.**
 - **C2 Run-transform counting** = 1 + 7. After `d ≡ 1 (mod p)` the pattern is 28 consecutive integers; look for a Meissel–Lehmer recursion for consecutive runs, which might rescale better than general patterns.
 - **C3 Euler engine** = 10 + 9 + 13. Euler's theorem converts avoidance to divisibility, Euler continuants lift CRT classes into the box, and idoneal forms certify the result.
 - **C4 Explicit formula for sub-box counts** = 14 + 15 + 12 + G4. Stationary phase picks zero tuples, Beta integrals give closed forms, the hybrid product controls the cutoff, bisection localizes.
@@ -89,7 +89,7 @@ Resonant frequencies are those where `xi*c_p/p` is near an integer for many `p` 
 
 ## First experiments, in order
 
-1. **C1 Resonance bisection** at AP-10 scale: it is closest to the project's original idea and directly measurable.
+1. ~~**C1 Resonance bisection**~~ at AP-10 scale: done in [G14](../papers/gaps/G14-resonance-bisection.md), rejected.
 2. **Idea 7 / C2** on 2-term patterns in the cone: any exact rescaling recursion would be new mathematics with large payoff.
 3. **Idea 25 Garner tree** with box pruning: cheap to implement, gives a clean nodes-per-survivor number.
 4. **Idea 17 Maynard sampler** and **idea 16 Heegner family**: cheap per-test hit-rate measurements.

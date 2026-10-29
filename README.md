@@ -8,6 +8,8 @@ The requested discovery method is mathematical construction. Enumerating more st
 
 A [fixed candidate check](research/fixed-ap27-candidate-check.md) independently verifies the August 2026 published AP-27 and derives its only direct extension not excluded modulo 29. The new endpoint has proper divisor 2971, so the candidate fails. Both composite neighbors also imply that any prime AP-28 can share at most 14 terms with this fixed source progression. This is a failed construction check, not an AP-28 discovery or a closed arithmetic gap.
 
+[Resonance Bisection](papers/gaps/G14-resonance-bisection.md) tests the first candidate from the [domain-ladder brainstorm](research/brainstorm-domain-ladder.md). Sieve counts are exact sums of products of Dirichlet kernels; LLL on the CRT dual finds resonant frequencies carrying 88% of the count fluctuation at sieve bound 23, against 4% for low-complexity frequencies. The captured share falls as sieve primes are added, and bisection even with optimal frequencies costs 380 to 93,000 times the wheel. Rejected as a discovery method; the resonance finder is kept as a tool.
+
 [How Far Is an AP-28?](papers/gaps/G13-calibrated-distance.md) calibrates the density model against PrimeGrid's actual counts (71 AP-26s, 4 AP-27s, no AP-28). A window model predicts the observed AP-26/AP-27 ratio (15.9 against 17.75) and about 20 AP-27 finds per AP-28. Isolating one of the roughly 13.6 expected AP-28s below `2^64` takes about 91 bits; congruences supply 36 bits cheaply. **Verdict: no known mathematical method yields an AP-28 without a search of roughly PrimeGrid's scale.** This is a limit of current mathematics; see the paper's Section 5.
 
 [No Published AP-26 or AP-27 Record Extends to AP-28](papers/gaps/G12-record-extension-census.md) extends that check to all four known AP-27s and four published AP-26s. As of the record table updated 12 October 2026, 27 is still the longest known length. Both neighbors of every listed record have an exact proper divisor or are nonpositive, so any prime AP-28 shares at most 14 terms with each. Modulo 29, the only full extension window is the one Wróblewski's program already tests. The route of extending known records is closed; no AP-28 is supplied.
@@ -75,6 +77,7 @@ python3 -m research.transference_audit
 python3 -m research.check_published_ap27
 python3 -m research.record_extensions
 python3 -m research.ap28_distance
+python3 -m research.resonance_bisection
 python3 estimate_ap28.py --start 1000000000000000
 python3 plan_prime_ap.py --start 1000000000000000 \
   --differences 223092870 6469693230 200560490130 --pilot-count 10000000
