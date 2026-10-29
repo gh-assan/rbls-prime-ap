@@ -1,0 +1,474 @@
+{
+  "status": "Exact recursion measured; no sublinear pattern counter and no AP28 supplied.",
+  "leaf_size": 16,
+  "patterns": {
+    "primes": {
+      "offsets": [
+        0
+      ],
+      "rows": [
+        {
+          "pattern": "primes",
+          "x": 1024,
+          "sieve_primes": 11,
+          "count": 162,
+          "direct_count": 162,
+          "calls": 153,
+          "distinct_subproblems": 76,
+          "distinct_states": 12,
+          "leaf_cells": 258
+        },
+        {
+          "pattern": "primes",
+          "x": 2048,
+          "sieve_primes": 14,
+          "count": 296,
+          "direct_count": 296,
+          "calls": 271,
+          "distinct_subproblems": 135,
+          "distinct_states": 15,
+          "leaf_cells": 446
+        },
+        {
+          "pattern": "primes",
+          "x": 4096,
+          "sieve_primes": 18,
+          "count": 547,
+          "direct_count": 547,
+          "calls": 491,
+          "distinct_subproblems": 245,
+          "distinct_states": 19,
+          "leaf_cells": 827
+        },
+        {
+          "pattern": "primes",
+          "x": 8192,
+          "sieve_primes": 24,
+          "count": 1005,
+          "direct_count": 1005,
+          "calls": 895,
+          "distinct_subproblems": 447,
+          "distinct_states": 25,
+          "leaf_cells": 1558
+        },
+        {
+          "pattern": "primes",
+          "x": 16384,
+          "sieve_primes": 31,
+          "count": 1870,
+          "direct_count": 1870,
+          "calls": 1583,
+          "distinct_subproblems": 791,
+          "distinct_states": 32,
+          "leaf_cells": 2803
+        },
+        {
+          "pattern": "primes",
+          "x": 32768,
+          "sieve_primes": 42,
+          "count": 3471,
+          "direct_count": 3471,
+          "calls": 2907,
+          "distinct_subproblems": 1453,
+          "distinct_states": 43,
+          "leaf_cells": 5032
+        },
+        {
+          "pattern": "primes",
+          "x": 65536,
+          "sieve_primes": 54,
+          "count": 6489,
+          "direct_count": 6489,
+          "calls": 4897,
+          "distinct_subproblems": 2448,
+          "distinct_states": 55,
+          "leaf_cells": 8364
+        },
+        {
+          "pattern": "primes",
+          "x": 131072,
+          "sieve_primes": 72,
+          "count": 12180,
+          "direct_count": 12180,
+          "calls": 8577,
+          "distinct_subproblems": 4288,
+          "distinct_states": 73,
+          "leaf_cells": 14519
+        },
+        {
+          "pattern": "primes",
+          "x": 262144,
+          "sieve_primes": 97,
+          "count": 22904,
+          "direct_count": 22904,
+          "calls": 15191,
+          "distinct_subproblems": 7595,
+          "distinct_states": 98,
+          "leaf_cells": 25719
+        },
+        {
+          "pattern": "primes",
+          "x": 524288,
+          "sieve_primes": 128,
+          "count": 43263,
+          "direct_count": 43263,
+          "calls": 25997,
+          "distinct_subproblems": 12998,
+          "distinct_states": 129,
+          "leaf_cells": 44094
+        },
+        {
+          "pattern": "primes",
+          "x": 1048576,
+          "sieve_primes": 172,
+          "count": 81854,
+          "direct_count": 81854,
+          "calls": 45491,
+          "distinct_subproblems": 22745,
+          "distinct_states": 173,
+          "leaf_cells": 77003
+        },
+        {
+          "pattern": "primes",
+          "x": 2097152,
+          "sieve_primes": 229,
+          "count": 155383,
+          "direct_count": 155383,
+          "calls": 78547,
+          "distinct_subproblems": 39273,
+          "distinct_states": 230,
+          "leaf_cells": 134402
+        },
+        {
+          "pattern": "primes",
+          "x": 4194304,
+          "sieve_primes": 309,
+          "count": 295639,
+          "direct_count": 295639,
+          "calls": 138509,
+          "distinct_subproblems": 69254,
+          "distinct_states": 310,
+          "leaf_cells": 239841
+        },
+        {
+          "pattern": "primes",
+          "x": 8388608,
+          "sieve_primes": 418,
+          "count": 563746,
+          "direct_count": 563746,
+          "calls": 244665,
+          "distinct_subproblems": 122332,
+          "distinct_states": 419,
+          "leaf_cells": 427459
+        },
+        {
+          "pattern": "primes",
+          "x": 16777216,
+          "sieve_primes": 564,
+          "count": 1077308,
+          "direct_count": 1077308,
+          "calls": 431471,
+          "distinct_subproblems": 215735,
+          "distinct_states": 565,
+          "leaf_cells": 762401
+        }
+      ],
+      "subproblem_growth_exponent": 0.8193784152344805
+    },
+    "twins": {
+      "offsets": [
+        0,
+        2
+      ],
+      "rows": [
+        {
+          "pattern": "twins",
+          "x": 1024,
+          "sieve_primes": 11,
+          "count": 31,
+          "direct_count": 31,
+          "calls": 417,
+          "distinct_subproblems": 154,
+          "distinct_states": 185,
+          "leaf_cells": 1019
+        },
+        {
+          "pattern": "twins",
+          "x": 2048,
+          "sieve_primes": 14,
+          "count": 56,
+          "direct_count": 56,
+          "calls": 808,
+          "distinct_subproblems": 296,
+          "distinct_states": 340,
+          "leaf_cells": 1986
+        },
+        {
+          "pattern": "twins",
+          "x": 4096,
+          "sieve_primes": 18,
+          "count": 100,
+          "direct_count": 100,
+          "calls": 1570,
+          "distinct_subproblems": 565,
+          "distinct_states": 650,
+          "leaf_cells": 4057
+        },
+        {
+          "pattern": "twins",
+          "x": 8192,
+          "sieve_primes": 24,
+          "count": 169,
+          "direct_count": 169,
+          "calls": 3240,
+          "distinct_subproblems": 1146,
+          "distinct_states": 1390,
+          "leaf_cells": 8289
+        },
+        {
+          "pattern": "twins",
+          "x": 16384,
+          "sieve_primes": 31,
+          "count": 280,
+          "direct_count": 280,
+          "calls": 6679,
+          "distinct_subproblems": 2325,
+          "distinct_states": 2989,
+          "leaf_cells": 17250
+        },
+        {
+          "pattern": "twins",
+          "x": 32768,
+          "sieve_primes": 42,
+          "count": 492,
+          "direct_count": 492,
+          "calls": 14830,
+          "distinct_subproblems": 5092,
+          "distinct_states": 7398,
+          "leaf_cells": 35169
+        },
+        {
+          "pattern": "twins",
+          "x": 65536,
+          "sieve_primes": 54,
+          "count": 843,
+          "direct_count": 843,
+          "calls": 32143,
+          "distinct_subproblems": 10930,
+          "distinct_states": 17530,
+          "leaf_cells": 70597
+        },
+        {
+          "pattern": "twins",
+          "x": 131072,
+          "sieve_primes": 72,
+          "count": 1505,
+          "direct_count": 1505,
+          "calls": 73134,
+          "distinct_subproblems": 24694,
+          "distinct_states": 44709,
+          "leaf_cells": 145432
+        },
+        {
+          "pattern": "twins",
+          "x": 262144,
+          "sieve_primes": 97,
+          "count": 2655,
+          "direct_count": 2655,
+          "calls": 169378,
+          "distinct_subproblems": 56912,
+          "distinct_states": 114888,
+          "leaf_cells": 299922
+        }
+      ],
+      "subproblem_growth_exponent": 1.1623152811473014
+    },
+    "ap3_d6": {
+      "offsets": [
+        0,
+        6,
+        12
+      ],
+      "rows": [
+        {
+          "pattern": "ap3_d6",
+          "x": 1024,
+          "sieve_primes": 11,
+          "count": 23,
+          "direct_count": 23,
+          "calls": 627,
+          "distinct_subproblems": 196,
+          "distinct_states": 322,
+          "leaf_cells": 1854
+        },
+        {
+          "pattern": "ap3_d6",
+          "x": 2048,
+          "sieve_primes": 14,
+          "count": 44,
+          "direct_count": 44,
+          "calls": 1275,
+          "distinct_subproblems": 400,
+          "distinct_states": 611,
+          "leaf_cells": 3690
+        },
+        {
+          "pattern": "ap3_d6",
+          "x": 4096,
+          "sieve_primes": 18,
+          "count": 64,
+          "direct_count": 64,
+          "calls": 2677,
+          "distinct_subproblems": 804,
+          "distinct_states": 1212,
+          "leaf_cells": 8061
+        },
+        {
+          "pattern": "ap3_d6",
+          "x": 8192,
+          "sieve_primes": 24,
+          "count": 101,
+          "direct_count": 101,
+          "calls": 6137,
+          "distinct_subproblems": 1762,
+          "distinct_states": 2737,
+          "leaf_cells": 17948
+        },
+        {
+          "pattern": "ap3_d6",
+          "x": 16384,
+          "sieve_primes": 31,
+          "count": 155,
+          "direct_count": 155,
+          "calls": 13821,
+          "distinct_subproblems": 3819,
+          "distinct_states": 6241,
+          "leaf_cells": 40520
+        },
+        {
+          "pattern": "ap3_d6",
+          "x": 32768,
+          "sieve_primes": 42,
+          "count": 246,
+          "direct_count": 246,
+          "calls": 33307,
+          "distinct_subproblems": 8895,
+          "distinct_states": 16388,
+          "leaf_cells": 89651
+        },
+        {
+          "pattern": "ap3_d6",
+          "x": 65536,
+          "sieve_primes": 54,
+          "count": 378,
+          "direct_count": 378,
+          "calls": 77255,
+          "distinct_subproblems": 20142,
+          "distinct_states": 42335,
+          "leaf_cells": 190040
+        },
+        {
+          "pattern": "ap3_d6",
+          "x": 131072,
+          "sieve_primes": 72,
+          "count": 630,
+          "direct_count": 630,
+          "calls": 186763,
+          "distinct_subproblems": 47929,
+          "distinct_states": 115925,
+          "leaf_cells": 408369
+        }
+      ],
+      "subproblem_growth_exponent": 1.2128036475845863
+    },
+    "ap5_d30": {
+      "offsets": [
+        0,
+        30,
+        60,
+        90,
+        120
+      ],
+      "rows": [
+        {
+          "pattern": "ap5_d30",
+          "x": 1024,
+          "sieve_primes": 11,
+          "count": 12,
+          "direct_count": 12,
+          "calls": 1165,
+          "distinct_subproblems": 286,
+          "distinct_states": 669,
+          "leaf_cells": 3632
+        },
+        {
+          "pattern": "ap5_d30",
+          "x": 2048,
+          "sieve_primes": 14,
+          "count": 14,
+          "direct_count": 14,
+          "calls": 2341,
+          "distinct_subproblems": 598,
+          "distinct_states": 1351,
+          "leaf_cells": 7560
+        },
+        {
+          "pattern": "ap5_d30",
+          "x": 4096,
+          "sieve_primes": 18,
+          "count": 18,
+          "direct_count": 18,
+          "calls": 5351,
+          "distinct_subproblems": 1275,
+          "distinct_states": 2796,
+          "leaf_cells": 17190
+        },
+        {
+          "pattern": "ap5_d30",
+          "x": 8192,
+          "sieve_primes": 24,
+          "count": 23,
+          "direct_count": 23,
+          "calls": 13351,
+          "distinct_subproblems": 2909,
+          "distinct_states": 6497,
+          "leaf_cells": 40728
+        },
+        {
+          "pattern": "ap5_d30",
+          "x": 16384,
+          "sieve_primes": 31,
+          "count": 30,
+          "direct_count": 30,
+          "calls": 34791,
+          "distinct_subproblems": 6931,
+          "distinct_states": 16222,
+          "leaf_cells": 101193
+        },
+        {
+          "pattern": "ap5_d30",
+          "x": 32768,
+          "sieve_primes": 42,
+          "count": 39,
+          "direct_count": 39,
+          "calls": 94599,
+          "distinct_subproblems": 17563,
+          "distinct_states": 48876,
+          "leaf_cells": 251527
+        },
+        {
+          "pattern": "ap5_d30",
+          "x": 65536,
+          "sieve_primes": 54,
+          "count": 57,
+          "direct_count": 57,
+          "calls": 243017,
+          "distinct_subproblems": 43250,
+          "distinct_states": 139644,
+          "leaf_cells": 595110
+        }
+      ],
+      "subproblem_growth_exponent": 1.3023718667953974
+    }
+  }
+}

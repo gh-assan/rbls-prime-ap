@@ -94,3 +94,4 @@ The paper also measures the information congruences supply: 36 of the roughly 91
 The [domain-ladder brainstorm](research/brainstorm-domain-ladder.md) lists unproved candidate methods; each tested one gets its own note.
 
 - C1, [Resonance Bisection](papers/gaps/G14-resonance-bisection.md): rejected. LLL finds the resonant frequencies of a sieve's exact Fourier expansion, but their share of the deciding information falls with each added sieve prime, and guided bisection costs 380 to 93,000 times wheel enumeration on an AP-10 analog. [Results](results/resonance-bisection.json).
+- Idea 7 / C2, [Meissel–Lehmer for Prime Patterns](papers/gaps/G15-pattern-counting.md): closed. The exact pattern recursion is verified, but its distinct subproblems grow superlinearly for every pattern of two or more forms because each substitution is remembered in the bad residue sets. [Results](results/pattern-counting.json).

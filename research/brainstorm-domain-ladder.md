@@ -27,7 +27,7 @@ Fourier transform of one bad line is a dual line. For fixed `m`, the good set mo
 4. **Fourier bisection sieve.** Survivor counts in a sub-box equal a sum over frequencies of (product of kernels) times (box kernel). Most kernel products are tiny; only *resonant* frequencies matter. Evaluate counts of sub-boxes from the resonant frequencies and bisect (contract of [G4](../papers/gaps/G4-witness-localization.md)) down to survivors, never enumerating dead cells. *Test:* how many frequencies are needed for counts accurate enough to bisect at AP-10 scale?
 5. **Sparse Fourier recovery.** Sieve survivors in the box are a *k-sparse* 2D signal (about `10^5` per expected AP-28 after primes to `10^7`). Sparse FFT algorithms (Hassanieh–Indyk–Katabi–Price 2012) recover a k-sparse signal from about `k log n` transform samples. The transform of the periodic part is free (product formula); the question is sampling the *box-restricted* transform. *Test:* can hashing filters be built from the product structure so that each bucket sample costs polylog?
 6. **Reciprocity for incomplete sums.** Dedekind sums and quadratic Gauss sums over intervals are evaluated in `O(log)` steps by reciprocity laws. Look for a reciprocity law for exponential sums over sieve survivors in an interval. *Test:* try the 1D case of one forbidden residue per prime.
-7. **Meissel–Lehmer for patterns.** Primes up to `x` are counted in about `x^{2/3}` time without listing them, using the recursion `Phi(x,a) = Phi(x,a-1) - Phi(x/p_a,a-1)`. No sublinear counter is known even for **twin primes**, because divisibility of `n+2` does not rescale. Find a recursion that does rescale for linear patterns, for example by working in the 2D cone where `(a,m) -> (a/p, m/p)` maps lines through the origin to themselves. With bisection this gives a non-enumerating AP-28 locator. *Test:* attempt an exact recursion for 2-term patterns `a, a+Dm` in the cone.
+7. **Meissel–Lehmer for patterns.** Primes up to `x` are counted in about `x^{2/3}` time without listing them, using the recursion `Phi(x,a) = Phi(x,a-1) - Phi(x/p_a,a-1)`. No sublinear counter is known even for **twin primes**, because divisibility of `n+2` does not rescale. Find a recursion that does rescale for linear patterns, for example by working in the 2D cone where `(a,m) -> (a/p, m/p)` maps lines through the origin to themselves. With bisection this gives a non-enumerating AP-28 locator. *Test:* attempt an exact recursion for 2-term patterns `a, a+Dm` in the cone. **Tested in [G15](../papers/gaps/G15-pattern-counting.md): the exact recursion exists but its subproblems grow faster than `x` for every pattern of two or more forms (exponents 1.16-1.30, against 0.82 for primes). Closed.**
 
 ## Level 3: dual lattices and Diophantine approximation
 
@@ -90,7 +90,7 @@ Resonant frequencies are those where `xi*c_p/p` is near an integer for many `p` 
 ## First experiments, in order
 
 1. ~~**C1 Resonance bisection**~~ at AP-10 scale: done in [G14](../papers/gaps/G14-resonance-bisection.md), rejected.
-2. **Idea 7 / C2** on 2-term patterns in the cone: any exact rescaling recursion would be new mathematics with large payoff.
+2. ~~**Idea 7 / C2**~~ on 2-term patterns: done in [G15](../papers/gaps/G15-pattern-counting.md), no collapse.
 3. **Idea 25 Garner tree** with box pruning: cheap to implement, gives a clean nodes-per-survivor number.
 4. **Idea 17 Maynard sampler** and **idea 16 Heegner family**: cheap per-test hit-rate measurements.
 
