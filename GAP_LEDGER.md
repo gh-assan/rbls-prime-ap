@@ -82,3 +82,9 @@ The [new source assessment](research/transference-route-assessment-2026-10-29.md
 [No Published AP-26 or AP-27 Record Extends to AP-28](papers/gaps/G12-record-extension-census.md) checks the four known AP-27s and four published AP-26s against the record table updated 12 October 2026, which still lists 27 as the longest length. An overlap lemma forces any prime AP-28 sharing at least 15 terms with a record to contain one of its two adjacent neighbors. All 16 neighbors have an exact proper divisor or are nonpositive. [The certificate](results/record-extension-checks.json) also blocks all 20 full-containment windows and shows exactly one window per record survives modulo 29.
 
 This closes the record-extension route completely. It supplies no new candidate and closes none of G2, G3b/G5, or the construction goal.
+
+## Calibration against actual record counts and verdict
+
+[How Far Is an AP-28?](papers/gaps/G13-calibrated-distance.md) uses PrimeGrid's totals (71 AP-26s, 4 AP-27s, 0 AP-28s, accessed 29 October 2026). An independent neighbor probability predicts the AP-26/AP-27 ratio as 15.9; the observed 17.75 is within Poisson noise. This is actual-count evidence for the density model at record heights. It is not the finite-height theorem G3b/G5 requires. The model predicts about 20 maximal AP-27s per AP-28, with a data-only range of 8 to 86.
+
+The paper also measures the information congruences supply: 36 of the roughly 91 bits needed through prime 541, and output-sensitive CRT enumeration stops paying near prime 83. With the existence, deterministic-prime and structure barriers in its Section 5, this supports a firm verdict: **G2 and G3b/G5 are open problems of current mathematics, and the search-free construction goal cannot be met with known methods.** [The calibration](results/ap28-distance.json) is reproducible.

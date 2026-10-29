@@ -101,3 +101,17 @@ The [29 October assessment](research/transference-route-assessment-2026-10-29.md
 For scaled or thinned prime weights with that majorant and an absolute dense-model mean error at most 0.01, the mean of the resulting `[0,1]`-valued model is below the density of an explicit AP-28-free digit set. Consequently its mean alone cannot give a positive universal progression bound at these scales. Exact counts, a sharp interval-norm comparison, and a finite Brun–Titchmarsh bound establish this result. It is stronger than merely failing to extract asymptotic constants, but its scope is the direct finite recipe stated in the assessment.
 
 Do not continue this recipe by assigning optimistic constants or adding another conditional density criterion. A useful next construction argument must bring in the actual joint arithmetic or exploit specific structure of a model beyond density. Larger heights and other relative methods remain possible research directions, without a demonstrated construction here. The original witness goal and G2/G3b/G5 remain open; this assessment is negative route evidence, not a completed AP-28 gate.
+
+## Decision point after G12 and G13
+
+[G12](papers/gaps/G12-record-extension-census.md) closes the last structural candidate source: no published AP-26 or AP-27 extends, and no prime AP-28 shares more than 14 terms with any of them. [G13](papers/gaps/G13-calibrated-distance.md) calibrates the density model against PrimeGrid's actual counts and quantifies the information gap.
+
+Together with G5, G7, G8, G10, G11 and the transference assessment, every proposed search-free route now ends in a proved obstruction or in an open problem of analytic number theory. Explicit finite-height lower bounds for 28-term prime patterns are not available from any known method, and no deterministic method constructs even a single prime of prescribed size without search. Further notes inside this loop cannot be expected to change that.
+
+The goal can be reached only by relaxing the search-free requirement. The realistic options are:
+
+1. contribute to PrimeGrid's AP27 search, whose program already tests every window an AP-28 could occupy;
+2. run a dedicated AP-28 sieve in the style of the Illinois report, with the repository's verifier for the final 28 terms;
+3. treat the explicit AP-28 as an open problem and keep the finite certificates as the project's result.
+
+On G13's estimate, options 1 and 2 need on the order of decades of PrimeGrid-scale computation in expectation. The choice belongs to the project owner.
